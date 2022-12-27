@@ -1,4 +1,6 @@
-﻿using Mauve.Patterns;
+﻿using Freya.Pipeline;
+
+using Mauve.Patterns;
 using Mauve.Runtime.Processing;
 using Mauve.Runtime.Services;
 
@@ -9,8 +11,8 @@ namespace Freya.Core
 
         #region Fields
 
+        private CommandPipeline? _commandPipeline;
         private IDependencyCollection? _dependencies;
-        private IPipeline<IBotCommand>? _commandPipeline;
 
         #endregion
 
@@ -34,6 +36,7 @@ namespace Freya.Core
             Configure(_dependencies, _commandPipeline);
 
             // Add the basic execution pipeline.
+            _commandPipeline.Run(new CommandExecutionMiddleware());
         }
 
         #endregion
