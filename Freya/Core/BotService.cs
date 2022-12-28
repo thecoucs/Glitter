@@ -16,6 +16,7 @@ namespace Freya.Core
         private CommandPipeline? _commandPipeline;
         private IDependencyCollection? _dependencies;
         private readonly ILogger<LogEntry> _logger;
+        private readonly CancellationToken _cancellationToken;
 
         #endregion
 
@@ -25,8 +26,11 @@ namespace Freya.Core
 
         #region Constructor
 
-        public BotService(ILogger<LogEntry> logger) =>
+        public BotService(ILogger<LogEntry> logger, CancellationToken cancellationToken)
+        {
             _logger = logger;
+            _cancellationToken = cancellationToken;
+        }
 
         #endregion
 
@@ -35,12 +39,10 @@ namespace Freya.Core
         public abstract void Configure(IDependencyCollection dependencies, IPipeline<BotCommand> pipeline);
         public async Task Start()
         {
-
-            // Create the initial dependency collection.
+            // Cancel if requested, otherwise create the command pipeline and dependency collection.
+            _cancellationToken.ThrowIfCancellationRequested();
+            _commandPipeline = new CommandPipeline(_cancellationToken);
             _dependencies = new DependencyCollection();
-
-            // Create the initial command pipeline.
-            _commandPipeline = new CommandPipeline();
 
             // Allow implementing services to configure their dependencies and custom pipelines.
             Configure(_dependencies, _commandPipeline);
@@ -48,17 +50,21 @@ namespace Freya.Core
             // Add the basic execution pipeline.
             _commandPipeline.Run(new CommandExecutionMiddleware());
 
-            // Run the service.
-            await Run();
+            // Cancel if requested, otherwise run the service.
+            _cancellationToken.ThrowIfCancellationRequested();
+            await Run(_cancellationToken);
         }
 
         #endregion
 
         #region Protected Methods
 
-        protected abstract Task Run();
-        protected void Log(EventType eventType, string message) =>
+        protected abstract Task Run(CancellationToken cancellationToken);
+        protected void Log(EventType eventType, string message)
+        {
+            _cancellationToken.ThrowIfCancellationRequested();
             _logger.Log(new LogEntry(eventType, message));
+        }
 
         #endregion
 
