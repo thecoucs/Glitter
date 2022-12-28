@@ -35,11 +35,15 @@ namespace Freya.Pipeline
 
         }
         /// <inheritdoc/>
-        public async Task InvokeAsync(BotCommand input, MiddlewareDelegate<BotCommand> next) =>
-            await InvokeAsync(input, next, CancellationToken.None);
+        public void Invoke(BotCommand input, IMiddleware<BotCommand> next) => throw new NotImplementedException();
         /// <inheritdoc/>
-        public async Task InvokeAsync(BotCommand input, MiddlewareDelegate<BotCommand> next, CancellationToken cancellationToken) =>
-            await Task.Run(() => Invoke(input, next), cancellationToken);
+        public Task Invoke(BotCommand input, IMiddleware<BotCommand> next, CancellationToken cancellationToken) => throw new NotImplementedException();
+        /// <inheritdoc/>
+        public Task Invoke(BotCommand input, MiddlewareDelegate<BotCommand> next, CancellationToken cancellationToken) => throw new NotImplementedException();
+
+        #endregion
+
+        #region Private Methods
 
         #endregion
 
