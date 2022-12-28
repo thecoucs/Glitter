@@ -23,16 +23,8 @@ namespace Freya.Pipeline
         #region Public Methods
 
         /// <inheritdoc/>
-        public void Invoke(BotCommand input, MiddlewareDelegate<BotCommand> next)
-        {
-            try
-            {
-                input.Execute();
-            } catch { } finally
-            {
-                _ = next?.Invoke(input);
-            }
-        }
+        public void Invoke(BotCommand input, MiddlewareDelegate<BotCommand> next) =>
+            input.Execute();
         /// <inheritdoc/>
         public async Task InvokeAsync(BotCommand input, MiddlewareDelegate<BotCommand> next) =>
             await InvokeAsync(input, next, CancellationToken.None);
