@@ -1,4 +1,4 @@
-# Freya
+![Freya Banner](/.resources/freya-banner.png "Freya Banner")
 
  - General Commands
    - Remind Me
