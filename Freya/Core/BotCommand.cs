@@ -1,7 +1,15 @@
-﻿namespace Freya.Core
+﻿using Mauve.Runtime;
+
+namespace Freya.Core
 {
     internal class BotCommand
     {
+
+        #region Fields
+
+        private readonly ILogger<LogEntry> _logger;
+
+        #endregion
 
         #region Properties
 
@@ -13,12 +21,17 @@
 
         #region Constructor
 
-        public BotCommand(string key, string displayName, string description)
+        public BotCommand(string key, string displayName, string description, ILogger<LogEntry> logger)
         {
             Key = key;
             DisplayName = displayName;
             Description = description;
+            _logger = logger;
         }
+
+        #endregion
+
+        #region Protected Methods
 
         #endregion
 
