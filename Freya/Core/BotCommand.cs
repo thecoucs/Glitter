@@ -39,13 +39,18 @@ namespace Freya.Core
 
         #region Public Methods
 
-        public void Execute()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
+        /// <returns></returns>
+        public async Task Execute(CancellationToken cancellationToken)
         {
             bool encounteredErrors = false;
             Log(EventType.Information, $"Executing command '{DisplayName}'...");
             try
             {
-                Work();
+                Work(cancellationToken);
             } catch (Exception e)
             {
                 Log(EventType.Exception, $"An unexpected error occurred during execution. {e.Message}");
@@ -58,6 +63,7 @@ namespace Freya.Core
 
                 // Log the completion message.
                 Log(type, "Execution complete.");
+                await Task.CompletedTask;
             }
         }
 
@@ -65,7 +71,7 @@ namespace Freya.Core
 
         #region Protected Methods
 
-        protected abstract void Work();
+        protected abstract void Work(CancellationToken cancellationToken);
         protected void Log(EventType eventType, string message) =>
             _logger.Log(new LogEntry(eventType, $"{_id}: {message}"));
 
