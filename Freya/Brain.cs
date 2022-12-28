@@ -1,4 +1,5 @@
 ﻿using Freya.Core;
+using Freya.Services;
 
 namespace Freya
 {
@@ -20,8 +21,8 @@ namespace Freya
 
         #region Public Methods
 
-        //public void Initialize() =>
-        //    _services.Add(new DiscordService());
+        public void Initialize() =>
+            _services.Add(new TestService());
         public async Task Start()
         {
             // Start all of the bot services.
