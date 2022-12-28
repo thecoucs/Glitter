@@ -53,6 +53,9 @@ namespace Freya.Core
             // Cancel if requested, otherwise run the service.
             _cancellationToken.ThrowIfCancellationRequested();
             await Run(_cancellationToken);
+
+            // Keep the bot alive.
+            await Task.Delay(Timeout.Infinite);
         }
 
         #endregion
