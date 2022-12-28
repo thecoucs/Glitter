@@ -74,10 +74,10 @@ namespace Freya.Core
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
         /// <returns>A <see cref="Task"/> describing the state of execution.</returns>
         protected abstract Task Run(CancellationToken cancellationToken);
-        protected void Log(EventType eventType, string message)
+        protected async Task Log(EventType eventType, string message)
         {
             _cancellationToken.ThrowIfCancellationRequested();
-            _logger.Log(new LogEntry(eventType, message));
+            await _logger.LogAsync(new LogEntry(eventType, message), _cancellationToken);
         }
 
         #endregion
