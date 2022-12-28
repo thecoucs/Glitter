@@ -12,8 +12,12 @@ namespace Freya.Services
 
         #region Constructor
 
-        public TestService() :
-            base(new ConsoleLogger())
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
+        public TestService(CancellationToken cancellationToken) :
+            base(new ConsoleLogger(), cancellationToken)
         { }
 
         #endregion
@@ -29,10 +33,11 @@ namespace Freya.Services
 
         #region Protected Methods
 
-        protected override async Task Run()
+        /// <inheritdoc/>
+        protected override async Task Run(CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
             Log(EventType.Information, "The test service is alive.");
-            await Task.Delay(Timeout.Infinite);
         }
 
         #endregion
