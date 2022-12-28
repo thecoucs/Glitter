@@ -8,7 +8,7 @@ namespace Freya.Pipeline
     /// Represents an implementation of <see cref="IMiddleware"/> that...
     /// </summary>
     /// <inheritdoc/>
-    internal class LoggingMiddleware : IMiddleware<IBotCommand>
+    internal class LoggingMiddleware : IMiddleware<BotCommand>
     {
 
         #region Constructor
@@ -26,15 +26,15 @@ namespace Freya.Pipeline
         #region Public Methods
 
         /// <inheritdoc/>
-        public void Invoke(IBotCommand input, MiddlewareDelegate<IBotCommand> next)
+        public void Invoke(BotCommand input, MiddlewareDelegate<BotCommand> next)
         {
 
         }
         /// <inheritdoc/>
-        public async Task InvokeAsync(IBotCommand input, MiddlewareDelegate<IBotCommand> next) =>
+        public async Task InvokeAsync(BotCommand input, MiddlewareDelegate<BotCommand> next) =>
             await InvokeAsync(input, next, CancellationToken.None);
         /// <inheritdoc/>
-        public async Task InvokeAsync(IBotCommand input, MiddlewareDelegate<IBotCommand> next, CancellationToken cancellationToken) =>
+        public async Task InvokeAsync(BotCommand input, MiddlewareDelegate<BotCommand> next, CancellationToken cancellationToken) =>
             await Task.Run(() => Invoke(input, next), cancellationToken);
 
         #endregion

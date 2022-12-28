@@ -3,9 +3,9 @@ using Mauve.Runtime.Processing;
 
 namespace Freya.Core
 {
-    internal class CommandPipeline : IPipeline<IBotCommand>
+    internal class CommandPipeline : IPipeline<BotCommand>
     {
-        public void Run(IMiddleware<IBotCommand> middleware) => throw new NotImplementedException();
-        public IPipeline<IBotCommand> Use(IMiddleware<IBotCommand> middleware) => throw new NotImplementedException();
+        public void Run(IMiddleware<BotCommand> middleware) => throw new NotImplementedException();
+        public IPipeline<BotCommand> Use(IMiddleware<BotCommand> middleware) => throw new NotImplementedException();
     }
 }

@@ -6,7 +6,7 @@ using Mauve.Runtime.Services;
 
 namespace Freya.Core
 {
-    internal abstract class BotService : IPipelineService<IBotCommand>
+    internal abstract class BotService : IPipelineService<BotCommand>
     {
 
         #region Fields
@@ -22,7 +22,7 @@ namespace Freya.Core
 
         #region Public Methods
 
-        public abstract void Configure(IDependencyCollection dependencies, IPipeline<IBotCommand> pipeline);
+        public abstract void Configure(IDependencyCollection dependencies, IPipeline<BotCommand> pipeline);
         public async Task Start()
         {
 

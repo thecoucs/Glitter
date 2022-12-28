@@ -4,10 +4,10 @@ using Mauve.Patterns;
 
 namespace Freya.Pipeline
 {
-    internal class CommandExecutionMiddleware : IMiddleware<IBotCommand>
+    internal class CommandExecutionMiddleware : IMiddleware<BotCommand>
     {
-        public void Invoke(IBotCommand input, MiddlewareDelegate<IBotCommand> next) => throw new NotImplementedException();
-        public Task InvokeAsync(IBotCommand input, MiddlewareDelegate<IBotCommand> next) => throw new NotImplementedException();
-        public Task InvokeAsync(IBotCommand input, MiddlewareDelegate<IBotCommand> next, CancellationToken cancellationToken) => throw new NotImplementedException();
+        public void Invoke(BotCommand input, MiddlewareDelegate<BotCommand> next) => throw new NotImplementedException();
+        public Task InvokeAsync(BotCommand input, MiddlewareDelegate<BotCommand> next) => throw new NotImplementedException();
+        public Task InvokeAsync(BotCommand input, MiddlewareDelegate<BotCommand> next, CancellationToken cancellationToken) => throw new NotImplementedException();
     }
 }
