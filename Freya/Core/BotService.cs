@@ -26,6 +26,11 @@ namespace Freya.Core
 
         #region Constructor
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
         public BotService(ILogger<LogEntry> logger, CancellationToken cancellationToken)
         {
             _logger = logger;
@@ -48,7 +53,8 @@ namespace Freya.Core
             Configure(_dependencies, _commandPipeline);
 
             // Add the basic execution pipeline.
-            _commandPipeline.Run(new CommandExecutionMiddleware());
+            var executor = new CommandExecutionMiddleware(_cancellationToken);
+            _commandPipeline.Run(executor);
 
             // Cancel if requested, otherwise run the service.
             _cancellationToken.ThrowIfCancellationRequested();
@@ -62,6 +68,11 @@ namespace Freya.Core
 
         #region Protected Methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
+        /// <returns>A <see cref="Task"/> describing the state of execution.</returns>
         protected abstract Task Run(CancellationToken cancellationToken);
         protected void Log(EventType eventType, string message)
         {
