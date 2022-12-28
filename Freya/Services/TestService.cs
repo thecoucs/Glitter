@@ -37,7 +37,7 @@ namespace Freya.Services
         protected override async Task Run(CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            Log(EventType.Information, "The test service is alive.");
+            await Log(EventType.Information, "The test service is alive.");
         }
 
         #endregion
