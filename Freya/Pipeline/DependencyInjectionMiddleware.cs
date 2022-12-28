@@ -13,6 +13,8 @@ namespace Freya.Pipeline
 
         #region Fields
 
+        private readonly IDependencyCollection _dependencies;
+
         #endregion
 
         #region Constructor
@@ -20,10 +22,8 @@ namespace Freya.Pipeline
         /// <summary>
         /// Creates a new instance of <see cref="DependencyInjectionMiddleware"/>.
         /// </summary>
-        public DependencyInjectionMiddleware(IDependencyCollection dependencies)
-        {
-
-        }
+        public DependencyInjectionMiddleware(IDependencyCollection dependencies) =>
+            _dependencies = dependencies;
 
         #endregion
 
