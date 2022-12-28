@@ -11,12 +11,19 @@ namespace Freya.Pipeline
     internal class CommandExecutionMiddleware : IMiddleware<BotCommand>
     {
 
+        #region Fields
+
+        private readonly CancellationToken _cancellationToken;
+
+        #endregion
+
         #region Constructor
 
         /// <summary>
         /// Creates a new instance of <see cref="CommandExecutionMiddleware"/>.
         /// </summary>
-        public CommandExecutionMiddleware() { }
+        public CommandExecutionMiddleware(CancellationToken cancellationToken) =>
+            _cancellationToken = cancellationToken;
 
         #endregion
 
@@ -24,13 +31,22 @@ namespace Freya.Pipeline
 
         /// <inheritdoc/>
         public void Invoke(BotCommand input, MiddlewareDelegate<BotCommand> next) =>
-            input.Execute();
+            input.Execute(_cancellationToken).GetAwaiter();
         /// <inheritdoc/>
-        public async Task InvokeAsync(BotCommand input, MiddlewareDelegate<BotCommand> next) =>
-            await InvokeAsync(input, next, CancellationToken.None);
+        public void Invoke(BotCommand input, IMiddleware<BotCommand> next) =>
+            input.Execute(_cancellationToken).GetAwaiter();
         /// <inheritdoc/>
-        public async Task InvokeAsync(BotCommand input, MiddlewareDelegate<BotCommand> next, CancellationToken cancellationToken) =>
-            await Task.Run(() => Invoke(input, next), cancellationToken);
+        public async Task Invoke(BotCommand input, IMiddleware<BotCommand> next, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            await input.Execute(cancellationToken);
+        }
+        /// <inheritdoc/>
+        public async Task Invoke(BotCommand input, MiddlewareDelegate<BotCommand> next, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            await input.Execute(cancellationToken);
+        }
 
         #endregion
 
