@@ -2,7 +2,7 @@
 
 namespace Freya.Core
 {
-    internal class BotCommand
+    internal abstract class BotCommand
     {
 
         #region Fields
@@ -28,6 +28,12 @@ namespace Freya.Core
             Description = description;
             _logger = logger;
         }
+
+        #endregion
+
+        #region Public Methods
+
+        public abstract void Execute();
 
         #endregion
 
