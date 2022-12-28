@@ -1,6 +1,8 @@
 ﻿using Freya.Pipeline;
 
+using Mauve;
 using Mauve.Patterns;
+using Mauve.Runtime;
 using Mauve.Runtime.Processing;
 using Mauve.Runtime.Services;
 
@@ -13,10 +15,18 @@ namespace Freya.Core
 
         private CommandPipeline? _commandPipeline;
         private IDependencyCollection? _dependencies;
+        private readonly ILogger<LogEntry> _logger;
 
         #endregion
 
         #region Properties
+
+        #endregion
+
+        #region Constructor
+
+        public BotService(ILogger<LogEntry> logger) =>
+            _logger = logger;
 
         #endregion
 
@@ -38,6 +48,13 @@ namespace Freya.Core
             // Add the basic execution pipeline.
             _commandPipeline.Run(new CommandExecutionMiddleware());
         }
+
+        #endregion
+
+        #region Protected Methods
+
+        protected void Log(EventType eventType, string message) =>
+            _logger.Log(new LogEntry(eventType, message));
 
         #endregion
 
