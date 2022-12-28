@@ -47,12 +47,16 @@ namespace Freya.Core
 
             // Add the basic execution pipeline.
             _commandPipeline.Run(new CommandExecutionMiddleware());
+
+            // Run the service.
+            await Run();
         }
 
         #endregion
 
         #region Protected Methods
 
+        protected abstract Task Run();
         protected void Log(EventType eventType, string message) =>
             _logger.Log(new LogEntry(eventType, message));
 
