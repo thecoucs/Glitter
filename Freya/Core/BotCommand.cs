@@ -48,7 +48,7 @@ namespace Freya.Core
                 Work();
             } catch (Exception e)
             {
-                Log(EventType.Exception, $"An unexpected exception occurred during execution. {e.Message}");
+                Log(EventType.Exception, $"An unexpected error occurred during execution. {e.Message}");
             } finally
             {
                 // Set the event type for the completion message.
