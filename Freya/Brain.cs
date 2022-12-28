@@ -18,5 +18,18 @@ namespace Freya
 
         #endregion
 
+        #region Public Methods
+
+        //public void Initialize() =>
+        //    _services.Add(new DiscordService());
+        public async Task Start()
+        {
+            // Start all of the bot services.
+            foreach (BotService service in _services)
+                await service.Start();
+        }
+
+        #endregion
+
     }
 }
