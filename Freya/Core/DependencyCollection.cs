@@ -6,7 +6,7 @@ namespace Freya.Core
 {
     internal class DependencyCollection : IDependencyCollection
     {
-        public DependencyDescriptor this[int index] { get; set; }
+        public DependencyDescriptor this[int index] { get => null; set => _ = 3; }
 
         public int Count { get; }
         public bool IsReadOnly { get; }
