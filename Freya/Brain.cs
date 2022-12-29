@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 
-using Freya.Core;
+using Freya.Runtime;
+using Freya.Services;
 
 using Mauve;
 using Mauve.Extensibility;
@@ -15,6 +16,7 @@ namespace Freya
         #region Fields
 
         private readonly List<BotService> _services;
+        private readonly CommandFactory _commandFactory;
         private readonly CancellationToken _cancellationToken;
         private readonly CancellationTokenSource _cancellationTokenSource;
 
@@ -26,6 +28,7 @@ namespace Freya
         {
             _cancellationTokenSource = new CancellationTokenSource();
             _cancellationToken = _cancellationTokenSource.Token;
+            _commandFactory = new CommandFactory();
             _services = new List<BotService>();
         }
 
@@ -121,8 +124,8 @@ namespace Freya
 
                 // Create an instance of the service.
                 object? instance = settings is null
-                    ? Activator.CreateInstance(serviceType, _cancellationToken)
-                    : Activator.CreateInstance(serviceType, settings, _cancellationToken);
+                    ? Activator.CreateInstance(serviceType, _commandFactory, _cancellationToken)
+                    : Activator.CreateInstance(serviceType, settings, _commandFactory, _cancellationToken);
 
                 // Validate the instance and register it.
                 if (instance is BotService botService)
