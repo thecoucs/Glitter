@@ -1,7 +1,7 @@
 ﻿using Discord;
 using Discord.WebSocket;
 
-using Freya.Core;
+using Freya.Commands;
 using Freya.Runtime;
 
 using Mauve;
@@ -27,16 +27,25 @@ namespace Freya.Services.Discord
         /// 
         /// </summary>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
-        public DiscordService(DiscordSettings settings, CancellationToken cancellationToken) :
-            base(settings, new ConsoleLogger(), cancellationToken) =>
+        public DiscordService(DiscordSettings settings, CommandFactory commandFactory, CancellationToken cancellationToken) :
+            base(settings, new ConsoleLogger(), commandFactory, cancellationToken) =>
             _client = new DiscordSocketClient();
 
         #endregion
 
         #region Public Methods
 
-        public override void Configure(IDependencyCollection dependencies, IPipeline<BotCommand> pipeline) =>
-            _client.Log += DiscordLogReceived;
+        /// <inheritdoc/>
+        public override void Configure(IDependencyCollection dependencies, IPipeline<BotCommand> pipeline)
+        {
+            _client.Log += HandleDiscordLog;
+            _client.LoggedIn += HandleDiscordLogin;
+            _client.LoggedOut += HandleClientLogout;
+            _client.Connected += HandleClientConnect;
+            _client.Disconnected += HandleClientDisconnect;
+            _client.MessageReceived += HandleClientMessage;
+            _ = Task.Run(async () => await _client.LoginAsync(TokenType.Bot, Settings.Token));
+        }
 
         #endregion
 
@@ -46,14 +55,29 @@ namespace Freya.Services.Discord
         protected override async Task Run(CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            await Log(EventType.Information, "The Discord service is alive.");
+            try
+            {
+                await _client.StartAsync();
+                await Log(EventType.Success, "The Discord service has been started successfully.");
+            } catch (Exception e)
+            {
+                await Log(EventType.Exception, $"An unexpected error occurred while starting the Discord service. {e.Message}");
+            }
         }
 
         #endregion
 
         #region Private Methods
 
-        private async Task DiscordLogReceived(LogMessage arg)
+        private async Task HandleClientConnect() =>
+            await Log(EventType.Success, "Successfully connected to Discord.");
+        private async Task HandleClientDisconnect(Exception arg) =>
+            await Log(EventType.Exception, $"Disconnected from Discord. {arg.FlattenMessages(" ")}");
+        private async Task HandleDiscordLogin() =>
+            await Log(EventType.Success, "Logged in to Discord.");
+        private async Task HandleClientLogout() =>
+            await Log(EventType.Warning, "Logged out of Discord.");
+        private async Task HandleDiscordLog(LogMessage arg)
         {
             // Determine the event type.
             EventType eventType = arg.Exception is null
@@ -76,6 +100,8 @@ namespace Freya.Services.Discord
                 }
             }
         }
+        private async Task HandleClientMessage(SocketMessage arg) =>
+            await Task.CompletedTask;
 
         #endregion
 
