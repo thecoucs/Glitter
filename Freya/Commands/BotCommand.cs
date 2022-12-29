@@ -3,7 +3,7 @@ using Mauve.Extensibility;
 using Mauve.Math;
 using Mauve.Runtime;
 
-namespace Freya.Core
+namespace Freya.Commands
 {
     internal abstract class BotCommand
     {
@@ -17,7 +17,6 @@ namespace Freya.Core
 
         #region Properties
 
-        public string Key { get; set; }
         public string DisplayName { get; set; }
         public string Description { get; set; }
 
@@ -25,12 +24,11 @@ namespace Freya.Core
 
         #region Constructor
 
-        public BotCommand(string key, string displayName, string description, ILogger<LogEntry> logger)
+        public BotCommand(string displayName, string description, ILogger<LogEntry> logger)
         {
             _logger = logger;
             _id = Guid.NewGuid().GetHashCode(NumericBase.Hexadecimal);
 
-            Key = key;
             DisplayName = displayName;
             Description = description;
         }
@@ -50,7 +48,7 @@ namespace Freya.Core
             Log(EventType.Information, $"Executing command '{DisplayName}'...");
             try
             {
-                Work(cancellationToken);
+                _ = Work(cancellationToken);
             } catch (Exception e)
             {
                 Log(EventType.Exception, $"An unexpected error occurred during execution. {e.Message}");
@@ -71,7 +69,7 @@ namespace Freya.Core
 
         #region Protected Methods
 
-        protected abstract void Work(CancellationToken cancellationToken);
+        protected abstract Task Work(CancellationToken cancellationToken);
         protected void Log(EventType eventType, string message) =>
             _logger.Log(new LogEntry(eventType, $"{_id}: {message}"));
 
