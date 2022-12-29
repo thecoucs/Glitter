@@ -1,5 +1,11 @@
-﻿using Freya.Core;
-using Freya.Services;
+﻿using System.Reflection;
+
+using Freya.Core;
+
+using Mauve;
+using Mauve.Extensibility;
+
+using Microsoft.Extensions.Configuration;
 
 namespace Freya
 {
@@ -29,8 +35,12 @@ namespace Freya
 
         public void Cancel() =>
             _cancellationTokenSource.Cancel();
-        public void Initialize() =>
-            _services.Add(new TestService(_cancellationToken));
+        public void Configure(IConfiguration configuration)
+        {
+            // Cancel if requested, otherwise load settings.
+            _cancellationToken.ThrowIfCancellationRequested();
+            RegisterServices(configuration);
+        }
         public async Task Start()
         {
             // Cancel if requested, otherwise start each service.
@@ -40,6 +50,83 @@ namespace Freya
                 // Cancel if requested, otherwise start the service.
                 _cancellationToken.ThrowIfCancellationRequested();
                 await service.Start();
+            }
+
+            await Task.Delay(Timeout.Infinite);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        /// Determines if the specified type is a concrete implementation of <see cref="BotService"/>.
+        /// </summary>
+        /// <param name="type">The type to evaluate.</param>
+        private bool IsConcreteBotService(Type type) =>
+            type.DerivesFrom<BotService>() &&
+            type.IsAbstract == false;
+        // TODO: Add logging. Refactor. Reduce nesting.
+        private void RegisterServices(IConfiguration configuration)
+        {
+            // Get the entry assembly, if we can't find it, there's no work.
+            var assembly = Assembly.GetEntryAssembly();
+            if (assembly is null)
+                return;
+
+            // Get any defined service types, if we have none there's no work.
+            IEnumerable<Type> serviceTypes = assembly.GetTypes().Where(IsConcreteBotService);
+            if (serviceTypes?.Any() != true)
+                return;
+
+            // Register each service type.
+            foreach (Type serviceType in serviceTypes)
+            {
+                // Currently, an alias is required for settings.
+                object? settings = null;
+                AliasAttribute? alias = serviceType.GetCustomAttribute<AliasAttribute>();
+                if (alias is not null)
+                {
+                    // If there's more than one alias, we don't know which one to use.
+                    if (alias.Values.Count > 1)
+                        continue;
+
+                    // Get the configuration section.
+                    string? key = alias.Values.FirstOrDefault();
+                    if (!string.IsNullOrWhiteSpace(key))
+                    {
+                        // Attempt to get a config section for the alias.
+                        IConfigurationSection configurationSection = configuration.GetSection(key);
+                        if (configurationSection is null)
+                            continue;
+
+                        // Bots with settings specify a type.
+                        Type[]? genericArguments = serviceType?.BaseType?.GetGenericArguments();
+                        if (genericArguments?.Length != 1)
+                            continue;
+
+                        // Get the setting type, if one is not present, there's no work.
+                        Type? settingType = genericArguments.FirstOrDefault();
+                        if (settingType is null)
+                            continue;
+
+                        // Attempt to parse the settings.
+                        settings = configurationSection.Get(settingType);
+                    }
+                }
+
+                // Validate the service type to satisfy warnings.
+                if (serviceType is null)
+                    continue;
+
+                // Create an instance of the service.
+                object? instance = settings is null
+                    ? Activator.CreateInstance(serviceType, _cancellationToken)
+                    : Activator.CreateInstance(serviceType, settings, _cancellationToken);
+
+                // Validate the instance and register it.
+                if (instance is BotService botService)
+                    _services.Add(botService);
             }
         }
 
