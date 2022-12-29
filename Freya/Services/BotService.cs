@@ -1,4 +1,6 @@
-﻿using Freya.Pipeline;
+﻿using Freya.Commands;
+using Freya.Pipeline;
+using Freya.Runtime;
 
 using Mauve;
 using Mauve.Patterns;
@@ -6,7 +8,7 @@ using Mauve.Runtime;
 using Mauve.Runtime.Processing;
 using Mauve.Runtime.Services;
 
-namespace Freya.Core
+namespace Freya.Services
 {
     internal abstract class BotService : IPipelineService<BotCommand>
     {
@@ -16,6 +18,7 @@ namespace Freya.Core
         private CommandPipeline? _commandPipeline;
         private IDependencyCollection? _dependencies;
         private readonly ILogger<LogEntry> _logger;
+        private readonly CommandFactory _commandFactory;
         private readonly CancellationToken _cancellationToken;
 
         #endregion
@@ -27,9 +30,10 @@ namespace Freya.Core
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
-        public BotService(ILogger<LogEntry> logger, CancellationToken cancellationToken)
+        public BotService(ILogger<LogEntry> logger, CommandFactory commandFactory, CancellationToken cancellationToken)
         {
             _logger = logger;
+            _commandFactory = commandFactory;
             _cancellationToken = cancellationToken;
         }
 
@@ -61,6 +65,7 @@ namespace Freya.Core
                 // Keep the bot alive.
                 await Task.Delay(Timeout.Infinite);
             }, _cancellationToken);
+            await Task.CompletedTask;
         }
 
         #endregion
