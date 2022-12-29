@@ -1,5 +1,4 @@
-﻿using Freya.Core;
-
+﻿using Freya.Commands;
 using Mauve.Patterns;
 
 namespace Freya.Pipeline
