@@ -1,4 +1,5 @@
-﻿using Discord.WebSocket;
+﻿using Discord;
+using Discord.WebSocket;
 
 using Freya.Core;
 using Freya.Runtime;
@@ -8,9 +9,10 @@ using Mauve.Extensibility;
 using Mauve.Patterns;
 using Mauve.Runtime.Processing;
 
-namespace Freya.Services
+namespace Freya.Services.Discord
 {
-    internal class DiscordService : BotService
+    [Alias("discord")]
+    internal class DiscordService : BotService<DiscordSettings>
     {
 
         #region Fields
@@ -25,8 +27,8 @@ namespace Freya.Services
         /// 
         /// </summary>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
-        public DiscordService(CancellationToken cancellationToken) :
-            base(new ConsoleLogger(), cancellationToken) =>
+        public DiscordService(DiscordSettings settings, CancellationToken cancellationToken) :
+            base(settings, new ConsoleLogger(), cancellationToken) =>
             _client = new DiscordSocketClient();
 
         #endregion
@@ -44,14 +46,14 @@ namespace Freya.Services
         protected override async Task Run(CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            _ = Log(EventType.Information, "The test service is alive.");
+            await Log(EventType.Information, "The Discord service is alive.");
         }
 
         #endregion
 
         #region Private Methods
 
-        private async Task DiscordLogReceived(Discord.LogMessage arg)
+        private async Task DiscordLogReceived(LogMessage arg)
         {
             // Determine the event type.
             EventType eventType = arg.Exception is null
