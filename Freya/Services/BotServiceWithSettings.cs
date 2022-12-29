@@ -1,6 +1,8 @@
-﻿using Mauve.Runtime;
+﻿using Freya.Runtime;
 
-namespace Freya.Core
+using Mauve.Runtime;
+
+namespace Freya.Services
 {
     internal abstract class BotService<TSettings> : BotService
     {
@@ -18,8 +20,8 @@ namespace Freya.Core
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
-        public BotService(TSettings settings, ILogger<LogEntry> logger, CancellationToken cancellationToken) :
-            base(logger, cancellationToken) =>
+        public BotService(TSettings settings, ILogger<LogEntry> logger, CommandFactory commandFactory, CancellationToken cancellationToken) :
+            base(logger, commandFactory, cancellationToken) =>
             Settings = settings;
 
         #endregion
