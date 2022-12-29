@@ -20,10 +20,6 @@ namespace Freya.Core
 
         #endregion
 
-        #region Properties
-
-        #endregion
-
         #region Constructor
 
         /// <summary>
@@ -58,10 +54,13 @@ namespace Freya.Core
 
             // Cancel if requested, otherwise run the service.
             _cancellationToken.ThrowIfCancellationRequested();
-            await Run(_cancellationToken);
+            _ = Task.Run(async () =>
+            {
+                await Run(_cancellationToken);
 
-            // Keep the bot alive.
-            await Task.Delay(Timeout.Infinite);
+                // Keep the bot alive.
+                await Task.Delay(Timeout.Infinite);
+            }, _cancellationToken);
         }
 
         #endregion
