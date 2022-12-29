@@ -2,7 +2,7 @@
 
 using Mauve.Patterns;
 
-namespace Freya.Core
+namespace Freya
 {
     internal class DependencyCollection : IDependencyCollection
     {
