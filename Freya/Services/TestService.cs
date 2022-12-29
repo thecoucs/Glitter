@@ -1,4 +1,4 @@
-﻿using Freya.Core;
+﻿using Freya.Commands;
 using Freya.Runtime;
 
 using Mauve;
@@ -16,8 +16,8 @@ namespace Freya.Services
         /// 
         /// </summary>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
-        public TestService(CancellationToken cancellationToken) :
-            base(new ConsoleLogger(), cancellationToken)
+        public TestService(CommandFactory commandFactory, CancellationToken cancellationToken) :
+            base(new ConsoleLogger(), commandFactory, cancellationToken)
         { }
 
         #endregion
