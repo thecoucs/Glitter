@@ -7,9 +7,18 @@ using Mauve;
 
 namespace Freya.Runtime
 {
+    /// <summary>
+    /// Represents a factory for creating <see cref="Command"/> instances.
+    /// </summary>
     internal class CommandFactory : AliasedTypeFactory<Command>
     {
         private Dictionary<string, Type>? _types;
+        /// <summary>
+        /// Attempts to create a new instance of <see cref="Command"/> from the specified <see cref="CommandRequest"/>.
+        /// </summary>
+        /// <param name="request">The request for the command.</param>
+        /// <param name="command">The command created by the factory.</param>
+        /// <returns><see langword="true"/> if creation was successful, otherwise <see langword="false"/>.</returns>
         public bool TryCreate(CommandRequest request, out Command? command)
         {
             // Attempt to identify a type that matches the specified key.
@@ -28,8 +37,14 @@ namespace Freya.Runtime
             {
                 return false;
             }
+
             return true;
         }
+        /// <summary>
+        /// Gets the <see cref="Type"/> for the specified alias.
+        /// </summary>
+        /// <param name="alias"></param>
+        /// <returns></returns>
         protected Type? GetTypeForAlias(string alias)
         {
             // If we already have the requested alias, return the associated type.
@@ -57,6 +72,11 @@ namespace Freya.Runtime
             // If we haven't found the requested alias by now, we're not going to.
             return null;
         }
+        /// <summary>
+        /// Attempts to add the specified type to the underlying cache.
+        /// </summary>
+        /// <param name="type">The type to handle.</param>
+        /// <exception cref="InvalidOperationException">Thrown if the specied type is associated with an alias that's already cached.</exception>
         private void HandleType(Type type)
         {
             // Get the type alias and validate it.
