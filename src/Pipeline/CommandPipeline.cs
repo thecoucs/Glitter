@@ -3,7 +3,7 @@ using Mauve.Extensibility;
 using Mauve.Patterns;
 using Mauve.Runtime.Processing;
 
-namespace Freya
+namespace Freya.Pipeline
 {
     /// <summary>
     /// Represents an implementation of <see cref="IPipeline{T}"/> that executes <see cref="BotCommand"/> instances.
