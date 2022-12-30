@@ -9,15 +9,7 @@ namespace Freya.Runtime
 {
     internal class CommandFactory : AliasedTypeFactory<Command>
     {
-
-        #region Fields
-
         private Dictionary<string, Type>? _types;
-
-        #endregion
-
-        #region Public Methods
-
         public bool TryCreate(CommandRequest request, out Command? command)
         {
             // Attempt to identify a type that matches the specified key.
@@ -38,11 +30,6 @@ namespace Freya.Runtime
             }
             return true;
         }
-
-        #endregion
-
-        #region Private Methods
-
         protected Type? GetTypeForAlias(string alias)
         {
             // If we already have the requested alias, return the associated type.
@@ -61,28 +48,7 @@ namespace Freya.Runtime
             // Store the types with their associated aliases.
             _types = new Dictionary<string, Type>();
             foreach (Type type in types)
-            {
-                // Get the type alias and validate it.
-                AliasAttribute? typeAlias = type?.GetCustomAttribute<AliasAttribute>();
-                if (typeAlias is null)
-                    continue;
-
-                // Iterate over the identified aliases, validating, and then recording them.
-                foreach (string value in typeAlias.Values)
-                {
-                    // Validate the value.
-                    if (string.IsNullOrWhiteSpace(value))
-                        continue;
-
-                    // Prevent duplicate associations.
-                    if (_types?.ContainsKey(value) == true)
-                        throw new InvalidOperationException("Unable to register more than one type with a single alias.");
-
-                    // Record the association.
-                    if (_types is not null && type is not null)
-                        _types.Add(value, type);
-                }
-            }
+                HandleType(type);
 
             // If we already have the requested alias, return the associated type.
             if (_types?.ContainsKey(alias) == true)
@@ -91,8 +57,28 @@ namespace Freya.Runtime
             // If we haven't found the requested alias by now, we're not going to.
             return null;
         }
+        private void HandleType(Type type)
+        {
+            // Get the type alias and validate it.
+            AliasAttribute? typeAlias = type?.GetCustomAttribute<AliasAttribute>();
+            if (typeAlias is null)
+                return;
 
-        #endregion
+            // Iterate over the identified aliases, validating, and then recording them.
+            foreach (string value in typeAlias.Values)
+            {
+                // Validate the value.
+                if (string.IsNullOrWhiteSpace(value))
+                    continue;
 
+                // Prevent duplicate associations.
+                if (_types?.ContainsKey(value) == true)
+                    throw new InvalidOperationException("Unable to register more than one type with a single alias.");
+
+                // Record the association.
+                if (_types is not null && type is not null)
+                    _types.Add(value, type);
+            }
+        }
     }
 }
