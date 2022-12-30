@@ -1,4 +1,5 @@
 ﻿using Freya.Commands;
+
 using Mauve.Patterns;
 
 namespace Freya.Pipeline
@@ -9,25 +10,12 @@ namespace Freya.Pipeline
     /// <inheritdoc/>
     internal class CommandExecutionMiddleware : IMiddleware<Command>
     {
-
-        #region Fields
-
         private readonly CancellationToken _cancellationToken;
-
-        #endregion
-
-        #region Constructor
-
         /// <summary>
         /// Creates a new instance of <see cref="CommandExecutionMiddleware"/>.
         /// </summary>
         public CommandExecutionMiddleware(CancellationToken cancellationToken) =>
             _cancellationToken = cancellationToken;
-
-        #endregion
-
-        #region Public Methods
-
         /// <inheritdoc/>
         public void Invoke(Command input, MiddlewareDelegate<Command> next) =>
             input.Execute(_cancellationToken).GetAwaiter();
@@ -46,8 +34,5 @@ namespace Freya.Pipeline
             cancellationToken.ThrowIfCancellationRequested();
             await input.Execute(cancellationToken);
         }
-
-        #endregion
-
     }
 }
