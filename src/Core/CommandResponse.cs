@@ -1,4 +1,4 @@
-﻿namespace Freya
+﻿namespace Freya.Core
 {
     /// <summary>
     /// Represents a <see cref="CommandResponse"/>.
