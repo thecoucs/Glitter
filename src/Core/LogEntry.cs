@@ -7,9 +7,6 @@ namespace Freya.Core
     /// </summary>
     internal record LogEntry
     {
-
-        #region Properties
-
         /// <summary>
         /// The <see cref="EventType"/> of the entry.
         /// </summary>
@@ -18,11 +15,6 @@ namespace Freya.Core
         /// The message the entry is for.
         /// </summary>
         public string Message { get; init; }
-
-        #endregion
-
-        #region Constructor
-
         /// <summary>
         /// Creates a new instance of <see cref="LogEntry"/>.
         /// </summary>
@@ -33,8 +25,5 @@ namespace Freya.Core
             Type = type;
             Message = message;
         }
-
-        #endregion
-
     }
 }
