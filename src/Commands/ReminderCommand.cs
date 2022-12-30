@@ -1,4 +1,6 @@
-﻿using Mauve;
+﻿using Freya.Core;
+
+using Mauve;
 
 namespace Freya.Commands
 {
