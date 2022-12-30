@@ -18,8 +18,13 @@ namespace Freya.Services
 
         private readonly string _name;
         private readonly ILogger<LogEntry> _logger;
-        private readonly CommandFactory _commandFactory;
         private readonly CancellationToken _cancellationToken;
+
+        #endregion
+
+        #region Properties
+
+        protected CommandFactory CommandFactory { get; set; }
 
         #endregion
 
@@ -34,8 +39,8 @@ namespace Freya.Services
         {
             _name = name;
             _logger = logger;
-            _commandFactory = commandFactory;
             _cancellationToken = cancellationToken;
+            CommandFactory = commandFactory;
         }
 
         #endregion
