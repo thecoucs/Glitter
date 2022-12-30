@@ -34,13 +34,13 @@ namespace Freya.Runtime
             if (tokens?.Any() != true)
                 return false;
 
-            // Capture the command key and any parameters.
+            // Capture the command key and validate.
             string? key = tokens.FirstOrDefault();
-            foreach (string token in tokens.AfterOrDefault(key))
-            {
+            if (string.IsNullOrWhiteSpace(key))
+                return false;
 
-            }
-
+            // Create a new request and return true.
+            request = new CommandRequest(key, tokens.AfterOrDefault(key));
             return true;
         }
     }
