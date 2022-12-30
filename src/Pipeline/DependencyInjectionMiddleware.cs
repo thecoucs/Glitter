@@ -10,25 +10,12 @@ namespace Freya.Pipeline
     /// <inheritdoc/>
     internal class DependencyInjectionMiddleware : IMiddleware<Command>
     {
-
-        #region Fields
-
         private readonly IServiceProvider _serviceProvider;
-
-        #endregion
-
-        #region Constructor
-
         /// <summary>
         /// Creates a new instance of <see cref="DependencyInjectionMiddleware"/>.
         /// </summary>
         public DependencyInjectionMiddleware(IServiceProvider serviceProvider) =>
             _serviceProvider = serviceProvider;
-
-        #endregion
-
-        #region Public Methods
-
         /// <inheritdoc/>
         public void Invoke(Command input, MiddlewareDelegate<Command> next)
         {
@@ -40,12 +27,5 @@ namespace Freya.Pipeline
         public Task Invoke(Command input, IMiddleware<Command> next, CancellationToken cancellationToken) => throw new NotImplementedException();
         /// <inheritdoc/>
         public Task Invoke(Command input, MiddlewareDelegate<Command> next, CancellationToken cancellationToken) => throw new NotImplementedException();
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
-
     }
 }
