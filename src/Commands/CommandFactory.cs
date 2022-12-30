@@ -1,11 +1,9 @@
 ﻿using System.Reflection;
-
-using Freya.Commands;
 using Freya.Core;
 
 using Mauve;
 
-namespace Freya.Runtime
+namespace Freya.Commands
 {
     /// <summary>
     /// Represents a factory for creating <see cref="Command"/> instances.
@@ -33,7 +31,8 @@ namespace Freya.Runtime
                 object? createdInstance = Activator.CreateInstance(type, request.Parameters);
                 if (createdInstance is Command commandInstance)
                     command = commandInstance;
-            } catch
+            }
+            catch
             {
                 return false;
             }
