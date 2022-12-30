@@ -5,11 +5,16 @@ using Mauve.Extensibility;
 
 namespace Freya.Core
 {
+    /// <summary>
+    /// Represents a factory for creating instances of concrete implementations of a specified type marked with an <see cref="AliasAttribute"/>.
+    /// </summary>
+    /// <typeparam name="T">Specifies the type of objects the factory can create.</typeparam>
     internal abstract class AliasedTypeFactory<T>
     {
-
-        #region Protected Methods
-
+        /// <summary>
+        /// Gets all qualified types for the factory.
+        /// </summary>
+        /// <returns>An <see cref="IEnumerable{T}"/> containing the qualified types for the factory.</returns>
         protected IEnumerable<Type>? GetQualifiedTypes()
         {
             // Get the entry assembly, if we can't find it, there's no work.
@@ -26,8 +31,5 @@ namespace Freya.Core
                          type.DerivesFrom<T>()
                    select type;
         }
-
-        #endregion
-
     }
 }
