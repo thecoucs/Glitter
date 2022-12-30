@@ -6,7 +6,7 @@ using Mauve.Runtime;
 
 namespace Freya.Commands
 {
-    internal abstract class BotCommand
+    internal abstract class Command
     {
 
         #region Fields
@@ -25,7 +25,7 @@ namespace Freya.Commands
 
         #region Constructor
 
-        public BotCommand(string displayName, string description, ILogger<LogEntry> logger)
+        public Command(string displayName, string description, ILogger<LogEntry> logger)
         {
             _logger = logger;
             _id = Guid.NewGuid().GetHashCode(NumericBase.Hexadecimal);

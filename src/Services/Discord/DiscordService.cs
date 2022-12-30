@@ -37,7 +37,7 @@ namespace Freya.Services.Discord
         #region Protected Methods
 
         /// <inheritdoc/>
-        protected override void ConfigureService(IServiceCollection services, IPipeline<BotCommand> pipeline)
+        protected override void ConfigureService(IServiceCollection services, IPipeline<Command> pipeline)
         {
             _client.Log += HandleDiscordLog;
             _client.LoggedIn += HandleDiscordLogin;

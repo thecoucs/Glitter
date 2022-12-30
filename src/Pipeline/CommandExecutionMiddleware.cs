@@ -4,10 +4,10 @@ using Mauve.Patterns;
 namespace Freya.Pipeline
 {
     /// <summary>
-    /// Represents an implementation of <see cref="IMiddleware{T}"/> that executes <see cref="BotCommand"/> instances.
+    /// Represents an implementation of <see cref="IMiddleware{T}"/> that executes <see cref="Command"/> instances.
     /// </summary>
     /// <inheritdoc/>
-    internal class CommandExecutionMiddleware : IMiddleware<BotCommand>
+    internal class CommandExecutionMiddleware : IMiddleware<Command>
     {
 
         #region Fields
@@ -29,19 +29,19 @@ namespace Freya.Pipeline
         #region Public Methods
 
         /// <inheritdoc/>
-        public void Invoke(BotCommand input, MiddlewareDelegate<BotCommand> next) =>
+        public void Invoke(Command input, MiddlewareDelegate<Command> next) =>
             input.Execute(_cancellationToken).GetAwaiter();
         /// <inheritdoc/>
-        public void Invoke(BotCommand input, IMiddleware<BotCommand> next) =>
+        public void Invoke(Command input, IMiddleware<Command> next) =>
             input.Execute(_cancellationToken).GetAwaiter();
         /// <inheritdoc/>
-        public async Task Invoke(BotCommand input, IMiddleware<BotCommand> next, CancellationToken cancellationToken)
+        public async Task Invoke(Command input, IMiddleware<Command> next, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
             await input.Execute(cancellationToken);
         }
         /// <inheritdoc/>
-        public async Task Invoke(BotCommand input, MiddlewareDelegate<BotCommand> next, CancellationToken cancellationToken)
+        public async Task Invoke(Command input, MiddlewareDelegate<Command> next, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
             await input.Execute(cancellationToken);

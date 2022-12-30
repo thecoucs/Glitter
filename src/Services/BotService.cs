@@ -42,7 +42,7 @@ namespace Freya.Services
 
         #region Public Methods
 
-        public void Configure(IServiceCollection services, IPipeline<BotCommand> pipeline)
+        public void Configure(IServiceCollection services, IPipeline<Command> pipeline)
         {
             // Allow the concrete service to configure itself.
             ConfigureService(services, pipeline);
@@ -73,7 +73,7 @@ namespace Freya.Services
 
         #region Protected Methods
 
-        protected abstract void ConfigureService(IServiceCollection services, IPipeline<BotCommand> pipeline);
+        protected abstract void ConfigureService(IServiceCollection services, IPipeline<Command> pipeline);
         /// <summary>
         /// 
         /// </summary>

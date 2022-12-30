@@ -4,10 +4,10 @@ using Mauve.Patterns;
 namespace Freya.Pipeline
 {
     /// <summary>
-    /// Represents an implementation of <see cref="IMiddleware{T}"/> that injects dependencies into <see cref="BotCommand"/> instances.
+    /// Represents an implementation of <see cref="IMiddleware{T}"/> that injects dependencies into <see cref="Command"/> instances.
     /// </summary>
     /// <inheritdoc/>
-    internal class DependencyInjectionMiddleware : IMiddleware<BotCommand>
+    internal class DependencyInjectionMiddleware : IMiddleware<Command>
     {
 
         #region Fields
@@ -29,16 +29,16 @@ namespace Freya.Pipeline
         #region Public Methods
 
         /// <inheritdoc/>
-        public void Invoke(BotCommand input, MiddlewareDelegate<BotCommand> next)
+        public void Invoke(Command input, MiddlewareDelegate<Command> next)
         {
 
         }
         /// <inheritdoc/>
-        public void Invoke(BotCommand input, IMiddleware<BotCommand> next) => throw new NotImplementedException();
+        public void Invoke(Command input, IMiddleware<Command> next) => throw new NotImplementedException();
         /// <inheritdoc/>
-        public Task Invoke(BotCommand input, IMiddleware<BotCommand> next, CancellationToken cancellationToken) => throw new NotImplementedException();
+        public Task Invoke(Command input, IMiddleware<Command> next, CancellationToken cancellationToken) => throw new NotImplementedException();
         /// <inheritdoc/>
-        public Task Invoke(BotCommand input, MiddlewareDelegate<BotCommand> next, CancellationToken cancellationToken) => throw new NotImplementedException();
+        public Task Invoke(Command input, MiddlewareDelegate<Command> next, CancellationToken cancellationToken) => throw new NotImplementedException();
 
         #endregion
 

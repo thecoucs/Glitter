@@ -6,16 +6,16 @@ using Mauve.Runtime.Processing;
 namespace Freya.Pipeline
 {
     /// <summary>
-    /// Represents an implementation of <see cref="IPipeline{T}"/> that executes <see cref="BotCommand"/> instances.
+    /// Represents an implementation of <see cref="IPipeline{T}"/> that executes <see cref="Command"/> instances.
     /// </summary>
-    internal class CommandPipeline : IPipeline<BotCommand>
+    internal class CommandPipeline : IPipeline<Command>
     {
 
         #region Fields
 
         private bool _pipelineComplete;
         private readonly CancellationToken _cancellationToken;
-        private readonly List<IMiddleware<BotCommand>> _middlewares;
+        private readonly List<IMiddleware<Command>> _middlewares;
 
         #endregion
 
@@ -28,28 +28,28 @@ namespace Freya.Pipeline
         public CommandPipeline(CancellationToken cancellationToken)
         {
             _cancellationToken = cancellationToken;
-            _middlewares = new List<IMiddleware<BotCommand>>();
+            _middlewares = new List<IMiddleware<Command>>();
         }
 
         #endregion
 
         #region Public Methods
 
-        public async Task Execute(BotCommand input)
+        public async Task Execute(Command input)
         {
             _cancellationToken.ThrowIfCancellationRequested();
-            foreach (IMiddleware<BotCommand> middleware in _middlewares)
+            foreach (IMiddleware<Command> middleware in _middlewares)
                 await middleware.Invoke(input, _middlewares.NextOrDefault(middleware), _cancellationToken);
 
             await Task.CompletedTask;
         }
-        public void Run(IMiddleware<BotCommand> middleware)
+        public void Run(IMiddleware<Command> middleware)
         {
             Validate();
             _middlewares.Add(middleware);
             _pipelineComplete = true;
         }
-        public IPipeline<BotCommand> Use(IMiddleware<BotCommand> middleware)
+        public IPipeline<Command> Use(IMiddleware<Command> middleware)
         {
             Validate();
             _middlewares.Add(middleware);

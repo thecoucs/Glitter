@@ -26,7 +26,7 @@ namespace Freya.Services
 
         #region Protected Methods
 
-        protected override void ConfigureService(IServiceCollection services, IPipeline<BotCommand> pipeline)
+        protected override void ConfigureService(IServiceCollection services, IPipeline<Command> pipeline)
         {
 
         }

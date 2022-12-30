@@ -7,7 +7,7 @@ using Mauve.Runtime;
 namespace Freya.Commands
 {
     [Alias("echo")]
-    internal class EchoCommand : BotCommand
+    internal class EchoCommand : Command
     {
 
         #region Fields
