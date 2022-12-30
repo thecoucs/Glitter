@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+Console.Title = "Freya";
 Console.WriteLine($"Initializing.");
 
 // Validate the base directory.
