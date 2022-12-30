@@ -1,7 +1,6 @@
 ﻿using Discord;
 using Discord.WebSocket;
-
-using Freya.Commands;
+using Freya.Core;
 using Freya.Runtime;
 
 using Mauve;
