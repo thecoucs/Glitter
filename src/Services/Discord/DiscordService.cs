@@ -1,5 +1,6 @@
 ﻿using Discord;
 using Discord.WebSocket;
+
 using Freya.Core;
 using Freya.Runtime;
 
@@ -28,15 +29,15 @@ namespace Freya.Services.Discord
         /// </summary>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
         public DiscordService(DiscordSettings settings, CommandFactory commandFactory, CancellationToken cancellationToken) :
-            base(settings, new ConsoleLogger(), commandFactory, cancellationToken) =>
+            base("Discord", settings, new ConsoleLogger(), commandFactory, cancellationToken) =>
             _client = new DiscordSocketClient();
 
         #endregion
 
-        #region Public Methods
+        #region Protected Methods
 
         /// <inheritdoc/>
-        public override void Configure(IServiceCollection services, IPipeline<BotCommand> pipeline)
+        protected override void ConfigureService(IServiceCollection services, IPipeline<BotCommand> pipeline)
         {
             _client.Log += HandleDiscordLog;
             _client.LoggedIn += HandleDiscordLogin;
@@ -45,19 +46,14 @@ namespace Freya.Services.Discord
             _client.Disconnected += HandleClientDisconnect;
             _client.MessageReceived += HandleClientMessage;
             _ = services.AddSingleton(_client);
-            _ = Task.Run(async () => await _client.LoginAsync(TokenType.Bot, Settings.Token));
         }
-
-        #endregion
-
-        #region Protected Methods
-
         /// <inheritdoc/>
         protected override async Task Run(CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
             try
             {
+                await _client.LoginAsync(TokenType.Bot, Settings.Token);
                 await _client.StartAsync();
                 await Log(EventType.Success, "The Discord service has been started successfully.");
             } catch (Exception e)
