@@ -34,7 +34,7 @@ IConfiguration configuration = new ConfigurationBuilder()
     .Build();
 
 // Create a new brain and host.
-Brain brain = null;
+Brain? brain = null;
 Console.WriteLine("Creating host.");
 using IHost host = Host.CreateDefaultBuilder()
     .ConfigureServices(services =>
