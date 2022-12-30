@@ -1,6 +1,6 @@
 ﻿using Mauve;
 
-namespace Freya
+namespace Freya.Core
 {
     /// <summary>
     /// Represents a log entry.
