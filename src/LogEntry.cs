@@ -5,7 +5,7 @@ namespace Freya
     /// <summary>
     /// Represents a log entry.
     /// </summary>
-    internal class LogEntry
+    internal record LogEntry
     {
 
         #region Properties
@@ -13,22 +13,16 @@ namespace Freya
         /// <summary>
         /// The <see cref="EventType"/> of the entry.
         /// </summary>
-        public EventType Type { get; set; }
+        public EventType Type { get; init; }
         /// <summary>
         /// The message the entry is for.
         /// </summary>
-        public string Message { get; set; }
+        public string Message { get; init; }
 
         #endregion
 
         #region Constructor
 
-        /// <summary>
-        /// Creates a new instance of <see cref="LogEntry"/>.
-        /// </summary>
-        public LogEntry() :
-            this(EventType.None, string.Empty)
-        { }
         /// <summary>
         /// Creates a new instance of <see cref="LogEntry"/>.
         /// </summary>

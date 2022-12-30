@@ -3,20 +3,20 @@ using Freya.Pipeline;
 using Freya.Runtime;
 
 using Mauve;
-using Mauve.Patterns;
 using Mauve.Runtime;
 using Mauve.Runtime.Processing;
-using Mauve.Runtime.Services;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Freya.Services
 {
-    internal abstract class BotService : IPipelineService<BotCommand>
+    internal abstract class BotService
     {
 
         #region Fields
 
         private CommandPipeline? _commandPipeline;
-        private IDependencyCollection? _dependencies;
+        private readonly IServiceCollection? _services;
         private readonly ILogger<LogEntry> _logger;
         private readonly CommandFactory _commandFactory;
         private readonly CancellationToken _cancellationToken;
@@ -41,16 +41,15 @@ namespace Freya.Services
 
         #region Public Methods
 
-        public abstract void Configure(IDependencyCollection dependencies, IPipeline<BotCommand> pipeline);
+        public abstract void Configure(IServiceCollection services, IPipeline<BotCommand> pipeline);
         public async Task Start()
         {
             // Cancel if requested, otherwise create the command pipeline and dependency collection.
             _cancellationToken.ThrowIfCancellationRequested();
             _commandPipeline = new CommandPipeline(_cancellationToken);
-            _dependencies = new DependencyCollection();
 
             // Allow implementing services to configure their dependencies and custom pipelines.
-            Configure(_dependencies, _commandPipeline);
+            Configure(_services, _commandPipeline);
 
             // Add the basic execution pipeline.
             var executor = new CommandExecutionMiddleware(_cancellationToken);

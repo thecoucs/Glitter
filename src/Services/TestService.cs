@@ -2,8 +2,9 @@
 using Freya.Runtime;
 
 using Mauve;
-using Mauve.Patterns;
 using Mauve.Runtime.Processing;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Freya.Services
 {
@@ -24,7 +25,7 @@ namespace Freya.Services
 
         #region Public Methods
 
-        public override void Configure(IDependencyCollection dependencies, IPipeline<BotCommand> pipeline)
+        public override void Configure(IServiceCollection services, IPipeline<BotCommand> pipeline)
         {
 
         }

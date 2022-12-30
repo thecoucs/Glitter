@@ -6,8 +6,9 @@ using Freya.Runtime;
 
 using Mauve;
 using Mauve.Extensibility;
-using Mauve.Patterns;
 using Mauve.Runtime.Processing;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Freya.Services.Discord
 {
@@ -36,7 +37,7 @@ namespace Freya.Services.Discord
         #region Public Methods
 
         /// <inheritdoc/>
-        public override void Configure(IDependencyCollection dependencies, IPipeline<BotCommand> pipeline)
+        public override void Configure(IServiceCollection services, IPipeline<BotCommand> pipeline)
         {
             _client.Log += HandleDiscordLog;
             _client.LoggedIn += HandleDiscordLogin;
@@ -44,6 +45,7 @@ namespace Freya.Services.Discord
             _client.Connected += HandleClientConnect;
             _client.Disconnected += HandleClientDisconnect;
             _client.MessageReceived += HandleClientMessage;
+            _ = services.AddSingleton(_client);
             _ = Task.Run(async () => await _client.LoginAsync(TokenType.Bot, Settings.Token));
         }
 
