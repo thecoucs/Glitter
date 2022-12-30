@@ -1,9 +1,10 @@
-﻿using Mauve;
+﻿using Freya.Core;
+using Mauve;
 using Mauve.Extensibility;
 using Mauve.Math;
 using Mauve.Runtime;
 
-namespace Freya.Core
+namespace Freya.Commands
 {
     internal abstract class BotCommand
     {

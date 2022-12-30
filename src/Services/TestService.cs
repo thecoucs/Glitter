@@ -1,4 +1,4 @@
-﻿using Freya.Core;
+﻿using Freya.Commands;
 using Freya.Runtime;
 
 using Mauve;

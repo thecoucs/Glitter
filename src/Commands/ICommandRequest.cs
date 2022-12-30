@@ -1,4 +1,4 @@
-﻿namespace Freya.Core
+﻿namespace Freya.Commands
 {
     internal interface ICommandRequest
     {
