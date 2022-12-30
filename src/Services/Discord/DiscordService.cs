@@ -15,15 +15,7 @@ namespace Freya.Services.Discord
     [Alias("discord")]
     internal class DiscordService : BotService<DiscordSettings>
     {
-
-        #region Fields
-
         private readonly DiscordSocketClient _client;
-
-        #endregion
-
-        #region Constructor
-
         /// <summary>
         /// 
         /// </summary>
@@ -31,11 +23,6 @@ namespace Freya.Services.Discord
         public DiscordService(DiscordSettings settings, CommandFactory commandFactory, CancellationToken cancellationToken) :
             base("Discord", settings, new ConsoleLogger(), commandFactory, cancellationToken) =>
             _client = new DiscordSocketClient();
-
-        #endregion
-
-        #region Protected Methods
-
         /// <inheritdoc/>
         protected override void ConfigureService(IServiceCollection services, IPipeline<Command> pipeline)
         {
@@ -64,11 +51,6 @@ namespace Freya.Services.Discord
                 await Log(EventType.Exception, $"An unexpected error occurred while starting the Discord service. {e.Message}");
             }
         }
-
-        #endregion
-
-        #region Private Methods
-
         private Task HandleInviteCreation(SocketInvite arg) => throw new NotImplementedException();
         private Task HandleScheduledGuildEventCreation(SocketGuildEvent arg) => throw new NotImplementedException();
         private Task HandleGuildJoin(SocketGuild arg) => throw new NotImplementedException();
@@ -105,8 +87,5 @@ namespace Freya.Services.Discord
         }
         private async Task HandleClientMessage(SocketMessage arg) =>
             await Task.CompletedTask;
-
-        #endregion
-
     }
 }
