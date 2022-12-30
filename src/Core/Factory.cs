@@ -1,4 +1,4 @@
-﻿namespace Freya
+﻿namespace Freya.Core
 {
     internal class Factory
     {
