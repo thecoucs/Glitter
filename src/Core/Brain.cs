@@ -8,7 +8,7 @@ using Mauve.Extensibility;
 
 using Microsoft.Extensions.Configuration;
 
-namespace Freya
+namespace Freya.Core
 {
     internal class Brain
     {
