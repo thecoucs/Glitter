@@ -1,4 +1,5 @@
 ﻿using Freya.Core;
+
 using Mauve;
 using Mauve.Extensibility;
 using Mauve.Math;
@@ -8,23 +9,10 @@ namespace Freya.Commands
 {
     internal abstract class Command
     {
-
-        #region Fields
-
         private readonly string _id;
         private readonly ILogger<LogEntry> _logger;
-
-        #endregion
-
-        #region Properties
-
         public string DisplayName { get; set; }
         public string Description { get; set; }
-
-        #endregion
-
-        #region Constructor
-
         public Command(string displayName, string description, ILogger<LogEntry> logger)
         {
             _logger = logger;
@@ -33,11 +21,6 @@ namespace Freya.Commands
             DisplayName = displayName;
             Description = description;
         }
-
-        #endregion
-
-        #region Public Methods
-
         /// <summary>
         /// 
         /// </summary>
@@ -50,12 +33,10 @@ namespace Freya.Commands
             try
             {
                 _ = Work(cancellationToken);
-            }
-            catch (Exception e)
+            } catch (Exception e)
             {
                 Log(EventType.Exception, $"An unexpected error occurred during execution. {e.Message}");
-            }
-            finally
+            } finally
             {
                 // Set the event type for the completion message.
                 EventType type = encounteredErrors
@@ -67,16 +48,8 @@ namespace Freya.Commands
                 await Task.CompletedTask;
             }
         }
-
-        #endregion
-
-        #region Protected Methods
-
         protected abstract Task Work(CancellationToken cancellationToken);
         protected void Log(EventType eventType, string message) =>
             _logger.Log(new LogEntry(eventType, $"{_id}: {message}"));
-
-        #endregion
-
     }
 }
