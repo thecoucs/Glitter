@@ -8,18 +8,10 @@ namespace Freya.Core
 {
     internal class Brain
     {
-
-        #region Fields
-
         private readonly List<BotService> _bots;
         private readonly ServiceFactory _serviceFactory;
         private readonly CancellationToken _cancellationToken;
         private readonly CancellationTokenSource _cancellationTokenSource;
-
-        #endregion
-
-        #region Constructor
-
         public Brain(ServiceFactory serviceFactory)
         {
             _cancellationTokenSource = new CancellationTokenSource();
@@ -27,11 +19,6 @@ namespace Freya.Core
             _bots = new List<BotService>();
             _serviceFactory = serviceFactory;
         }
-
-        #endregion
-
-        #region Public Methods
-
         public void Cancel() =>
             _cancellationTokenSource.Cancel();
         public void Configure(IServiceCollection services)
@@ -57,8 +44,5 @@ namespace Freya.Core
 
             await Task.Delay(Timeout.Infinite);
         }
-
-        #endregion
-
     }
 }
