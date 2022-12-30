@@ -45,6 +45,9 @@ namespace Freya.Services.Discord
             _client.Connected += HandleClientConnect;
             _client.Disconnected += HandleClientDisconnect;
             _client.MessageReceived += HandleClientMessage;
+            _client.JoinedGuild += HandleGuildJoin;
+            _client.GuildScheduledEventCreated += HandleScheduledGuildEventCreation;
+            _client.InviteCreated += HandleInviteCreation;
             _ = services.AddSingleton(_client);
         }
         /// <inheritdoc/>
@@ -66,6 +69,9 @@ namespace Freya.Services.Discord
 
         #region Private Methods
 
+        private Task HandleInviteCreation(SocketInvite arg) => throw new NotImplementedException();
+        private Task HandleScheduledGuildEventCreation(SocketGuildEvent arg) => throw new NotImplementedException();
+        private Task HandleGuildJoin(SocketGuild arg) => throw new NotImplementedException();
         private async Task HandleClientConnect() =>
             await Log(EventType.Success, "Successfully connected to Discord.");
         private async Task HandleClientDisconnect(Exception arg) =>
