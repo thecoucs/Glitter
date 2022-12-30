@@ -1,29 +1,13 @@
-﻿using Freya.Core;
-
-using Mauve;
+﻿using Mauve;
 
 namespace Freya.Commands
 {
+    /// <summary>
+    /// Represents a <see cref="Command"/> that reminds users of some specified input.
+    /// </summary>
     [Alias("remind")]
     internal class ReminderCommand
     {
-
-        #region Fields
-
-        private readonly string _what;
-        private readonly DateTime _when;
-
-        #endregion
-
-        #region Constructor
-
-        public ReminderCommand([FromBot] DateTime when, [FromBot] string what)
-        {
-            _when = when;
-            _what = what;
-        }
-
-        #endregion
 
     }
 }
