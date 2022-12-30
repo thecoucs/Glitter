@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Freya.Services
 {
+    [Alias("test")]
     internal class TestService : BotService
     {
 
@@ -18,22 +19,17 @@ namespace Freya.Services
         /// </summary>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
         public TestService(CommandFactory commandFactory, CancellationToken cancellationToken) :
-            base(new ConsoleLogger(), commandFactory, cancellationToken)
+            base("Test", new ConsoleLogger(), commandFactory, cancellationToken)
         { }
-
-        #endregion
-
-        #region Public Methods
-
-        public override void Configure(IServiceCollection services, IPipeline<BotCommand> pipeline)
-        {
-
-        }
 
         #endregion
 
         #region Protected Methods
 
+        protected override void ConfigureService(IServiceCollection services, IPipeline<BotCommand> pipeline)
+        {
+
+        }
         /// <inheritdoc/>
         protected override async Task Run(CancellationToken cancellationToken)
         {
