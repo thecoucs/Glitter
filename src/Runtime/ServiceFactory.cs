@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 
+using Freya.Commands;
 using Freya.Core;
 using Freya.Services;
 
@@ -9,28 +10,28 @@ using Microsoft.Extensions.Configuration;
 
 namespace Freya.Runtime
 {
+    /// <summary>
+    /// Represents a factory responsible for creating <see cref="BotService"/> instances.
+    /// </summary>
     internal class ServiceFactory : AliasedTypeFactory<BotService>
     {
-
-        #region Fields
-
         private readonly IConfiguration _configuration;
         private readonly CommandFactory _commandFactory;
-
-        #endregion
-
-        #region Constructor
-
+        /// <summary>
+        /// Creates a new <see cref="ServiceFactory"/> instance.
+        /// </summary>
+        /// <param name="configuration">The application configuration.</param>
+        /// <param name="commandFactory">The factory services should use when creating <see cref="Command"/> instances.</param>
         public ServiceFactory(IConfiguration configuration, CommandFactory commandFactory)
         {
             _configuration = configuration;
             _commandFactory = commandFactory;
         }
-
-        #endregion
-
-        #region Public Methods
-
+        /// <summary>
+        /// Discovers all concrete <see cref="BotService"/> implementations in the current <see cref="Assembly"/>.
+        /// </summary>
+        /// <param name="cancellationToken">The cancellation token to be provided to the <see cref="BotService"/> upon creation.</param>
+        /// <returns>An <see cref="IEnumerable{T}"/> containing all concrete <see cref="BotService"/> implementations in the current <see cref="Assembly"/>.</returns>
         public IEnumerable<BotService> Discover(CancellationToken cancellationToken)
         {
             // Get any types considered valid for the factory.
@@ -62,11 +63,12 @@ namespace Freya.Runtime
             // Signal to consumers that we're done iterating.
             yield break;
         }
-
-        #endregion
-
-        #region Private Methods
-
+        /// <summary>
+        /// Attempts to load settings for the specified type.
+        /// </summary>
+        /// <param name="type">The type to load settings for.</param>
+        /// <param name="settings">The resulting settings loaded from the application configuration.</param>
+        /// <returns><see langword="true"/> if settings are not applicable or if they were successfully loaded, otherwise <see langword="false"/>.</returns>
         private bool TryGetSettings(Type type, out object? settings)
         {
             // Set settings to null by default and validate the input.
@@ -97,8 +99,6 @@ namespace Freya.Runtime
                     if (configurationSection is null)
                         return false;
 
-
-
                     // Get the setting type, if one is not present, there's no work.
                     Type? settingType = genericArguments.FirstOrDefault();
                     if (settingType is null)
@@ -111,8 +111,5 @@ namespace Freya.Runtime
 
             return true;
         }
-
-        #endregion
-
     }
 }
