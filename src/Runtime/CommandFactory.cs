@@ -1,63 +1,98 @@
-﻿namespace Freya.Runtime
+﻿using System.Reflection;
+
+using Freya.Commands;
+using Freya.Core;
+
+using Mauve;
+
+namespace Freya.Runtime
 {
-    internal class CommandFactory
+    internal class CommandFactory : AliasedTypeFactory<Command>
     {
-        //protected Type? GetTypeForAlias(string alias)
-        //{
-        //    // If we already have the requested alias, return the associated type.
-        //    if (_types?.ContainsKey(alias) == true)
-        //        return _types[alias];
 
-        //    // If the alias wasn't found but we've already recorded all eligible types, then return null.
-        //    else if (_types is not null)
-        //        return null;
+        #region Fields
 
-        //    // Get the entry assembly, if we can't find it, there's no work.
-        //    var assembly = Assembly.GetEntryAssembly();
-        //    if (assembly is null)
-        //        return null;
+        private Dictionary<string, Type>? _types;
 
-        //    // Get any types considered valid for the factory.
-        //    IEnumerable<Type> types = from type
-        //                              in assembly.GetTypes()
-        //                              where !type.IsAbstract &&
-        //                                    !type.IsInterface &&
-        //                                    type.GetCustomAttribute<AliasAttribute>() is not null &&
-        //                                    type.DerivesFrom<T>()
-        //                              select type;
+        #endregion
 
-        //    // Store the types with their associated aliases.
-        //    _types = new Dictionary<string, Type>();
-        //    foreach (Type type in types)
-        //    {
-        //        // Get the type alias and validate it.
-        //        AliasAttribute? typeAlias = type?.GetCustomAttribute<AliasAttribute>();
-        //        if (typeAlias is null)
-        //            continue;
+        #region Public Methods
 
-        //        // Iterate over the identified aliases, validating, and then recording them.
-        //        foreach (string value in typeAlias.Values)
-        //        {
-        //            // Validate the value.
-        //            if (string.IsNullOrWhiteSpace(value))
-        //                continue;
+        public bool TryCreate(CommandRequest request, out Command? command)
+        {
+            // Attempt to identify a type that matches the specified key.
+            command = null;
+            Type? type = GetTypeForAlias(request.Key);
+            if (type is null)
+                return false;
 
-        //            // Prevent duplicate associations.
-        //            if (_types?.ContainsKey(value) == true)
-        //                throw new InvalidOperationException("Unable to register more than one type with a single alias.");
+            try
+            {
+                // Create an instance of the command.
+                object? createdInstance = Activator.CreateInstance(type, request.Parameters);
+                if (createdInstance is Command commandInstance)
+                    command = commandInstance;
+            } catch
+            {
+                return false;
+            }
+            return true;
+        }
 
-        //            // Record the association.
-        //            if (_types is not null && type is not null)
-        //                _types.Add(value, type);
-        //        }
-        //    }
+        #endregion
 
-        //    // If we already have the requested alias, return the associated type.
-        //    if (_types?.ContainsKey(alias) == true)
-        //        return _types[alias];
+        #region Private Methods
 
-        //    // If we haven't found the requested alias by now, we're not going to.
-        //    return null;
-        //}
+        protected Type? GetTypeForAlias(string alias)
+        {
+            // If we already have the requested alias, return the associated type.
+            if (_types?.ContainsKey(alias) == true)
+                return _types[alias];
+
+            // If the alias wasn't found but we've already recorded all eligible types, then return null.
+            else if (_types is not null)
+                return null;
+
+            // Get any types considered valid for the factory.
+            IEnumerable<Type>? types = GetQualifiedTypes();
+            if (types is null)
+                return null;
+
+            // Store the types with their associated aliases.
+            _types = new Dictionary<string, Type>();
+            foreach (Type type in types)
+            {
+                // Get the type alias and validate it.
+                AliasAttribute? typeAlias = type?.GetCustomAttribute<AliasAttribute>();
+                if (typeAlias is null)
+                    continue;
+
+                // Iterate over the identified aliases, validating, and then recording them.
+                foreach (string value in typeAlias.Values)
+                {
+                    // Validate the value.
+                    if (string.IsNullOrWhiteSpace(value))
+                        continue;
+
+                    // Prevent duplicate associations.
+                    if (_types?.ContainsKey(value) == true)
+                        throw new InvalidOperationException("Unable to register more than one type with a single alias.");
+
+                    // Record the association.
+                    if (_types is not null && type is not null)
+                        _types.Add(value, type);
+                }
+            }
+
+            // If we already have the requested alias, return the associated type.
+            if (_types?.ContainsKey(alias) == true)
+                return _types[alias];
+
+            // If we haven't found the requested alias by now, we're not going to.
+            return null;
+        }
+
+        #endregion
+
     }
 }
