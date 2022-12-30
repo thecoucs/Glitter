@@ -1,4 +1,5 @@
 ﻿using Freya.Commands;
+
 using Mauve.Patterns;
 
 namespace Freya.Pipeline
@@ -12,7 +13,7 @@ namespace Freya.Pipeline
 
         #region Fields
 
-        private readonly IDependencyCollection _dependencies;
+        private readonly IServiceProvider _serviceProvider;
 
         #endregion
 
@@ -21,8 +22,8 @@ namespace Freya.Pipeline
         /// <summary>
         /// Creates a new instance of <see cref="DependencyInjectionMiddleware"/>.
         /// </summary>
-        public DependencyInjectionMiddleware(IDependencyCollection dependencies) =>
-            _dependencies = dependencies;
+        public DependencyInjectionMiddleware(IServiceProvider serviceProvider) =>
+            _serviceProvider = serviceProvider;
 
         #endregion
 
