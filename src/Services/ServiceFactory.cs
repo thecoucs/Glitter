@@ -2,13 +2,12 @@
 
 using Freya.Commands;
 using Freya.Core;
-using Freya.Services;
 
 using Mauve;
 
 using Microsoft.Extensions.Configuration;
 
-namespace Freya.Runtime
+namespace Freya.Services
 {
     /// <summary>
     /// Represents a factory responsible for creating <see cref="BotService"/> instances.
