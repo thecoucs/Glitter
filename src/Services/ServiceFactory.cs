@@ -82,7 +82,7 @@ namespace Freya.Services
             else if (genericArguments?.Length != 1)
                 return false;
 
-            AliasAttribute? alias = type.GetCustomAttribute<AliasAttribute>();
+            AliasAttribute? alias = type?.GetCustomAttribute<AliasAttribute>();
             if (alias is not null)
             {
                 // If there's more than one alias, we don't know which one to use.
