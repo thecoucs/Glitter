@@ -40,7 +40,7 @@ namespace Freya.Runtime
                 return false;
 
             // Create a new request and return true.
-            request = new CommandRequest(key, tokens.AfterOrDefault(key));
+            request = new CommandRequest(key, tokens.AfterOrDefault(key).ToArray());
             return true;
         }
     }
