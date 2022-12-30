@@ -3,7 +3,7 @@ using Mauve.Extensibility;
 using Mauve.Math;
 using Mauve.Runtime;
 
-namespace Freya.Commands
+namespace Freya.Core
 {
     internal abstract class BotCommand
     {
@@ -49,10 +49,12 @@ namespace Freya.Commands
             try
             {
                 _ = Work(cancellationToken);
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Log(EventType.Exception, $"An unexpected error occurred during execution. {e.Message}");
-            } finally
+            }
+            finally
             {
                 // Set the event type for the completion message.
                 EventType type = encounteredErrors
