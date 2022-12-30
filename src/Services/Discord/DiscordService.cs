@@ -12,12 +12,15 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Freya.Services.Discord
 {
+    /// <summary>
+    /// Represents a new <see cref="BotService"/> for integrating with <see href="https://discordnet.dev/guides/introduction/intro.html">Discord</see>.
+    /// </summary>
     [Alias("discord")]
     internal class DiscordService : BotService<DiscordSettings>
     {
         private readonly DiscordSocketClient _client;
         /// <summary>
-        /// 
+        /// Creates a new <see cref="DiscordService"/> instance.
         /// </summary>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
         public DiscordService(DiscordSettings settings, CommandFactory commandFactory, CancellationToken cancellationToken) :
