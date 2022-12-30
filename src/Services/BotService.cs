@@ -15,8 +15,7 @@ namespace Freya.Services
 
         #region Fields
 
-        private CommandPipeline? _commandPipeline;
-        private readonly IServiceCollection? _services;
+        private readonly string _name;
         private readonly ILogger<LogEntry> _logger;
         private readonly CommandFactory _commandFactory;
         private readonly CancellationToken _cancellationToken;
@@ -30,8 +29,9 @@ namespace Freya.Services
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
-        public BotService(ILogger<LogEntry> logger, CommandFactory commandFactory, CancellationToken cancellationToken)
+        public BotService(string name, ILogger<LogEntry> logger, CommandFactory commandFactory, CancellationToken cancellationToken)
         {
+            _name = name;
             _logger = logger;
             _commandFactory = commandFactory;
             _cancellationToken = cancellationToken;
@@ -41,19 +41,20 @@ namespace Freya.Services
 
         #region Public Methods
 
-        public abstract void Configure(IServiceCollection services, IPipeline<BotCommand> pipeline);
+        public void Configure(IServiceCollection services, IPipeline<BotCommand> pipeline)
+        {
+            // Allow the concrete service to configure itself.
+            ConfigureService(services, pipeline);
+
+            // Add the basic execution pipeline.
+            var executor = new CommandExecutionMiddleware(_cancellationToken);
+            pipeline.Run(executor);
+        }
         public async Task Start()
         {
             // Cancel if requested, otherwise create the command pipeline and dependency collection.
             _cancellationToken.ThrowIfCancellationRequested();
-            _commandPipeline = new CommandPipeline(_cancellationToken);
-
-            // Allow implementing services to configure their dependencies and custom pipelines.
-            Configure(_services, _commandPipeline);
-
-            // Add the basic execution pipeline.
-            var executor = new CommandExecutionMiddleware(_cancellationToken);
-            _commandPipeline.Run(executor);
+            await Log(EventType.Information, $"Starting.");
 
             // Cancel if requested, otherwise run the service.
             _cancellationToken.ThrowIfCancellationRequested();
@@ -71,6 +72,7 @@ namespace Freya.Services
 
         #region Protected Methods
 
+        protected abstract void ConfigureService(IServiceCollection services, IPipeline<BotCommand> pipeline);
         /// <summary>
         /// 
         /// </summary>
@@ -80,7 +82,7 @@ namespace Freya.Services
         protected async Task Log(EventType eventType, string message)
         {
             _cancellationToken.ThrowIfCancellationRequested();
-            await _logger.LogAsync(new LogEntry(eventType, message), _cancellationToken);
+            await _logger.LogAsync(new LogEntry(eventType, $"{_name}: {message}"));
         }
 
         #endregion
