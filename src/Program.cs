@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 
 using Freya.Core;
-using Freya.Runtime;
 
 using MediatR;
 
@@ -18,10 +17,9 @@ using IHost host = Host.CreateDefaultBuilder()
     .ConfigureServices(services =>
     {
         // Add services.
-        _ = services.AddSingleton(new RequestParser("!", ","))
-                    .AddLogging(loggingBuilder => loggingBuilder.AddConsole().AddDebug().Configure(options => options.ActivityTrackingOptions = ActivityTrackingOptions.None))
-                    .AddMediatR(Assembly.GetExecutingAssembly());
-        //.AddSingleton<ILogger<LogEntry>>(new ConsoleLogger())
+        _ = services.AddLogging(BuildLogging)
+            .AddSingleton(new RequestParser("!", ","))
+            .AddMediatR(Assembly.GetExecutingAssembly());
 
         // Create a provider and register it for the command factory.
         IServiceProvider serviceProvider = services.BuildServiceProvider();
@@ -39,3 +37,10 @@ Console.ForegroundColor = initialColor;
 Console.WriteLine("Starting services.");
 var brain = new Brain(host.Services);
 await brain.Start();
+
+/// <summary>
+/// Builds the logging serice.
+/// </summary>
+static void BuildLogging(ILoggingBuilder logging) =>
+    logging.AddDebug()
+           .AddConsole();

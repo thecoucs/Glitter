@@ -1,7 +1,7 @@
 ﻿using Freya.Commands;
 
 using Mauve.Extensibility;
-namespace Freya.Runtime
+namespace Freya.Core
 {
     /// <summary>
     /// Represents a parser responsible for creating <see cref="CommandRequest"/> instances.
