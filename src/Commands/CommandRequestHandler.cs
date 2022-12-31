@@ -1,43 +1,49 @@
 ﻿using System.Reflection;
+
 using Freya.Core;
 
 using Mauve;
+
+using MediatR;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Freya.Commands
 {
     /// <summary>
     /// Represents a factory for creating <see cref="Command"/> instances.
     /// </summary>
-    internal class CommandFactory : AliasedTypeFactory<Command>
+    internal class CommandRequestHandler : AliasedTypeFactory<Command>, IRequestHandler<CommandRequest, Command?>
     {
         private Dictionary<string, Type>? _types;
+        private readonly IServiceProvider _serviceProvider;
+        public CommandRequestHandler(IServiceProvider serviceProvider) =>
+            _serviceProvider = serviceProvider;
         /// <summary>
         /// Attempts to create a new instance of <see cref="Command"/> from the specified <see cref="CommandRequest"/>.
         /// </summary>
         /// <param name="request">The request for the command.</param>
-        /// <param name="command">The command created by the factory.</param>
-        /// <returns><see langword="true"/> if creation was successful, otherwise <see langword="false"/>.</returns>
-        public bool TryCreate(CommandRequest request, out Command? command)
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> for cancelling the operation.</param>
+        /// <returns>A <see cref="Task"/> describing the state of the operation.</returns>
+        public Task<Command?> Handle(CommandRequest request, CancellationToken cancellationToken)
         {
             // Attempt to identify a type that matches the specified key.
-            command = null;
             Type? type = GetTypeForAlias(request.Key);
             if (type is null)
-                return false;
+                return null;
 
             try
             {
                 // Create an instance of the command.
-                object? createdInstance = Activator.CreateInstance(type, request.Parameters);
+                object? createdInstance = ActivatorUtilities.CreateInstance(_serviceProvider, type);
                 if (createdInstance is Command commandInstance)
-                    command = commandInstance;
-            }
-            catch
+                    return Task.FromResult((Command?)commandInstance);
+            } catch
             {
-                return false;
+                return null;
             }
 
-            return true;
+            return null;
         }
         /// <summary>
         /// Gets the <see cref="Type"/> for the specified alias.
