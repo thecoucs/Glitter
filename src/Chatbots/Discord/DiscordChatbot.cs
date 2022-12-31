@@ -1,7 +1,8 @@
 ﻿using Discord;
 using Discord.WebSocket;
+
 using Freya.Core;
-using Mauve;
+
 using Mauve.Extensibility;
 
 using MediatR;
@@ -13,7 +14,7 @@ namespace Freya.Services.Discord
     /// <summary>
     /// Represents a new <see cref="Chatbot"/> for integrating with <see href="https://discordnet.dev/guides/introduction/intro.html">Discord</see>.
     /// </summary>
-    [Alias("discord")]
+    //[Alias("discord")]
     internal class DiscordChatbot : Chatbot<DiscordSettings>
     {
         private readonly DiscordSocketClient _client;
