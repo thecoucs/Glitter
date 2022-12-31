@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-using Discord.Commands;
+﻿using Discord.Commands;
 
 using Freya.Core;
 
@@ -24,12 +22,10 @@ namespace Freya.Commands
             base("Echo", "Echoes the specified input back to the user.", logger) =>
             _input = input;
         /// <inheritdoc/>
-        protected override async Task Work(CancellationToken cancellationToken)
+        protected override async Task<CommandResponse> Work(CancellationToken cancellationToken)
         {
-            byte[] data = Encoding.UTF8.GetBytes(_input);
-            _ = new CommandResponse(data);
-            //await invokingService.SendResponse(response, cancellationToken);
-            await Task.CompletedTask; // TODO: remove.
+            var response = new CommandResponse(_input);
+            return await Task.FromResult(response);
         }
     }
 }

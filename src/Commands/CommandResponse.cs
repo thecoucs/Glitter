@@ -6,14 +6,14 @@
     internal sealed class CommandResponse
     {
         /// <summary>
-        /// The data in the response.
+        /// The message for the response.
         /// </summary>
-        public byte[] Data { get; set; }
+        public string Message { get; set; }
         /// <summary>
         /// Creates a new instance of <see cref="CommandResponse"/>.
         /// </summary>
-        /// <param name="data">The data in the response.</param>
-        public CommandResponse(byte[] data) =>
-            Data = data;
+        /// <param name="message">The message for the response.</param>
+        public CommandResponse(string message) =>
+            Message = message;
     }
 }

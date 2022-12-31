@@ -26,13 +26,14 @@ namespace Freya.Commands
         /// </summary>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
         /// <returns></returns>
-        public async Task Execute(CancellationToken cancellationToken)
+        public async Task<CommandResponse?> Execute(CancellationToken cancellationToken)
         {
             bool encounteredErrors = false;
+            CommandResponse? response = null;
             Log(EventType.Information, $"Executing command '{DisplayName}'...");
             try
             {
-                _ = Work(cancellationToken);
+                response = await Work(cancellationToken);
             } catch (Exception e)
             {
                 Log(EventType.Exception, $"An unexpected error occurred during execution. {e.Message}");
@@ -45,10 +46,11 @@ namespace Freya.Commands
 
                 // Log the completion message.
                 Log(type, "Execution complete.");
-                await Task.CompletedTask;
             }
+
+            return await Task.FromResult(response);
         }
-        protected abstract Task Work(CancellationToken cancellationToken);
+        protected abstract Task<CommandResponse> Work(CancellationToken cancellationToken);
         protected void Log(EventType eventType, string message) =>
             _logger.Log(new LogEntry(eventType, $"{_id}: {message}"));
     }
