@@ -12,5 +12,5 @@
    - Balance
 
 ### 💪 Powered By Open Source
- - Mauve
- - MediatR
+ - [Mauve](https://github.com/tacosontitan/Mauve)
+ - [MediatR](https://github.com/jbogard/MediatR)
