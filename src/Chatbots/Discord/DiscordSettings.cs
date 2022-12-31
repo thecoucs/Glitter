@@ -3,7 +3,7 @@
 namespace Freya.Services.Discord
 {
     /// <summary>
-    /// Represents a collection of settings for the <see cref="DiscordService"/>.
+    /// Represents a collection of settings for the <see cref="DiscordChatbot"/>.
     /// </summary>
     internal class DiscordSettings
     {

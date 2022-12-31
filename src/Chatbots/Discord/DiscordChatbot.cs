@@ -15,14 +15,14 @@ namespace Freya.Services.Discord
     /// Represents a new <see cref="Chatbot"/> for integrating with <see href="https://discordnet.dev/guides/introduction/intro.html">Discord</see>.
     /// </summary>
     [Alias("discord")]
-    internal class DiscordService : Chatbot<DiscordSettings>
+    internal class DiscordChatbot : Chatbot<DiscordSettings>
     {
         private readonly DiscordSocketClient _client;
         /// <summary>
-        /// Creates a new <see cref="DiscordService"/> instance.
+        /// Creates a new <see cref="DiscordChatbot"/> instance.
         /// </summary>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
-        public DiscordService(DiscordSettings settings, ILogger<LogEntry> logger, IMediator mediator, CancellationToken cancellationToken) :
+        public DiscordChatbot(DiscordSettings settings, ILogger<LogEntry> logger, IMediator mediator, CancellationToken cancellationToken) :
             base("Discord", settings, logger, mediator, cancellationToken) =>
             _client = new DiscordSocketClient();
         /// <inheritdoc/>
