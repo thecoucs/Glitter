@@ -1,28 +1,28 @@
 ﻿using Freya.Commands;
 using Freya.Core;
-
+using Freya.Services;
 using Mauve;
 
 using MediatR;
 
 using Microsoft.Extensions.Logging;
 
-namespace Freya.Services
+namespace Freya.Chatbots.Console
 {
     /// <summary>
     /// Represents a test service for testing within the deployed console.
     /// </summary>
     [Alias("test")]
-    internal class TestChatbot : Chatbot
+    internal class ConsoleChatbot : Chatbot
     {
         /// <summary>
-        /// Creates a new <see cref="TestChatbot"/> instance.
+        /// Creates a new <see cref="ConsoleChatbot"/> instance.
         /// </summary>
         /// <param name="commandFactory">The command factory for the service to create commands.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
-        public TestChatbot(
+        public ConsoleChatbot(
             RequestParser parser,
-            ILogger<TestChatbot> logger,
+            ILogger<ConsoleChatbot> logger,
             IMediator mediator,
             CancellationToken cancellationToken) :
             base("Test", parser, logger, mediator, cancellationToken)
