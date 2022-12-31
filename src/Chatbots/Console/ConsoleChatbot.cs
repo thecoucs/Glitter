@@ -7,6 +7,8 @@ using MediatR;
 
 using Microsoft.Extensions.Logging;
 
+using SystemConsole = System.Console;
+
 namespace Freya.Chatbots.Console
 {
     /// <summary>
@@ -38,7 +40,7 @@ namespace Freya.Chatbots.Console
             {
                 // Cancel if requested, otherwise wait for input.
                 cancellationToken.ThrowIfCancellationRequested();
-                string? input = Console.ReadLine();
+                string? input = SystemConsole.ReadLine();
                 if (!string.IsNullOrWhiteSpace(input))
                 {
                     if (Parser.TryParse(input, out CommandRequest? commandRequest))
@@ -50,7 +52,7 @@ namespace Freya.Chatbots.Console
                             {
                                 CommandResponse? response = await command.Execute(cancellationToken);
                                 if (!string.IsNullOrWhiteSpace(response?.Message))
-                                    Console.WriteLine(response.Message);
+                                    SystemConsole.WriteLine(response.Message);
                             }
                         }
                     }
