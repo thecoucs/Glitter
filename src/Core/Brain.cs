@@ -32,12 +32,32 @@ namespace Freya.Core
         /// Starts the brain.
         /// </summary>
         /// <returns>A <see cref="Task"/> describing the state of the operation.</returns>
-        /// TODO: Extract the configuration logic.
         public async Task Start()
         {
-            // Cancel if requested, otherwise start each service.
+            // Cancel if requested, otherwise load the application configuration.
             _cancellationToken.ThrowIfCancellationRequested();
+            LoadConfiguration(out IConfiguration configuration);
 
+            // Cancel if requested, otherwise discover and start each service.
+            _cancellationToken.ThrowIfCancellationRequested();
+            var serviceFactory = new ChatbotFactory(configuration, _serviceProvider);
+            foreach (Chatbot bot in serviceFactory.Discover(_cancellationToken))
+            {
+                // Cancel if requested, otherwise start the service.
+                _cancellationToken.ThrowIfCancellationRequested();
+                bot.Configure(new CommandPipeline(_cancellationToken));
+                await bot.Start();
+            }
+
+            await Task.Delay(Timeout.Infinite);
+        }
+        /// <summary>
+        /// Loads the configuration for the application.
+        /// </summary>
+        /// <param name="configuration">The <see cref="IConfiguration"/> for the application.</param>
+        /// <exception cref="InvalidOperationException">Thrown when <see cref="AppContext.BaseDirectory"/> unable to be resolved.</exception>
+        private void LoadConfiguration(out IConfiguration configuration)
+        {
             // Validate the base directory.
             string baseDirectory = AppContext.BaseDirectory;
             if (string.IsNullOrWhiteSpace(baseDirectory))
@@ -50,22 +70,11 @@ namespace Freya.Core
 
             // Build configuration
             Console.WriteLine("Building configuration.");
-            IConfiguration configuration = new ConfigurationBuilder()
+            configuration = new ConfigurationBuilder()
                 .SetBasePath(parentDirectory.FullName)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile("appsettings.development.json", optional: true)
                 .Build();
-
-            var serviceFactory = new ChatbotFactory(configuration, _serviceProvider);
-            foreach (Chatbot bot in serviceFactory.Discover(_cancellationToken))
-            {
-                // Cancel if requested, otherwise start the service.
-                _cancellationToken.ThrowIfCancellationRequested();
-                bot.Configure(new CommandPipeline(_cancellationToken));
-                await bot.Start();
-            }
-
-            await Task.Delay(Timeout.Infinite);
         }
     }
 }
