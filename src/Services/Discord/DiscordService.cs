@@ -1,33 +1,32 @@
 ﻿using Discord;
 using Discord.WebSocket;
 
-using Freya.Commands;
-using Freya.Runtime;
+using Freya.Core;
 
 using Mauve;
 using Mauve.Extensibility;
-using Mauve.Runtime.Processing;
+using Mauve.Runtime;
 
-using Microsoft.Extensions.DependencyInjection;
+using MediatR;
 
 namespace Freya.Services.Discord
 {
     /// <summary>
-    /// Represents a new <see cref="BotService"/> for integrating with <see href="https://discordnet.dev/guides/introduction/intro.html">Discord</see>.
+    /// Represents a new <see cref="Chatbot"/> for integrating with <see href="https://discordnet.dev/guides/introduction/intro.html">Discord</see>.
     /// </summary>
     [Alias("discord")]
-    internal class DiscordService : BotService<DiscordSettings>
+    internal class DiscordService : Chatbot<DiscordSettings>
     {
         private readonly DiscordSocketClient _client;
         /// <summary>
         /// Creates a new <see cref="DiscordService"/> instance.
         /// </summary>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
-        public DiscordService(DiscordSettings settings, CommandFactory commandFactory, CancellationToken cancellationToken) :
-            base("Discord", settings, new ConsoleLogger(), commandFactory, cancellationToken) =>
+        public DiscordService(DiscordSettings settings, ILogger<LogEntry> logger, IMediator mediator, CancellationToken cancellationToken) :
+            base("Discord", settings, logger, mediator, cancellationToken) =>
             _client = new DiscordSocketClient();
         /// <inheritdoc/>
-        protected override void ConfigureService(IServiceCollection services, IPipeline<Command> pipeline)
+        protected override void Initialize()
         {
             _client.Log += HandleDiscordLog;
             _client.LoggedIn += HandleDiscordLogin;
@@ -38,7 +37,6 @@ namespace Freya.Services.Discord
             _client.JoinedGuild += HandleGuildJoin;
             _client.GuildScheduledEventCreated += HandleScheduledGuildEventCreation;
             _client.InviteCreated += HandleInviteCreation;
-            _ = services.AddSingleton(_client);
         }
         /// <inheritdoc/>
         protected override async Task Run(CancellationToken cancellationToken)
