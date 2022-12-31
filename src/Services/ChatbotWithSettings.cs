@@ -1,30 +1,31 @@
-﻿using Freya.Commands;
-using Freya.Core;
+﻿using Freya.Core;
 
 using Mauve.Runtime;
+
+using MediatR;
 
 namespace Freya.Services
 {
     /// <summary>
-    /// Represents a <see cref="BotService"/> with settings.
+    /// Represents a <see cref="Chatbot"/> with settings.
     /// </summary>
     /// <typeparam name="TSettings">Specifies the type used for settings.</typeparam>
-    internal abstract class BotService<TSettings> : BotService
+    internal abstract class Chatbot<TSettings> : Chatbot
     {
         /// <summary>
         /// The settings for the service.
         /// </summary>
         protected TSettings Settings { get; set; }
         /// <summary>
-        /// Creates a new <see cref="BotService{TSettings}"/> instance.
+        /// Creates a new <see cref="Chatbot{TSettings}"/> instance.
         /// </summary>
         /// <param name="name">The name of the service.</param>
         /// <param name="settings">The settings for the service.</param>
         /// <param name="logger">The logger to be utilized by the service.</param>
-        /// <param name="commandFactory">The <see cref="Commands.CommandFactory"/> instance the service should use when creating commands.</param>
+        /// <param name="commandFactory">The <see cref="Commands.CommandRequestHandler"/> instance the service should use when creating commands.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
-        public BotService(string name, TSettings settings, ILogger<LogEntry> logger, CommandFactory commandFactory, CancellationToken cancellationToken) :
-            base(name, logger, commandFactory, cancellationToken) =>
+        public Chatbot(string name, TSettings settings, ILogger<LogEntry> logger, IMediator mediator, CancellationToken cancellationToken) :
+            base(name, logger, mediator, cancellationToken) =>
             Settings = settings;
     }
 }
