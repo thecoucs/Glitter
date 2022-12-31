@@ -1,4 +1,6 @@
-﻿using Freya.Core;
+﻿using Freya.Commands;
+using Freya.Core;
+using Freya.Runtime;
 
 using Mauve;
 using Mauve.Runtime;
@@ -18,14 +20,42 @@ namespace Freya.Services
         /// </summary>
         /// <param name="commandFactory">The command factory for the service to create commands.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
-        public TestChatbot(ILogger<LogEntry> logger, IMediator mediator, CancellationToken cancellationToken) :
-            base("Test", logger, mediator, cancellationToken)
+        public TestChatbot(
+            RequestParser parser,
+            ILogger<LogEntry> logger,
+            IMediator mediator,
+            CancellationToken cancellationToken) :
+            base("Test", parser, logger, mediator, cancellationToken)
         { }
         /// <inheritdoc/>
         protected override async Task Run(CancellationToken cancellationToken)
         {
+            // Cancel if requested, otherwise start the service.
             cancellationToken.ThrowIfCancellationRequested();
-            await Log(EventType.Information, "The test service is alive.");
+            await Log(EventType.Success, "Connected to console.");
+
+            do
+            {
+                // Cancel if requested, otherwise wait for input.
+                cancellationToken.ThrowIfCancellationRequested();
+                string? input = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(input))
+                {
+                    if (Parser.TryParse(input, out CommandRequest? commandRequest))
+                    {
+                        if (commandRequest is not null)
+                        {
+                            Command? command = await Mediator.Send(commandRequest, cancellationToken);
+                            if (command is not null)
+                            {
+                                CommandResponse? response = await command.Execute(cancellationToken);
+                                if (!string.IsNullOrWhiteSpace(response?.Message))
+                                    Console.WriteLine(response.Message);
+                            }
+                        }
+                    }
+                }
+            } while (true);
         }
     }
 }

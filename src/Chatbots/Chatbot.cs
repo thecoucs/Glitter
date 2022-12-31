@@ -1,6 +1,7 @@
 ﻿using Freya.Commands;
 using Freya.Core;
 using Freya.Pipeline;
+using Freya.Runtime;
 
 using Mauve;
 using Mauve.Runtime;
@@ -18,19 +19,25 @@ namespace Freya.Services
         private readonly string _name;
         private readonly ILogger<LogEntry> _logger;
         private readonly CancellationToken _cancellationToken;
+        protected RequestParser Parser { get; set; }
         protected IMediator Mediator { get; set; }
         /// <summary>
         /// Creates a new <see cref="Chatbot"/> instance.
         /// </summary>
         /// <param name="name">The name of the service.</param>
         /// <param name="logger">The logger to be utilized by the service.</param>
-        /// <param name="commandFactory">The <see cref="Commands.CommandRequestHandler"/> instance the service should use when creating commands.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
-        public Chatbot(string name, ILogger<LogEntry> logger, IMediator mediator, CancellationToken cancellationToken)
+        public Chatbot(
+            string name,
+            RequestParser parser,
+            ILogger<LogEntry> logger,
+            IMediator mediator,
+            CancellationToken cancellationToken)
         {
             _name = name;
             _logger = logger;
             _cancellationToken = cancellationToken;
+            Parser = parser;
             Mediator = mediator;
         }
         /// <summary>

@@ -1,4 +1,5 @@
 ﻿using Freya.Core;
+using Freya.Runtime;
 
 using Mauve.Runtime;
 
@@ -24,8 +25,14 @@ namespace Freya.Services
         /// <param name="logger">The logger to be utilized by the service.</param>
         /// <param name="commandFactory">The <see cref="Commands.CommandRequestHandler"/> instance the service should use when creating commands.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
-        public Chatbot(string name, TSettings settings, ILogger<LogEntry> logger, IMediator mediator, CancellationToken cancellationToken) :
-            base(name, logger, mediator, cancellationToken) =>
+        public Chatbot(
+            string name,
+            TSettings settings,
+            RequestParser parser,
+            ILogger<LogEntry> logger,
+            IMediator mediator,
+            CancellationToken cancellationToken) :
+            base(name, parser, logger, mediator, cancellationToken) =>
             Settings = settings;
     }
 }

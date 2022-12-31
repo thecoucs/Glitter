@@ -2,6 +2,7 @@
 using Discord.WebSocket;
 
 using Freya.Core;
+using Freya.Runtime;
 
 using Mauve;
 using Mauve.Extensibility;
@@ -22,8 +23,13 @@ namespace Freya.Services.Discord
         /// Creates a new <see cref="DiscordChatbot"/> instance.
         /// </summary>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
-        public DiscordChatbot(DiscordSettings settings, ILogger<LogEntry> logger, IMediator mediator, CancellationToken cancellationToken) :
-            base("Discord", settings, logger, mediator, cancellationToken) =>
+        public DiscordChatbot(
+            DiscordSettings settings,
+            RequestParser parser,
+            ILogger<LogEntry> logger,
+            IMediator mediator,
+            CancellationToken cancellationToken) :
+            base("Discord", settings, parser, logger, mediator, cancellationToken) =>
             _client = new DiscordSocketClient();
         /// <inheritdoc/>
         protected override void Initialize()

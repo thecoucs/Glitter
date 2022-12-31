@@ -1,7 +1,6 @@
-﻿using Discord.Commands;
+﻿using Freya.Core;
 
-using Freya.Core;
-
+using Mauve;
 using Mauve.Runtime;
 
 namespace Freya.Commands

@@ -30,7 +30,7 @@ namespace Freya.Commands
             // Attempt to identify a type that matches the specified key.
             Type? type = GetTypeForAlias(request.Key);
             if (type is null)
-                return null;
+                return Task.FromResult<Command?>(null);
 
             try
             {
@@ -40,10 +40,10 @@ namespace Freya.Commands
                     return Task.FromResult((Command?)commandInstance);
             } catch
             {
-                return null;
+                return Task.FromResult<Command?>(null);
             }
 
-            return null;
+            return Task.FromResult<Command?>(null);
         }
         /// <summary>
         /// Gets the <see cref="Type"/> for the specified alias.
