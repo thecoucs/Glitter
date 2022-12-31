@@ -1,7 +1,7 @@
 ﻿using Freya.Pipeline;
 using Freya.Services;
 
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 
 namespace Freya.Core
 {
@@ -10,20 +10,20 @@ namespace Freya.Core
     /// </summary>
     internal class Brain
     {
-        private readonly List<BotService> _bots;
-        private readonly ServiceFactory _serviceFactory;
+        private readonly List<Chatbot> _bots;
+        private readonly IServiceProvider _serviceProvider;
         private readonly CancellationToken _cancellationToken;
         private readonly CancellationTokenSource _cancellationTokenSource;
         /// <summary>
         /// Creates a new instance of <see cref="Brain"/>.
         /// </summary>
-        /// <param name="serviceFactory">The <see cref="ServiceFactory"/> for discovering <see cref="BotService"/> instances.</param>
-        public Brain(ServiceFactory serviceFactory)
+        /// <param name="serviceFactory">The <see cref="ChatbotFactory"/> for discovering <see cref="Chatbot"/> instances.</param>
+        public Brain(IServiceProvider serviceProvider)
         {
             _cancellationTokenSource = new CancellationTokenSource();
             _cancellationToken = _cancellationTokenSource.Token;
-            _bots = new List<BotService>();
-            _serviceFactory = serviceFactory;
+            _serviceProvider = serviceProvider;
+            _bots = new List<Chatbot>();
         }
         /// <summary>
         /// Cancels processing for the <see cref="Brain"/>.
@@ -31,31 +31,39 @@ namespace Freya.Core
         public void Cancel() =>
             _cancellationTokenSource.Cancel();
         /// <summary>
-        /// Configures the <see cref="Brain"/> and discovered <see cref="BotService"/> instances.
-        /// </summary>
-        /// <param name="services">The service collection the <see cref="Brain"/> and <see cref="BotService"/> instances can add to.</param>
-        public void Configure(IServiceCollection services)
-        {
-            // Cancel if requested, otherwise discover and configure services.
-            _cancellationToken.ThrowIfCancellationRequested();
-            foreach (BotService bot in _serviceFactory.Discover(_cancellationToken))
-            {
-                bot.Configure(services, new CommandPipeline(_cancellationToken));
-                _bots.Add(bot);
-            }
-        }
-        /// <summary>
         /// Starts the brain.
         /// </summary>
         /// <returns>A <see cref="Task"/> describing the state of the operation.</returns>
+        /// TODO: Extract the configuration logic.
         public async Task Start()
         {
             // Cancel if requested, otherwise start each service.
             _cancellationToken.ThrowIfCancellationRequested();
-            foreach (BotService bot in _bots)
+
+            // Validate the base directory.
+            string baseDirectory = AppContext.BaseDirectory;
+            if (string.IsNullOrWhiteSpace(baseDirectory))
+                throw new InvalidOperationException("Unable to start. The base directory is null or empty.");
+
+            // Validate the parent directory.
+            DirectoryInfo? parentDirectory = Directory.GetParent(baseDirectory);
+            if (parentDirectory is null)
+                throw new InvalidOperationException("Unable to start. The parent directory is null.");
+
+            // Build configuration
+            Console.WriteLine("Building configuration.");
+            IConfiguration configuration = new ConfigurationBuilder()
+                .SetBasePath(parentDirectory.FullName)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile("appsettings.development.json", optional: true)
+                .Build();
+
+            var serviceFactory = new ChatbotFactory(configuration, _serviceProvider);
+            foreach (Chatbot bot in serviceFactory.Discover(_cancellationToken))
             {
                 // Cancel if requested, otherwise start the service.
                 _cancellationToken.ThrowIfCancellationRequested();
+                bot.Configure(new CommandPipeline(_cancellationToken));
                 await bot.Start();
             }
 
