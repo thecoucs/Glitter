@@ -6,58 +6,57 @@ using Mauve;
 using Mauve.Runtime;
 using Mauve.Runtime.Processing;
 
-using Microsoft.Extensions.DependencyInjection;
+using MediatR;
 
 namespace Freya.Services
 {
     /// <summary>
     /// Represents a service for integrating Freya with a specific provider.
     /// </summary>
-    internal abstract class BotService
+    internal abstract class Chatbot
     {
         private readonly string _name;
         private readonly ILogger<LogEntry> _logger;
         private readonly CancellationToken _cancellationToken;
-        protected CommandFactory CommandFactory { get; set; }
+        protected IMediator Mediator { get; set; }
         /// <summary>
-        /// Creates a new <see cref="BotService"/> instance.
+        /// Creates a new <see cref="Chatbot"/> instance.
         /// </summary>
         /// <param name="name">The name of the service.</param>
         /// <param name="logger">The logger to be utilized by the service.</param>
-        /// <param name="commandFactory">The <see cref="Commands.CommandFactory"/> instance the service should use when creating commands.</param>
+        /// <param name="commandFactory">The <see cref="Commands.CommandRequestHandler"/> instance the service should use when creating commands.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
-        public BotService(string name, ILogger<LogEntry> logger, CommandFactory commandFactory, CancellationToken cancellationToken)
+        public Chatbot(string name, ILogger<LogEntry> logger, IMediator mediator, CancellationToken cancellationToken)
         {
             _name = name;
             _logger = logger;
             _cancellationToken = cancellationToken;
-            CommandFactory = commandFactory;
+            Mediator = mediator;
         }
         /// <summary>
-        /// Configures the <see cref="BotService"/>.
+        /// Configures the <see cref="Chatbot"/>.
         /// </summary>
         /// <param name="services">The service collection to add to.</param>
         /// <param name="pipeline">The pipeline to register middleware with.</param>
-        public void Configure(IServiceCollection services, IPipeline<Command> pipeline)
+        public virtual void Configure(IPipeline<Command> pipeline)
         {
-            // Allow the concrete service to configure itself.
-            ConfigureService(services, pipeline);
-
             // Add the basic execution pipeline.
             var executor = new CommandExecutionMiddleware(_cancellationToken);
             pipeline.Run(executor);
         }
         /// <summary>
-        /// Starts the <see cref="BotService"/>.
+        /// Starts the <see cref="Chatbot"/>.
         /// </summary>
         /// <returns>A <see cref="Task"/> describing the state of the operation.</returns>
         public async Task Start()
         {
             // Cancel if requested, otherwise create the command pipeline and dependency collection.
             _cancellationToken.ThrowIfCancellationRequested();
-            await Log(EventType.Information, $"Starting.");
+            await Log(EventType.Information, "Initializing.");
+            Initialize();
 
             // Cancel if requested, otherwise run the service.
+            await Log(EventType.Information, $"Starting.");
             _cancellationToken.ThrowIfCancellationRequested();
             _ = Task.Run(async () =>
             {
@@ -68,12 +67,7 @@ namespace Freya.Services
             }, _cancellationToken);
             await Task.CompletedTask;
         }
-        /// <summary>
-        /// Configures the service.
-        /// </summary>
-        /// <param name="services">The service collection to add to.</param>
-        /// <param name="pipeline">The pipeline to register middleware with.</param>
-        protected abstract void ConfigureService(IServiceCollection services, IPipeline<Command> pipeline);
+        protected virtual void Initialize() { }
         /// <summary>
         /// Runs the primary work for the service.
         /// </summary>
