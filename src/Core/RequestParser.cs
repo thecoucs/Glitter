@@ -41,13 +41,12 @@ namespace Freya.Core
 
             // Capture the remaining tokens.
             rawInput = rawInput.TakeAfter(" ");
-            string[] tokens = rawInput.Split(_separator);
+            string[] tokens = rawInput.Split(_separator, StringSplitOptions.RemoveEmptyEntries);
             if (tokens?.Any() != true)
                 return false;
 
             // Create a new request and return true.
-            IEnumerable<string> trimmedTokens = tokens.AfterOrDefault(key).Select(s => s.Trim());
-            request = new CommandRequest(key, trimmedTokens.ToArray());
+            request = new CommandRequest(key, tokens);
             return true;
         }
     }
