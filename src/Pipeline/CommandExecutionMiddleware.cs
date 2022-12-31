@@ -17,22 +17,13 @@ namespace Freya.Pipeline
         public CommandExecutionMiddleware(CancellationToken cancellationToken) =>
             _cancellationToken = cancellationToken;
         /// <inheritdoc/>
-        public void Invoke(Command input, MiddlewareDelegate<Command> next) =>
-            input.Execute(_cancellationToken).GetAwaiter();
-        /// <inheritdoc/>
-        public void Invoke(Command input, IMiddleware<Command> next) =>
-            input.Execute(_cancellationToken).GetAwaiter();
+        public async Task Invoke(Command input, IMiddleware<Command> next) =>
+            _ = await input.Execute(_cancellationToken);
         /// <inheritdoc/>
         public async Task Invoke(Command input, IMiddleware<Command> next, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            await input.Execute(cancellationToken);
-        }
-        /// <inheritdoc/>
-        public async Task Invoke(Command input, MiddlewareDelegate<Command> next, CancellationToken cancellationToken)
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-            await input.Execute(cancellationToken);
+            _ = await input.Execute(cancellationToken);
         }
     }
 }

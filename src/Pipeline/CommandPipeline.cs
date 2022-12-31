@@ -2,7 +2,7 @@
 
 using Mauve.Extensibility;
 using Mauve.Patterns;
-using Mauve.Runtime.Processing;
+using Mauve.Runtime;
 
 namespace Freya.Pipeline
 {
@@ -30,9 +30,26 @@ namespace Freya.Pipeline
         /// <returns>A <see cref="Task"/> representing the state of the operation.</returns>
         public async Task Execute(Command input)
         {
-            _cancellationToken.ThrowIfCancellationRequested();
             foreach (IMiddleware<Command> middleware in _middlewares)
+            {
+                _cancellationToken.ThrowIfCancellationRequested();
                 await middleware.Invoke(input, _middlewares.NextOrDefault(middleware), _cancellationToken);
+            }
+
+            await Task.CompletedTask;
+        }
+        /// <summary>
+        /// Executes the specified <see cref="Command"/> through the pipeline.
+        /// </summary>
+        /// <param name="input">The <see cref="Command"/> to execute.</param>
+        /// <returns>A <see cref="Task"/> representing the state of the operation.</returns>
+        public async Task Execute(Command input, CancellationToken cancellationToken)
+        {
+            foreach (IMiddleware<Command> middleware in _middlewares)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                await middleware.Invoke(input, _middlewares.NextOrDefault(middleware), cancellationToken);
+            }
 
             await Task.CompletedTask;
         }

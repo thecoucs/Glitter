@@ -1,19 +1,17 @@
-﻿using Freya.Core;
-
-using Mauve;
-using Mauve.Extensibility;
+﻿using Mauve.Extensibility;
 using Mauve.Math;
-using Mauve.Runtime;
+
+using Microsoft.Extensions.Logging;
 
 namespace Freya.Commands
 {
     internal abstract class Command
     {
         private readonly string _id;
-        private readonly ILogger<LogEntry> _logger;
+        private readonly ILogger _logger;
         public string DisplayName { get; set; }
         public string Description { get; set; }
-        public Command(string displayName, string description, ILogger<LogEntry> logger)
+        public Command(string displayName, string description, ILogger logger)
         {
             _logger = logger;
             _id = Guid.NewGuid().GetHashCode(NumericBase.Hexadecimal);
@@ -30,28 +28,28 @@ namespace Freya.Commands
         {
             bool encounteredErrors = false;
             CommandResponse? response = null;
-            Log(EventType.Information, $"Executing command '{DisplayName}'...");
+            Log(LogLevel.Information, $"Executing command '{DisplayName}'...");
             try
             {
                 response = await Work(cancellationToken);
             } catch (Exception e)
             {
-                Log(EventType.Exception, $"An unexpected error occurred during execution. {e.Message}");
+                Log(LogLevel.Error, $"An unexpected error occurred during execution. {e.Message}");
             } finally
             {
                 // Set the event type for the completion message.
-                EventType type = encounteredErrors
-                    ? EventType.Error
-                    : EventType.Success;
+                LogLevel logLevel = encounteredErrors
+                    ? LogLevel.Error
+                    : LogLevel.Information;
 
                 // Log the completion message.
-                Log(type, "Execution complete.");
+                Log(logLevel, "Execution complete.");
             }
 
             return await Task.FromResult(response);
         }
         protected abstract Task<CommandResponse> Work(CancellationToken cancellationToken);
-        protected void Log(EventType eventType, string message) =>
-            _logger.Log(new LogEntry(eventType, $"{_id}: {message}"));
+        protected void Log(LogLevel level, string message) =>
+            _logger.Log(level, $"{_id}: {message}");
     }
 }

@@ -1,13 +1,13 @@
 ﻿using Freya.Commands;
-using Freya.Core;
 using Freya.Pipeline;
 using Freya.Runtime;
 
 using Mauve;
 using Mauve.Runtime;
-using Mauve.Runtime.Processing;
 
 using MediatR;
+
+using Microsoft.Extensions.Logging;
 
 namespace Freya.Services
 {
@@ -17,7 +17,7 @@ namespace Freya.Services
     internal abstract class Chatbot
     {
         private readonly string _name;
-        private readonly ILogger<LogEntry> _logger;
+        private readonly ILogger _logger;
         private readonly CancellationToken _cancellationToken;
         protected RequestParser Parser { get; set; }
         protected IMediator Mediator { get; set; }
@@ -30,7 +30,7 @@ namespace Freya.Services
         public Chatbot(
             string name,
             RequestParser parser,
-            ILogger<LogEntry> logger,
+            ILogger logger,
             IMediator mediator,
             CancellationToken cancellationToken)
         {
@@ -59,11 +59,11 @@ namespace Freya.Services
         {
             // Cancel if requested, otherwise create the command pipeline and dependency collection.
             _cancellationToken.ThrowIfCancellationRequested();
-            await Log(EventType.Information, "Initializing.");
+            await Log(LogLevel.Information, "Initializing.");
             Initialize();
 
             // Cancel if requested, otherwise run the service.
-            await Log(EventType.Information, $"Starting.");
+            await Log(LogLevel.Information, $"Starting.");
             _cancellationToken.ThrowIfCancellationRequested();
             _ = Task.Run(async () =>
             {
@@ -87,10 +87,11 @@ namespace Freya.Services
         /// <param name="eventType">The <see cref="EventType"/> associated with the message.</param>
         /// <param name="message">The message to log.</param>
         /// <returns>A <see cref="Task"/> describing the state of the operation.</returns>
-        protected async Task Log(EventType eventType, string message)
+        protected async Task Log(LogLevel level, string message)
         {
             _cancellationToken.ThrowIfCancellationRequested();
-            await _logger.LogAsync(new LogEntry(eventType, $"{_name}: {message}"));
+            _logger.Log(level, $"{_name}: {message}");
+            await Task.CompletedTask;
         }
     }
 }

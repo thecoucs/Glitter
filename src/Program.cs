@@ -3,12 +3,11 @@
 using Freya.Core;
 using Freya.Runtime;
 
-using Mauve.Runtime;
-
 using MediatR;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 Console.Title = "Freya";
 Console.WriteLine($"Initializing.");
@@ -19,9 +18,10 @@ using IHost host = Host.CreateDefaultBuilder()
     .ConfigureServices(services =>
     {
         // Add services.
-        _ = services.AddMediatR(Assembly.GetExecutingAssembly())
-                    .AddSingleton(new RequestParser("!", ","))
-                    .AddSingleton<ILogger<LogEntry>>(new ConsoleLogger());
+        _ = services.AddSingleton(new RequestParser("!", ","))
+                    .AddLogging(loggingBuilder => loggingBuilder.AddConsole().AddDebug().Configure(options => options.ActivityTrackingOptions = ActivityTrackingOptions.None))
+                    .AddMediatR(Assembly.GetExecutingAssembly());
+        //.AddSingleton<ILogger<LogEntry>>(new ConsoleLogger())
 
         // Create a provider and register it for the command factory.
         IServiceProvider serviceProvider = services.BuildServiceProvider();

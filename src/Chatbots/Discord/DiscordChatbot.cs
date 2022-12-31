@@ -1,14 +1,14 @@
 ﻿using Discord;
 using Discord.WebSocket;
 
-using Freya.Core;
 using Freya.Runtime;
 
 using Mauve;
 using Mauve.Extensibility;
-using Mauve.Runtime;
 
 using MediatR;
+
+using Microsoft.Extensions.Logging;
 
 namespace Freya.Services.Discord
 {
@@ -26,7 +26,7 @@ namespace Freya.Services.Discord
         public DiscordChatbot(
             DiscordSettings settings,
             RequestParser parser,
-            ILogger<LogEntry> logger,
+            ILogger<DiscordChatbot> logger,
             IMediator mediator,
             CancellationToken cancellationToken) :
             base("Discord", settings, parser, logger, mediator, cancellationToken) =>
@@ -52,43 +52,43 @@ namespace Freya.Services.Discord
             {
                 await _client.LoginAsync(TokenType.Bot, Settings.Token);
                 await _client.StartAsync();
-                await Log(EventType.Success, "The Discord service has been started successfully.");
+                await Log(LogLevel.Information, "The Discord service has been started successfully.");
             } catch (Exception e)
             {
-                await Log(EventType.Exception, $"An unexpected error occurred while starting the Discord service. {e.Message}");
+                await Log(LogLevel.Information, $"An unexpected error occurred while starting the Discord service. {e.Message}");
             }
         }
         private Task HandleInviteCreation(SocketInvite arg) => throw new NotImplementedException();
         private Task HandleScheduledGuildEventCreation(SocketGuildEvent arg) => throw new NotImplementedException();
         private Task HandleGuildJoin(SocketGuild arg) => throw new NotImplementedException();
         private async Task HandleClientConnect() =>
-            await Log(EventType.Success, "Successfully connected to Discord.");
+            await Log(LogLevel.Information, "Successfully connected to Discord.");
         private async Task HandleClientDisconnect(Exception arg) =>
-            await Log(EventType.Exception, $"Disconnected from Discord. {arg.FlattenMessages(" ")}");
+            await Log(LogLevel.Error, $"Disconnected from Discord. {arg.FlattenMessages(" ")}");
         private async Task HandleDiscordLogin() =>
-            await Log(EventType.Success, "Logged in to Discord.");
+            await Log(LogLevel.Information, "Logged in to Discord.");
         private async Task HandleClientLogout() =>
-            await Log(EventType.Warning, "Logged out of Discord.");
+            await Log(LogLevel.Warning, "Logged out of Discord.");
         private async Task HandleDiscordLog(LogMessage arg)
         {
             // Determine the event type.
-            EventType eventType = arg.Exception is null
-                ? EventType.Information
-                : EventType.Error;
+            LogLevel logLevel = arg.Exception is null
+                ? LogLevel.Information
+                : LogLevel.Error;
 
             // Log the original message.
             if (!string.IsNullOrWhiteSpace(arg.Message))
-                await Log(eventType, arg.Message);
+                await Log(logLevel, arg.Message);
 
             // Log the exception separately.
             if (arg.Exception is not null)
             {
                 try
                 {
-                    await Log(EventType.Exception, arg.Exception.FlattenMessages(" "));
+                    await Log(LogLevel.Error, arg.Exception.FlattenMessages(" "));
                 } catch (Exception e)
                 {
-                    await Log(EventType.Exception, $"An unexpected error occurred while recording a log from Discord. {e.Message}");
+                    await Log(LogLevel.Error, $"An unexpected error occurred while recording a log from Discord. {e.Message}");
                 }
             }
         }

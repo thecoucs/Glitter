@@ -1,9 +1,8 @@
-﻿using Freya.Core;
-using Freya.Runtime;
-
-using Mauve.Runtime;
+﻿using Freya.Runtime;
 
 using MediatR;
+
+using Microsoft.Extensions.Logging;
 
 namespace Freya.Services
 {
@@ -29,7 +28,7 @@ namespace Freya.Services
             string name,
             TSettings settings,
             RequestParser parser,
-            ILogger<LogEntry> logger,
+            ILogger logger,
             IMediator mediator,
             CancellationToken cancellationToken) :
             base(name, parser, logger, mediator, cancellationToken) =>

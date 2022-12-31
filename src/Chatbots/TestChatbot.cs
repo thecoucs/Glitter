@@ -1,11 +1,11 @@
 ﻿using Freya.Commands;
-using Freya.Core;
 using Freya.Runtime;
 
 using Mauve;
-using Mauve.Runtime;
 
 using MediatR;
+
+using Microsoft.Extensions.Logging;
 
 namespace Freya.Services
 {
@@ -22,7 +22,7 @@ namespace Freya.Services
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
         public TestChatbot(
             RequestParser parser,
-            ILogger<LogEntry> logger,
+            ILogger<TestChatbot> logger,
             IMediator mediator,
             CancellationToken cancellationToken) :
             base("Test", parser, logger, mediator, cancellationToken)
@@ -32,7 +32,7 @@ namespace Freya.Services
         {
             // Cancel if requested, otherwise start the service.
             cancellationToken.ThrowIfCancellationRequested();
-            await Log(EventType.Success, "Connected to console.");
+            await Log(LogLevel.Information, "Connected to console.");
 
             do
             {

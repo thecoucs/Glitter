@@ -1,7 +1,8 @@
 ﻿using Freya.Core;
 
 using Mauve;
-using Mauve.Runtime;
+
+using Microsoft.Extensions.Logging;
 
 namespace Freya.Commands
 {
@@ -17,7 +18,7 @@ namespace Freya.Commands
         /// </summary>
         /// <param name="input">The input to be echoed back to the user.</param>
         /// <param name="logger"></param>
-        public EchoCommand([FromBot] string input, ILogger<LogEntry> logger) :
+        public EchoCommand([FromBot] string input, ILogger<EchoCommand> logger) :
             base("Echo", "Echoes the specified input back to the user.", logger) =>
             _input = input;
         /// <inheritdoc/>
