@@ -10,7 +10,6 @@ namespace Freya.Core
     /// </summary>
     internal class Brain
     {
-        private readonly List<Chatbot> _bots;
         private readonly IServiceProvider _serviceProvider;
         private readonly CancellationToken _cancellationToken;
         private readonly CancellationTokenSource _cancellationTokenSource;
@@ -23,7 +22,6 @@ namespace Freya.Core
             _cancellationTokenSource = new CancellationTokenSource();
             _cancellationToken = _cancellationTokenSource.Token;
             _serviceProvider = serviceProvider;
-            _bots = new List<Chatbot>();
         }
         /// <summary>
         /// Cancels processing for the <see cref="Brain"/>.
