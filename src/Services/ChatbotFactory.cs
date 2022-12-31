@@ -6,32 +6,33 @@ using Freya.Core;
 using Mauve;
 
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Freya.Services
 {
     /// <summary>
-    /// Represents a factory responsible for creating <see cref="BotService"/> instances.
+    /// Represents a factory responsible for creating <see cref="Chatbot"/> instances.
     /// </summary>
-    internal class ServiceFactory : AliasedTypeFactory<BotService>
+    internal class ChatbotFactory : AliasedTypeFactory<Chatbot>
     {
         private readonly IConfiguration _configuration;
-        private readonly CommandFactory _commandFactory;
+        private readonly IServiceProvider _serviceProvider;
         /// <summary>
-        /// Creates a new <see cref="ServiceFactory"/> instance.
+        /// Creates a new <see cref="ChatbotFactory"/> instance.
         /// </summary>
         /// <param name="configuration">The application configuration.</param>
         /// <param name="commandFactory">The factory services should use when creating <see cref="Command"/> instances.</param>
-        public ServiceFactory(IConfiguration configuration, CommandFactory commandFactory)
+        public ChatbotFactory(IConfiguration configuration, IServiceProvider serviceProvider)
         {
             _configuration = configuration;
-            _commandFactory = commandFactory;
+            _serviceProvider = serviceProvider;
         }
         /// <summary>
-        /// Discovers all concrete <see cref="BotService"/> implementations in the current <see cref="Assembly"/>.
+        /// Discovers all concrete <see cref="Chatbot"/> implementations in the current <see cref="Assembly"/>.
         /// </summary>
-        /// <param name="cancellationToken">The cancellation token to be provided to the <see cref="BotService"/> upon creation.</param>
-        /// <returns>An <see cref="IEnumerable{T}"/> containing all concrete <see cref="BotService"/> implementations in the current <see cref="Assembly"/>.</returns>
-        public IEnumerable<BotService> Discover(CancellationToken cancellationToken)
+        /// <param name="cancellationToken">The cancellation token to be provided to the <see cref="Chatbot"/> upon creation.</param>
+        /// <returns>An <see cref="IEnumerable{T}"/> containing all concrete <see cref="Chatbot"/> implementations in the current <see cref="Assembly"/>.</returns>
+        public IEnumerable<Chatbot> Discover(CancellationToken cancellationToken)
         {
             // Get any types considered valid for the factory.
             IEnumerable<Type>? types = GetQualifiedTypes();
@@ -51,11 +52,11 @@ namespace Freya.Services
 
                 // Create an instance of the service.
                 object? instance = settings is null
-                    ? Activator.CreateInstance(type, _commandFactory, cancellationToken)
-                    : Activator.CreateInstance(type, settings, _commandFactory, cancellationToken);
+                    ? ActivatorUtilities.CreateInstance(_serviceProvider, type, cancellationToken)
+                    : ActivatorUtilities.CreateInstance(_serviceProvider, type, settings, cancellationToken);
 
                 // Validate the instance and register it.
-                if (instance is BotService botService)
+                if (instance is Chatbot botService)
                     yield return botService;
             }
 
