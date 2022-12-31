@@ -1,10 +1,9 @@
-﻿using Freya.Commands;
-using Freya.Runtime;
+﻿using Freya.Core;
 
 using Mauve;
-using Mauve.Runtime.Processing;
+using Mauve.Runtime;
 
-using Microsoft.Extensions.DependencyInjection;
+using MediatR;
 
 namespace Freya.Services
 {
@@ -12,21 +11,16 @@ namespace Freya.Services
     /// Represents a test service for testing within the deployed console.
     /// </summary>
     [Alias("test")]
-    internal class TestService : BotService
+    internal class TestService : Chatbot
     {
         /// <summary>
         /// Creates a new <see cref="TestService"/> instance.
         /// </summary>
         /// <param name="commandFactory">The command factory for the service to create commands.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
-        public TestService(CommandFactory commandFactory, CancellationToken cancellationToken) :
-            base("Test", new ConsoleLogger(), commandFactory, cancellationToken)
+        public TestService(ILogger<LogEntry> logger, IMediator mediator, CancellationToken cancellationToken) :
+            base("Test", logger, mediator, cancellationToken)
         { }
-        /// <inheritdoc/>
-        protected override void ConfigureService(IServiceCollection services, IPipeline<Command> pipeline)
-        {
-
-        }
         /// <inheritdoc/>
         protected override async Task Run(CancellationToken cancellationToken)
         {
