@@ -10,3 +10,7 @@
    - Positions
    - Watchlist
    - Balance
+
+### 💪 Powered By Open Source
+ - Mauve
+ - MediatR
