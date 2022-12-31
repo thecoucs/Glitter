@@ -20,7 +20,7 @@ using IHost host = Host.CreateDefaultBuilder()
     {
         // Add services.
         _ = services.AddMediatR(Assembly.GetExecutingAssembly())
-                    .AddSingleton(new RequestParser("!"))
+                    .AddSingleton(new RequestParser("!", ","))
                     .AddSingleton<ILogger<LogEntry>>(new ConsoleLogger());
 
         // Create a provider and register it for the command factory.

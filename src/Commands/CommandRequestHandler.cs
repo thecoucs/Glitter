@@ -35,7 +35,7 @@ namespace Freya.Commands
             try
             {
                 // Create an instance of the command.
-                object? createdInstance = ActivatorUtilities.CreateInstance(_serviceProvider, type);
+                object? createdInstance = ActivatorUtilities.CreateInstance(_serviceProvider, type, request.Parameters.ToArray());
                 if (createdInstance is Command commandInstance)
                     return Task.FromResult((Command?)commandInstance);
             } catch
