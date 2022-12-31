@@ -34,15 +34,15 @@ namespace Freya.Services.Discord
         /// <inheritdoc/>
         protected override void Initialize()
         {
-            _client.Log += HandleDiscordLog;
-            _client.LoggedIn += HandleDiscordLogin;
+            _client.Log += HandleClientLog;
+            _client.LoggedIn += HandleClientLogin;
             _client.LoggedOut += HandleClientLogout;
             _client.Connected += HandleClientConnect;
             _client.Disconnected += HandleClientDisconnect;
             _client.MessageReceived += HandleClientMessage;
-            _client.JoinedGuild += HandleGuildJoin;
-            _client.GuildScheduledEventCreated += HandleScheduledGuildEventCreation;
-            _client.InviteCreated += HandleInviteCreation;
+            _client.JoinedGuild += HandleClientGuildJoin;
+            _client.GuildScheduledEventCreated += HandleClientScheduledGuildEventCreation;
+            _client.InviteCreated += HandleClientInviteCreation;
         }
         /// <inheritdoc/>
         protected override async Task Run(CancellationToken cancellationToken)
@@ -58,18 +58,18 @@ namespace Freya.Services.Discord
                 await Log(LogLevel.Information, $"An unexpected error occurred while starting the Discord service. {e.Message}");
             }
         }
-        private Task HandleInviteCreation(SocketInvite arg) => throw new NotImplementedException();
-        private Task HandleScheduledGuildEventCreation(SocketGuildEvent arg) => throw new NotImplementedException();
-        private Task HandleGuildJoin(SocketGuild arg) => throw new NotImplementedException();
+        private Task HandleClientInviteCreation(SocketInvite arg) => throw new NotImplementedException();
+        private Task HandleClientScheduledGuildEventCreation(SocketGuildEvent arg) => throw new NotImplementedException();
+        private Task HandleClientGuildJoin(SocketGuild arg) => throw new NotImplementedException();
         private async Task HandleClientConnect() =>
             await Log(LogLevel.Information, "Successfully connected to Discord.");
         private async Task HandleClientDisconnect(Exception arg) =>
             await Log(LogLevel.Error, $"Disconnected from Discord. {arg.FlattenMessages(" ")}");
-        private async Task HandleDiscordLogin() =>
+        private async Task HandleClientLogin() =>
             await Log(LogLevel.Information, "Logged in to Discord.");
         private async Task HandleClientLogout() =>
             await Log(LogLevel.Warning, "Logged out of Discord.");
-        private async Task HandleDiscordLog(LogMessage arg)
+        private async Task HandleClientLog(LogMessage arg)
         {
             // Determine the event type.
             LogLevel logLevel = arg.Exception is null
