@@ -9,7 +9,7 @@ namespace Freya.Core
     /// Represents a factory for creating instances of concrete implementations of a specified type marked with an <see cref="AliasAttribute"/>.
     /// </summary>
     /// <typeparam name="T">Specifies the type of objects the factory can create.</typeparam>
-    internal abstract class AliasedTypeFactory<T>
+    public abstract class AliasedTypeFactory<T>
     {
         /// <summary>
         /// Gets all qualified types for the factory.

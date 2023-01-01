@@ -27,6 +27,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\.providers\Freya.Console\Freya.Console.csproj" />
+    <ProjectReference Include="..\.providers\Freya.Discord\Freya.Discord.csproj" />
+    <ProjectReference Include="..\Freya.Core\Freya.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="appsettings.development.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

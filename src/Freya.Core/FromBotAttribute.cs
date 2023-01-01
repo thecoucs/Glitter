@@ -3,7 +3,7 @@
     /// <summary>
     /// Allows specification that a member comes from the bot.
     /// </summary>
-    internal class FromBotAttribute : Attribute
+    public class FromBotAttribute : Attribute
     {
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Freya.Data
 {
-    internal class Channel
+    public class Role
     {
     }
 }

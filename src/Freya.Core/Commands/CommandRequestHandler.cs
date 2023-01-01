@@ -13,7 +13,7 @@ namespace Freya.Commands
     /// <summary>
     /// Represents a factory for creating <see cref="Command"/> instances.
     /// </summary>
-    internal class CommandRequestHandler : AliasedTypeFactory<Command>, IRequestHandler<CommandRequest, Command?>
+    public class CommandRequestHandler : AliasedTypeFactory<Command>, IRequestHandler<CommandRequest, Command?>
     {
         private Dictionary<string, Type>? _types;
         private readonly IServiceProvider _serviceProvider;

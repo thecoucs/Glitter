@@ -6,7 +6,7 @@ namespace Freya.Core
     /// <summary>
     /// Represents a parser responsible for creating <see cref="CommandRequest"/> instances.
     /// </summary>
-    internal class RequestParser
+    public class RequestParser
     {
         private readonly string _separator;
         private readonly string _commandToken;

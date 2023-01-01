@@ -1,6 +1,6 @@
 ﻿using Mauve;
 
-namespace Freya.Commands.General
+namespace Freya.Commands
 {
     /// <summary>
     /// Represents a <see cref="Command"/> that reminds users of some specified input.

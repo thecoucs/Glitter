@@ -9,7 +9,7 @@ namespace Freya.Services
     /// Represents a <see cref="Chatbot"/> with settings.
     /// </summary>
     /// <typeparam name="TSettings">Specifies the type used for settings.</typeparam>
-    internal abstract class Chatbot<TSettings> : Chatbot
+    public abstract class Chatbot<TSettings> : Chatbot
     {
         /// <summary>
         /// The settings for the service.

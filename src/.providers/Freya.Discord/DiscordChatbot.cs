@@ -1,4 +1,17 @@
-﻿namespace Freya.Providers.Discord
+﻿using Discord;
+using Discord.WebSocket;
+
+using Freya.Core;
+using Freya.Services;
+
+using Mauve;
+using Mauve.Extensibility;
+
+using MediatR;
+
+using Microsoft.Extensions.Logging;
+
+namespace Freya.Providers.Discord
 {
     /// <summary>
     /// Represents a new <see cref="Chatbot"/> for integrating with <see href="https://discordnet.dev/guides/introduction/intro.html">Discord</see>.

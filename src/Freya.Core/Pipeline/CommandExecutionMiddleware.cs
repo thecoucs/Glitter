@@ -8,7 +8,7 @@ namespace Freya.Pipeline
     /// Represents an implementation of <see cref="IMiddleware{T}"/> that executes <see cref="Command"/> instances.
     /// </summary>
     /// <inheritdoc/>
-    internal class CommandExecutionMiddleware : IMiddleware<Command>
+    public class CommandExecutionMiddleware : IMiddleware<Command>
     {
         private readonly CancellationToken _cancellationToken;
         /// <summary>

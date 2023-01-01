@@ -14,7 +14,7 @@ namespace Freya.Services
     /// <summary>
     /// Represents a service for integrating Freya with a specific provider.
     /// </summary>
-    internal abstract class Chatbot
+    public abstract class Chatbot
     {
         private readonly string _name;
         private readonly ILogger _logger;

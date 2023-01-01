@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Freya.Commands
 {
-    internal abstract class Command
+    public abstract class Command
     {
         private readonly string _id;
         private readonly ILogger _logger;

@@ -4,7 +4,7 @@ using Mauve;
 
 using Microsoft.Extensions.Logging;
 
-namespace Freya.Commands.General
+namespace Freya.Commands
 {
     /// <summary>
     /// Represents a <see cref="Command"/> that echos input back to the user.

@@ -5,7 +5,7 @@ namespace Freya.Core
     /// <summary>
     /// Represents a log entry.
     /// </summary>
-    internal record LogEntry
+    public record LogEntry
     {
         /// <summary>
         /// The <see cref="EventType"/> of the entry.

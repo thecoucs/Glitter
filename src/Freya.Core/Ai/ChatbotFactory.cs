@@ -13,7 +13,7 @@ namespace Freya.Services
     /// <summary>
     /// Represents a factory responsible for creating <see cref="Chatbot"/> instances.
     /// </summary>
-    internal class ChatbotFactory : AliasedTypeFactory<Chatbot>
+    public class ChatbotFactory : AliasedTypeFactory<Chatbot>
     {
         private readonly IConfiguration _configuration;
         private readonly IServiceProvider _serviceProvider;

@@ -8,7 +8,7 @@ namespace Freya.Core
     /// <summary>
     /// Represents Freya's central processing system.
     /// </summary>
-    internal class Brain
+    public class Brain
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly CancellationToken _cancellationToken;

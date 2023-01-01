@@ -5,7 +5,7 @@ namespace Freya.Commands
     /// <summary>
     /// Represents a command request within Freya.
     /// </summary>
-    internal record CommandRequest : IRequest<Command?>
+    public record CommandRequest : IRequest<Command?>
     {
         /// <summary>
         /// The key used for invoking the command.

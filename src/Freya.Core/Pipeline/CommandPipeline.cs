@@ -9,7 +9,7 @@ namespace Freya.Pipeline
     /// <summary>
     /// Represents an implementation of <see cref="IPipeline{T}"/> that executes <see cref="Command"/> instances.
     /// </summary>
-    internal class CommandPipeline : IPipeline<Command>
+    public class CommandPipeline : IPipeline<Command>
     {
         private bool _pipelineComplete;
         private readonly CancellationToken _cancellationToken;
