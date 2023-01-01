@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Freya.Services.Discord
+namespace Freya.Providers.Discord
 {
     /// <summary>
     /// Represents a collection of settings for the <see cref="DiscordChatbot"/>.
