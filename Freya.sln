@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Freya", "src\Freya\Freya.cs
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Freya.Core", "src\Freya.Core\Freya.Core.csproj", "{CBB2128C-91E6-4F96-ACBB-6DE58F7FCB39}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Freya.Discord", "src\Freya.Discord\Freya.Discord.csproj", "{E0344855-6218-46EF-BB0E-F5EC9A2BEB71}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{CBB2128C-91E6-4F96-ACBB-6DE58F7FCB39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBB2128C-91E6-4F96-ACBB-6DE58F7FCB39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBB2128C-91E6-4F96-ACBB-6DE58F7FCB39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0344855-6218-46EF-BB0E-F5EC9A2BEB71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0344855-6218-46EF-BB0E-F5EC9A2BEB71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0344855-6218-46EF-BB0E-F5EC9A2BEB71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0344855-6218-46EF-BB0E-F5EC9A2BEB71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
