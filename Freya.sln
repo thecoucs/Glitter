@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Freya.Console", "src\Freya.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Freya.Tests", "Freya.Tests\Freya.Tests.csproj", "{FA53AFBC-C2CA-4477-BE4E-A276C3CAE42F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".providers", ".providers", "{2CCD146A-4B04-4785-8129-9681F6DCEAA3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +44,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E0344855-6218-46EF-BB0E-F5EC9A2BEB71} = {2CCD146A-4B04-4785-8129-9681F6DCEAA3}
+		{FBDB3E34-DCA1-4DD7-BE45-77A9D7CD2A99} = {2CCD146A-4B04-4785-8129-9681F6DCEAA3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5E57A512-C45B-46F0-8152-F6C4E7084E0C}
