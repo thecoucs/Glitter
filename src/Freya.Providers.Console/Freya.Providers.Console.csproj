@@ -7,13 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="mauve" Version="1.0.0" />
+    <PackageReference Include="mauve" Version="2023.0.0.1" />
     <PackageReference Include="MediatR" Version="11.1.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Freya.Core\Freya.Core.csproj" />
+    <ProjectReference Include="..\Freya.Core\Freya.Core.csproj" />
   </ItemGroup>
 
 </Project>
