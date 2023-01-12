@@ -27,9 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\.providers\Freya.Console\Freya.Console.csproj" />
-    <ProjectReference Include="..\.providers\Freya.Discord\Freya.Discord.csproj" />
     <ProjectReference Include="..\Freya.Core\Freya.Core.csproj" />
+    <ProjectReference Include="..\Freya.Providers.Console\Freya.Providers.Console.csproj" />
+    <ProjectReference Include="..\Freya.Providers.Discord\Freya.Providers.Discord.csproj" />
   </ItemGroup>
 
   <ItemGroup>
