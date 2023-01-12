@@ -3,7 +3,7 @@ using Freya.Services;
 
 using Microsoft.Extensions.Configuration;
 
-namespace Freya.Core
+namespace Freya.Ai
 {
     /// <summary>
     /// Represents Freya's central processing system.

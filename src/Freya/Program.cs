@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 
+using Freya.Ai;
 using Freya.Core;
 
 using MediatR;
