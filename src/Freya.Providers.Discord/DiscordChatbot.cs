@@ -33,7 +33,6 @@ namespace Freya.Providers.Discord
         /// <inheritdoc/>
         protected override void Initialize()
         {
-            _client.LoggedOut += HandleClientLogout;
             _client.Connected += HandleClientConnect;
             _client.Disconnected += HandleClientDisconnect;
             _client.MessageReceived += HandleClientMessage;
@@ -67,11 +66,6 @@ namespace Freya.Providers.Discord
         private async Task HandleClientDisconnect(Exception arg)
         {
             Log(LogLevel.Error, $"Disconnected from Discord. {arg.FlattenMessages(" ")}");
-            await Task.CompletedTask;
-        }
-        private async Task HandleClientLogout()
-        {
-            Log(LogLevel.Warning, "Logged out of Discord.");
             await Task.CompletedTask;
         }
         private async Task HandleClientMessage(SocketMessage arg) =>
