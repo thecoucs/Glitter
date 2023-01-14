@@ -40,22 +40,25 @@ namespace Freya.Providers.Console
                 // Cancel if requested, otherwise wait for input.
                 cancellationToken.ThrowIfCancellationRequested();
                 string? input = SystemConsole.ReadLine();
-                if (!string.IsNullOrWhiteSpace(input))
+
+                // Validate any input received.
+                if (string.IsNullOrWhiteSpace(input) ||
+                    !Parser.TryParse(input, out CommandRequest? commandRequest) ||
+                    commandRequest is null)
+                    continue;
+
+                // Capture the command and validate.
+                Command? command = await Mediator.Send(commandRequest, cancellationToken);
+                if (command is null)
                 {
-                    if (Parser.TryParse(input, out CommandRequest? commandRequest))
-                    {
-                        if (commandRequest is not null)
-                        {
-                            Command? command = await Mediator.Send(commandRequest, cancellationToken);
-                            if (command is not null)
-                            {
-                                CommandResponse? response = await command.Execute(cancellationToken);
-                                if (!string.IsNullOrWhiteSpace(response?.Message))
-                                    SystemConsole.WriteLine(response.Message);
-                            }
-                        }
-                    }
+                    Log(LogLevel.Warning, $"Unable to locate a command that satisfies the given request.");
+                    continue;
                 }
+
+                // Execute the command and handle the response.
+                CommandResponse? response = await command.Execute(cancellationToken);
+                if (!string.IsNullOrWhiteSpace(response?.Message))
+                    SystemConsole.WriteLine(response.Message);
             } while (true);
         }
     }
