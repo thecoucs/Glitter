@@ -47,7 +47,7 @@ namespace Freya.Ai
 
             // Wake up all event handlers.
             // TODO: This is a disgusting way to handle this, fix it per issue #6.
-            _ = _serviceProvider.GetServices<IEventHandler>();
+            _ = _serviceProvider.GetServices<EventHandler>();
             await Task.Delay(Timeout.Infinite);
         }
     }
