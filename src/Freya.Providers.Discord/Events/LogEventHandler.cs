@@ -10,10 +10,10 @@ using Microsoft.Extensions.Logging;
 
 namespace Freya.Providers.Discord.Events
 {
-    internal sealed class LogMessageHandler : IEventHandler
+    internal sealed class LogEventHandler : IEventHandler
     {
         private readonly ILogger _logger;
-        public LogMessageHandler(DiscordSocketClient discordClient, ILogger<DiscordChatbot> logger) {
+        public LogEventHandler(DiscordSocketClient discordClient, ILogger<DiscordChatbot> logger) {
             _logger = logger;
             discordClient.Log += HandleLogMessage;
             _logger.LogInformation("Message handler successfully created.");

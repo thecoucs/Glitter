@@ -29,7 +29,7 @@ namespace Freya.Providers.Discord
             // Register the Discord bot and its settings.
             return services.AddSingleton(new DiscordSocketClient())
                            .AddSingleton<Chatbot, DiscordChatbot>()
-                           .AddTransient<IEventHandler, LogMessageHandler>()
+                           .AddTransient<IEventHandler, LogEventHandler>()
                            .AddTransient<IEventHandler, LoggedInEventHandler>()
                            .AddSingleton(settings);
         }
