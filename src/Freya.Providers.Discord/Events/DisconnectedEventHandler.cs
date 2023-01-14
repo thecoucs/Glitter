@@ -16,7 +16,7 @@ namespace Freya.Providers.Discord.Events
         /// </summary>
         /// <param name="client">The <see cref="DiscordSocketClient"/> to handle disconnected events for.</param>
         /// <param name="logger">The logger for the <see cref="DiscordChatbot"/>.</param>
-        public DisconnectedEventHandler(DiscordSocketClient client, ILogger logger) :
+        public DisconnectedEventHandler(DiscordSocketClient client, ILogger<DiscordChatbot> logger) :
             base(logger) =>
             client.Disconnected += HandleDisconnect;
         private async Task HandleDisconnect(Exception arg)
