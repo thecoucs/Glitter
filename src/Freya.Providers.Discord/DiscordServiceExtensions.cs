@@ -30,6 +30,7 @@ namespace Freya.Providers.Discord
             return services.AddSingleton(new DiscordSocketClient())
                            .AddSingleton<Chatbot, DiscordChatbot>()
                            .AddTransient<IEventHandler, LogMessageHandler>()
+                           .AddTransient<IEventHandler, LoggedInEventHandler>()
                            .AddSingleton(settings);
         }
     }
