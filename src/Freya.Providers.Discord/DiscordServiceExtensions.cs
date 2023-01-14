@@ -20,10 +20,10 @@ namespace Freya.Providers.Discord
                 throw new InvalidOperationException("Unable to identify a configuration section for Discord.");
 
             // Attempt to parse the settings.
-            var settings = configurationSection.Get<DiscordSettings>();
+            DiscordSettings? settings = configurationSection.Get<DiscordSettings>();
             if (settings is null)
                 throw new InvalidOperationException("Unable to load configuration for Discord.");
-            
+
             // Register the Discord bot and its settings.
             return services.AddSingleton(settings)
                            .AddSingleton<Chatbot, DiscordChatbot>();
