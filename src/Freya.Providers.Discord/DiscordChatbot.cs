@@ -24,15 +24,15 @@ namespace Freya.Providers.Discord
         /// </summary>
         public DiscordChatbot(
             DiscordSettings settings,
+            DiscordSocketClient client,
             RequestParser parser,
             ILogger<DiscordChatbot> logger,
             IMediator mediator) :
             base("Discord", settings, parser, logger, mediator) =>
-            _client = new DiscordSocketClient();
+            _client = client;
         /// <inheritdoc/>
         protected override void Initialize()
         {
-            _client.Log += HandleClientLog;
             _client.LoggedIn += HandleClientLogin;
             _client.LoggedOut += HandleClientLogout;
             _client.Connected += HandleClientConnect;
@@ -78,33 +78,6 @@ namespace Freya.Providers.Discord
         private async Task HandleClientLogout()
         {
             Log(LogLevel.Warning, "Logged out of Discord.");
-            await Task.CompletedTask;
-        }
-        private async Task HandleClientLog(LogMessage arg)
-        {
-            // Determine the event type.
-            LogLevel logLevel = arg.Exception is null
-                ? LogLevel.Information
-                : LogLevel.Error;
-
-            // Log the original message.
-            if (!string.IsNullOrWhiteSpace(arg.Message))
-                Log(logLevel, arg.Message);
-
-            // Log the exception separately.
-            if (arg.Exception is not null)
-            {
-                try
-                {
-                    Log(LogLevel.Error, arg.Exception.FlattenMessages(" "));
-                }
-                catch (Exception e)
-                {
-                    Log(LogLevel.Error, $"An unexpected error occurred while recording a log from Discord. {e.Message}");
-                    await Task.FromException(e);
-                }
-            }
-
             await Task.CompletedTask;
         }
         private async Task HandleClientMessage(SocketMessage arg) =>
