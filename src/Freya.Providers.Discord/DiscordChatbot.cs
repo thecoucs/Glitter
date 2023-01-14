@@ -16,7 +16,7 @@ namespace Freya.Providers.Discord
     /// <summary>
     /// Represents a new <see cref="Chatbot"/> for integrating with <see href="https://discordnet.dev/guides/introduction/intro.html">Discord</see>.
     /// </summary>
-    internal class DiscordChatbot : Chatbot<DiscordSettings>
+    internal sealed class DiscordChatbot : Chatbot<DiscordSettings>
     {
         private readonly DiscordSocketClient _client;
         /// <summary>
