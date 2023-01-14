@@ -18,17 +18,17 @@ namespace Freya.Core
         protected IEnumerable<Type>? GetQualifiedTypes()
         {
             // Get the entry assembly, if we can't find it, there's no work.
-            var assembly = Assembly.GetEntryAssembly();
-            if (assembly is null)
+            IEnumerable<Assembly> domainAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+            if (domainAssemblies is null)
                 return null;
 
             // Get any types considered valid for the factory.
-            return from type
-                   in assembly.GetTypes()
+            return from assembly in domainAssemblies
+                   from type in assembly.GetTypes()
                    where !type.IsAbstract &&
                          !type.IsInterface &&
-                         type.GetCustomAttribute<AliasAttribute>() is not null &&
-                         type.DerivesFrom<T>()
+                          type.GetCustomAttribute<AliasAttribute>() is not null &&
+                          type.DerivesFrom<T>()
                    select type;
         }
     }
