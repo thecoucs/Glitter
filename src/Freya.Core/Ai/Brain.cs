@@ -40,13 +40,15 @@ namespace Freya.Ai
 
             // Cancel if requested, otherwise discover and start each service.
             _cancellationToken.ThrowIfCancellationRequested();
+            Console.WriteLine("Discovering providers.");
             var serviceFactory = new ChatbotFactory(configuration, _serviceProvider);
             foreach (Chatbot bot in serviceFactory.Discover(_cancellationToken))
             {
                 // Cancel if requested, otherwise start the service.
                 _cancellationToken.ThrowIfCancellationRequested();
+                Console.WriteLine($"Starting provider {bot.Name}");
                 bot.Configure(new CommandPipeline(_cancellationToken));
-                await bot.Start();
+                await bot.Start(_cancellationToken);
             }
 
             await Task.Delay(Timeout.Infinite);
