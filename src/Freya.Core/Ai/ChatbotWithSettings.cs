@@ -22,15 +22,13 @@ namespace Freya.Services
         /// <param name="settings">The settings for the service.</param>
         /// <param name="logger">The logger to be utilized by the service.</param>
         /// <param name="commandFactory">The <see cref="Commands.CommandRequestHandler"/> instance the service should use when creating commands.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
         public Chatbot(
             string name,
             TSettings settings,
             RequestParser parser,
             ILogger logger,
-            IMediator mediator,
-            CancellationToken cancellationToken) :
-            base(name, parser, logger, mediator, cancellationToken) =>
+            IMediator mediator) :
+            base(name, parser, logger, mediator) =>
             Settings = settings;
     }
 }
