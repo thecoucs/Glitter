@@ -15,7 +15,6 @@ namespace Freya.Providers.Console
     /// <summary>
     /// Represents a test service for testing within the deployed console.
     /// </summary>
-    [Alias("test")]
     internal class ConsoleChatbot : Chatbot
     {
         /// <summary>
