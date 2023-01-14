@@ -26,7 +26,7 @@ using IHost host = Host.CreateDefaultBuilder()
             .AddSingleton(new RequestParser(commandToken: "!", separator: ","))
             .AddMediatR(assemblies: Assembly.GetExecutingAssembly())
             .AddTestingConsole()
-            .AddDiscord();
+            .AddDiscord(configuration);
 
         // Create a provider and register it for the command factory.
         IServiceProvider serviceProvider = services.BuildServiceProvider();
