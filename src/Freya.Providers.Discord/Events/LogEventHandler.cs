@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 using Discord;
 using Discord.WebSocket;
+
 using Mauve.Extensibility;
+
 using Microsoft.Extensions.Logging;
 
 namespace Freya.Providers.Discord.Events
@@ -40,8 +37,7 @@ namespace Freya.Providers.Discord.Events
                 try
                 {
                     Logger.Log(LogLevel.Error, message.Exception.FlattenMessages(" "));
-                }
-                catch (Exception e)
+                } catch (Exception e)
                 {
                     Logger.Log(LogLevel.Error, $"An unexpected error occurred while recording a log from Discord. {e.Message}");
                     await Task.FromException(e);

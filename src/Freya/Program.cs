@@ -6,7 +6,9 @@ using Freya.Core;
 using Freya.Logging;
 using Freya.Providers.Console;
 using Freya.Providers.Discord;
+
 using MediatR;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

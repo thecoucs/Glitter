@@ -1,6 +1,5 @@
 using Freya.Services;
 
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Freya.Providers.Console

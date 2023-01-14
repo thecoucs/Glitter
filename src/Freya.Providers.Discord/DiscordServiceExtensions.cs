@@ -1,4 +1,5 @@
 using Discord.WebSocket;
+
 using Freya.Providers.Discord.Events;
 using Freya.Services;
 

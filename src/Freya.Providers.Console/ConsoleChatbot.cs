@@ -2,8 +2,6 @@
 using Freya.Core;
 using Freya.Services;
 
-using Mauve;
-
 using MediatR;
 
 using Microsoft.Extensions.Logging;

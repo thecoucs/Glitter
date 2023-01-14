@@ -1,5 +1,6 @@
 ﻿using Freya.Pipeline;
 using Freya.Services;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Freya.Ai

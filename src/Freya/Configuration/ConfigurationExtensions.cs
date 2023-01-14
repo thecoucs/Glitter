@@ -5,7 +5,8 @@ namespace Freya.Configuration
 {
     public static class ConfigurationExtensions
     {
-        public static IServiceCollection LoadConfiguration(this IServiceCollection services, out IConfiguration configuration) {
+        public static IServiceCollection LoadConfiguration(this IServiceCollection services, out IConfiguration configuration)
+        {
             // Validate the base directory.
             string baseDirectory = AppContext.BaseDirectory;
             if (string.IsNullOrWhiteSpace(baseDirectory))
@@ -23,7 +24,7 @@ namespace Freya.Configuration
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile("appsettings.development.json", optional: true)
                 .Build();
-            
+
             return services;
         }
     }
