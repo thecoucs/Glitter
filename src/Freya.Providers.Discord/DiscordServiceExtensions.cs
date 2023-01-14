@@ -1,3 +1,4 @@
+using Discord;
 using Discord.WebSocket;
 
 using Freya.Providers.Discord.Events;
@@ -27,16 +28,26 @@ namespace Freya.Providers.Discord
             if (settings is null)
                 throw new InvalidOperationException("Unable to load configuration for Discord.");
 
-            // Register the Discord bot and its settings.
-            return services.AddSingleton(new DiscordSocketClient())
-                           .AddSingleton<Chatbot, DiscordChatbot>()
+            // Create the client configuration and register services.
+            CreateClientConfiguration(out DiscordSocketConfig discordClientConfiguration);
+            return services.AddSingleton<Chatbot, DiscordChatbot>()
                            .AddTransient<EventHandler, LogEventHandler>()
                            .AddTransient<EventHandler, LoggedInEventHandler>()
                            .AddTransient<EventHandler, LoggedOutEventHandler>()
                            .AddTransient<EventHandler, ConnectedEventHandler>()
                            .AddTransient<EventHandler, DisconnectedEventHandler>()
                            .AddTransient<EventHandler, MessageReceivedEventHandler>()
+                           .AddSingleton(new DiscordSocketClient(discordClientConfiguration))
                            .AddSingleton(settings);
         }
+        private static void CreateClientConfiguration(out DiscordSocketConfig configuration) =>
+            configuration = new DiscordSocketConfig
+            {
+                LogLevel = LogSeverity.Info,
+                MessageCacheSize = 100,
+                GatewayIntents = GatewayIntents.DirectMessages |
+                                 GatewayIntents.DirectMessageReactions |
+                                 GatewayIntents.MessageContent
+            };
     }
 }
