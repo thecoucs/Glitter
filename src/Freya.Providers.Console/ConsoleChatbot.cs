@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 using SystemConsole = System.Console;
 
-namespace Freya.Chatbots.Console
+namespace Freya.Providers.Console
 {
     /// <summary>
     /// Represents a test service for testing within the deployed console.
@@ -26,16 +26,15 @@ namespace Freya.Chatbots.Console
         public ConsoleChatbot(
             RequestParser parser,
             ILogger<ConsoleChatbot> logger,
-            IMediator mediator,
-            CancellationToken cancellationToken) :
-            base("Test", parser, logger, mediator, cancellationToken)
+            IMediator mediator) :
+            base("Test", parser, logger, mediator)
         { }
         /// <inheritdoc/>
         protected override async Task Run(CancellationToken cancellationToken)
         {
             // Cancel if requested, otherwise start the service.
             cancellationToken.ThrowIfCancellationRequested();
-            await Log(LogLevel.Information, "Connected to console.");
+            Log(LogLevel.Information, "Connected to console.");
 
             do
             {
