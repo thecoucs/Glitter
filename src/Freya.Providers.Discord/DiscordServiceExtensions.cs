@@ -1,3 +1,5 @@
+using Discord.WebSocket;
+using Freya.Providers.Discord.Events;
 using Freya.Services;
 
 using Microsoft.Extensions.Configuration;
@@ -25,8 +27,10 @@ namespace Freya.Providers.Discord
                 throw new InvalidOperationException("Unable to load configuration for Discord.");
 
             // Register the Discord bot and its settings.
-            return services.AddSingleton(settings)
-                           .AddSingleton<Chatbot, DiscordChatbot>();
+            return services.AddSingleton(new DiscordSocketClient())
+                           .AddSingleton<Chatbot, DiscordChatbot>()
+                           .AddTransient<IEventHandler, LogMessageHandler>()
+                           .AddSingleton(settings);
         }
     }
 }
