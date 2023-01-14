@@ -31,6 +31,7 @@ namespace Freya.Providers.Discord
                            .AddSingleton<Chatbot, DiscordChatbot>()
                            .AddTransient<IEventHandler, LogEventHandler>()
                            .AddTransient<IEventHandler, LoggedInEventHandler>()
+                           .AddTransient<IEventHandler, LoggedOutEventHandler>()
                            .AddSingleton(settings);
         }
     }
