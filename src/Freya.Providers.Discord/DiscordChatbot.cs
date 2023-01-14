@@ -28,13 +28,6 @@ namespace Freya.Providers.Discord
             base("Discord", settings, parser, logger, mediator) =>
             _client = client;
         /// <inheritdoc/>
-        protected override void Initialize()
-        {
-            _client.JoinedGuild += HandleClientGuildJoin;
-            _client.GuildScheduledEventCreated += HandleClientScheduledGuildEventCreation;
-            _client.InviteCreated += HandleClientInviteCreation;
-        }
-        /// <inheritdoc/>
         protected override async Task Run(CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -48,8 +41,5 @@ namespace Freya.Providers.Discord
                 Log(LogLevel.Information, $"An unexpected error occurred while starting the Discord service. {e.Message}");
             }
         }
-        private Task HandleClientInviteCreation(SocketInvite arg) => throw new NotImplementedException();
-        private Task HandleClientScheduledGuildEventCreation(SocketGuildEvent arg) => throw new NotImplementedException();
-        private Task HandleClientGuildJoin(SocketGuild arg) => throw new NotImplementedException();
     }
 }
