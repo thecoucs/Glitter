@@ -33,6 +33,7 @@ namespace Freya.Providers.Discord
                            .AddTransient<EventHandler, LoggedInEventHandler>()
                            .AddTransient<EventHandler, LoggedOutEventHandler>()
                            .AddTransient<EventHandler, ConnectedEventHandler>()
+                           .AddTransient<EventHandler, DisconnectedEventHandler>()
                            .AddSingleton(settings);
         }
     }
