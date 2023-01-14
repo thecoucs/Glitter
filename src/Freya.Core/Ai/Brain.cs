@@ -45,6 +45,9 @@ namespace Freya.Ai
                 await bot.Start(_cancellationToken);
             }
 
+            // Wake up all event handlers.
+            // TODO: This is a disgusting way to handle this, fix it per issue #6.
+            _ = _serviceProvider.GetServices<IEventHandler>();
             await Task.Delay(Timeout.Infinite);
         }
     }
