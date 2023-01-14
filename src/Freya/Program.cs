@@ -40,9 +40,7 @@ Console.WriteLine("Starting services.");
 var brain = new Brain(host.Services);
 await brain.Start();
 
-/// <summary>
-/// Builds the logging serice.
-/// </summary>
+// Builds the logging service.
 static void BuildLogging(ILoggingBuilder logging) =>
     logging.AddDebug()
            .AddColoredConsole();
