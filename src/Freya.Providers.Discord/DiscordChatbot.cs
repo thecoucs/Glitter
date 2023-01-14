@@ -30,7 +30,6 @@ namespace Freya.Providers.Discord
         /// <inheritdoc/>
         protected override void Initialize()
         {
-            _client.MessageReceived += HandleClientMessage;
             _client.JoinedGuild += HandleClientGuildJoin;
             _client.GuildScheduledEventCreated += HandleClientScheduledGuildEventCreation;
             _client.InviteCreated += HandleClientInviteCreation;
@@ -52,7 +51,5 @@ namespace Freya.Providers.Discord
         private Task HandleClientInviteCreation(SocketInvite arg) => throw new NotImplementedException();
         private Task HandleClientScheduledGuildEventCreation(SocketGuildEvent arg) => throw new NotImplementedException();
         private Task HandleClientGuildJoin(SocketGuild arg) => throw new NotImplementedException();
-        private async Task HandleClientMessage(SocketMessage arg) =>
-            await Task.CompletedTask;
     }
 }
