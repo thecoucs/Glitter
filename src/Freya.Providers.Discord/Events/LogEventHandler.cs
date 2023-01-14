@@ -26,7 +26,7 @@ namespace Freya.Providers.Discord.Events
             discordClient.Log += HandleLogMessage;
             _logger.LogInformation("Message handler successfully created.");
         }
-        public async Task HandleLogMessage(LogMessage message)
+        private async Task HandleLogMessage(LogMessage message)
         {
             // Determine the event type.
             LogLevel logLevel = message.Exception is null
