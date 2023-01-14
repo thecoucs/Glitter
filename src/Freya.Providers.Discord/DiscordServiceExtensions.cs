@@ -1,5 +1,6 @@
 using Freya.Services;
 
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Freya.Providers.Discord
@@ -11,7 +12,21 @@ namespace Freya.Providers.Discord
         /// </summary>
         /// <param name="services">The service contract for adding services to the DI container.</param>
         /// <returns>The current <see cref="IServiceCollection"/> instance containing <see cref="DiscordChatbot"/> as a singleton service.</returns>
-        public static IServiceCollection AddDiscord(this IServiceCollection services) =>
-            services.AddSingleton<Chatbot, DiscordChatbot>();
+        public static IServiceCollection AddDiscord(this IServiceCollection services, IConfiguration configuration)
+        {
+            // Attempt to get a config section for the discord settings.
+            IConfigurationSection configurationSection = configuration.GetSection("discord");
+            if (configurationSection is null)
+                throw new InvalidOperationException("Unable to identify a configuration section for Discord.");
+
+            // Attempt to parse the settings.
+            var settings = configurationSection.Get<DiscordSettings>();
+            if (settings is null)
+                throw new InvalidOperationException("Unable to load configuration for Discord.");
+            
+            // Register the Discord bot and its settings.
+            return services.AddSingleton(settings)
+                           .AddSingleton<Chatbot, DiscordChatbot>();
+        }
     }
 }
