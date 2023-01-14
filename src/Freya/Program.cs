@@ -2,6 +2,7 @@
 
 using Freya.Ai;
 using Freya.Core;
+using Freya.Logging;
 
 using MediatR;
 
@@ -44,4 +45,4 @@ await brain.Start();
 /// </summary>
 static void BuildLogging(ILoggingBuilder logging) =>
     logging.AddDebug()
-           .AddConsole();
+           .AddColoredConsole();
