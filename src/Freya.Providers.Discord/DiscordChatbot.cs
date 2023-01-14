@@ -33,7 +33,6 @@ namespace Freya.Providers.Discord
         /// <inheritdoc/>
         protected override void Initialize()
         {
-            _client.Connected += HandleClientConnect;
             _client.Disconnected += HandleClientDisconnect;
             _client.MessageReceived += HandleClientMessage;
             _client.JoinedGuild += HandleClientGuildJoin;
@@ -58,11 +57,7 @@ namespace Freya.Providers.Discord
         private Task HandleClientInviteCreation(SocketInvite arg) => throw new NotImplementedException();
         private Task HandleClientScheduledGuildEventCreation(SocketGuildEvent arg) => throw new NotImplementedException();
         private Task HandleClientGuildJoin(SocketGuild arg) => throw new NotImplementedException();
-        private async Task HandleClientConnect()
-        {
-            Log(LogLevel.Information, "Successfully connected to Discord.");
-            await Task.CompletedTask;
-        }
+
         private async Task HandleClientDisconnect(Exception arg)
         {
             Log(LogLevel.Error, $"Disconnected from Discord. {arg.FlattenMessages(" ")}");
