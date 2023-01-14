@@ -23,8 +23,8 @@ using IHost host = Host.CreateDefaultBuilder()
         // Add services.
         _ = services.LoadConfiguration(out IConfiguration configuration)
             .AddLogging(BuildLogging)
-            .AddSingleton(new RequestParser(commandToken: "!", separator: ","))
             .AddMediatR(assemblies: Assembly.GetExecutingAssembly())
+            .AddSingleton(new RequestParser(commandToken: "!", separator: ","))
             .AddTestingConsole()
             .AddDiscord(configuration);
 
