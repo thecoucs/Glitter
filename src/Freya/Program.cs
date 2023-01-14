@@ -1,11 +1,13 @@
 ﻿using System.Reflection;
 
 using Freya.Ai;
+using Freya.Configuration;
 using Freya.Core;
 using Freya.Logging;
-
+using Freya.Providers.Console;
+using Freya.Providers.Discord;
 using MediatR;
-
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -19,9 +21,12 @@ using IHost host = Host.CreateDefaultBuilder()
     .ConfigureServices(services =>
     {
         // Add services.
-        _ = services.AddLogging(BuildLogging)
-            .AddSingleton(new RequestParser("!", ","))
-            .AddMediatR(Assembly.GetExecutingAssembly());
+        _ = services.LoadConfiguration(out IConfiguration configuration)
+            .AddLogging(BuildLogging)
+            .AddSingleton(new RequestParser(commandToken: "!", separator: ","))
+            .AddMediatR(assemblies: Assembly.GetExecutingAssembly())
+            .AddTestingConsole()
+            .AddDiscord();
 
         // Create a provider and register it for the command factory.
         IServiceProvider serviceProvider = services.BuildServiceProvider();
