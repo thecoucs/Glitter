@@ -16,10 +16,10 @@ namespace Freya.Providers.Discord.Events
         /// <param name="logger">The logger for the <see cref="DiscordChatbot"/>.</param>
         public MessageReceivedEventHandler(DiscordSocketClient client, ILogger<DiscordChatbot> logger) :
             base(logger) =>
-            client.Connected += HandleConnected;
-        private async Task HandleConnected()
+            client.MessageReceived += HandleMessage;
+        private async Task HandleMessage(SocketMessage message)
         {
-            Logger.LogInformation("Successfully connected to Discord.");
+            Logger.LogInformation($"{message.Author.Username}: {message.Content}");
             await Task.CompletedTask;
         }
     }
