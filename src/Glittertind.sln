@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Freya", "Freya\Freya.csproj", "{AF0628C3-FD5D-45E7-BB41-0C28CE6ADE5A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glittertind", "Glittertind\Glittertind.csproj", "{C4828673-9C97-489A-89AB-FF3D38B0FE0B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glittertind.Discord", "Glittertind.Discord\Glittertind.Discord.csproj", "{C7E1B400-8E99-4ADF-8ED8-11D315361058}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glittertind.Tests", "Glittertind.Tests\Glittertind.Tests.csproj", "{5F5E829F-8E75-43EB-A560-BA836C638C79}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF0628C3-FD5D-45E7-BB41-0C28CE6ADE5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF0628C3-FD5D-45E7-BB41-0C28CE6ADE5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF0628C3-FD5D-45E7-BB41-0C28CE6ADE5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF0628C3-FD5D-45E7-BB41-0C28CE6ADE5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4828673-9C97-489A-89AB-FF3D38B0FE0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4828673-9C97-489A-89AB-FF3D38B0FE0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4828673-9C97-489A-89AB-FF3D38B0FE0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4828673-9C97-489A-89AB-FF3D38B0FE0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7E1B400-8E99-4ADF-8ED8-11D315361058}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7E1B400-8E99-4ADF-8ED8-11D315361058}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7E1B400-8E99-4ADF-8ED8-11D315361058}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7E1B400-8E99-4ADF-8ED8-11D315361058}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F5E829F-8E75-43EB-A560-BA836C638C79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F5E829F-8E75-43EB-A560-BA836C638C79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F5E829F-8E75-43EB-A560-BA836C638C79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F5E829F-8E75-43EB-A560-BA836C638C79}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5E57A512-C45B-46F0-8152-F6C4E7084E0C}
+	EndGlobalSection
+EndGlobal
