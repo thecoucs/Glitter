@@ -1,9 +1,8 @@
 ﻿using Freya.Logging;
 
+using Glittertind;
 using Glittertind.Commands.OpenSource;
 using Glittertind.Discord;
-
-using Glittertind.Extensibility;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

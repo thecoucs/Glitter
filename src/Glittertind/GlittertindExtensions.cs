@@ -7,7 +7,7 @@ using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Glittertind.Extensibility
+namespace Glittertind
 {
     public static class ServiceCollectionExtensions
     {
