@@ -1,6 +1,5 @@
-﻿using Freya.Pipeline;
-
-using Glittertind.Commands;
+﻿using Glittertind.Commands;
+using Glittertind.Pipeline;
 
 using Mauve.Runtime;
 

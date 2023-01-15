@@ -2,7 +2,7 @@
 
 using Mauve.Patterns;
 
-namespace Freya.Pipeline
+namespace Glittertind.Pipeline
 {
     /// <summary>
     /// Represents an implementation of <see cref="IMiddleware{T}"/> that executes <see cref="Command"/> instances.

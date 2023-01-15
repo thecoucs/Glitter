@@ -4,7 +4,7 @@ using Mauve.Extensibility;
 using Mauve.Patterns;
 using Mauve.Runtime;
 
-namespace Freya.Pipeline
+namespace Glittertind.Pipeline
 {
     /// <summary>
     /// Represents an implementation of <see cref="IPipeline{T}"/> that executes <see cref="Command"/> instances.
