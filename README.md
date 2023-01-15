@@ -23,8 +23,13 @@ await host.RunAsync();
 ```
 With that, you've got a working chatbot that can communicate with Discord; and all that's left is to add some commands!
 
-![Freya Header](/.resources/freya-header.png "Freya Header")
+# 💪 Powered By Open Source
+The following open source projects help to power both Glittertind and Freya; be sure to give them a star! ⭐
+ - [Mauve](https://github.com/tacosontitan/Mauve)
+ - [MediatR](https://github.com/jbogard/MediatR)
+
 # 💃 Freya
+Freya is my personal chatbot built using Glittertind as a design pallete and proof of concept. The following commands are available out of the box:
 
  - General Commands
    - Remind Me
@@ -36,6 +41,5 @@ With that, you've got a working chatbot that can communicate with Discord; and a
    - Positions
    - Watchlist
    - Balance
-# 💪 Powered By Open Source
- - [Mauve](https://github.com/tacosontitan/Mauve)
- - [MediatR](https://github.com/jbogard/MediatR)
+
+![Freya Header](/.resources/freya-header.png "Freya Header")
