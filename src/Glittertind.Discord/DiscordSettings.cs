@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Freya.Providers.Discord
+namespace Glittertind.Discord
 {
     /// <summary>
     /// Represents a collection of settings for the <see cref="DiscordChatbot"/>.

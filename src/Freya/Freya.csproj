@@ -28,7 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Glittertind\Glittertind.csproj" />
-    <ProjectReference Include="..\Freya.Providers.Discord\Freya.Providers.Discord.csproj" />
+    <ProjectReference Include="..\Glittertind.Discord\Glittertind.Discord.csproj" />
     <ProjectReference Include="..\Glittertind.Discord\Glittertind.Discord.csproj" />
     <ProjectReference Include="..\Glittertind\Glittertind.csproj" />
   </ItemGroup>

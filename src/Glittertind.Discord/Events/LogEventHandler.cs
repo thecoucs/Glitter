@@ -5,7 +5,7 @@ using Mauve.Extensibility;
 
 using Microsoft.Extensions.Logging;
 
-namespace Freya.Providers.Discord.Events
+namespace Glittertind.Discord.Events
 {
     /// <summary>
     /// Represents an <see cref="IEventHandler"/> for handling the Log event for a <see cref="DiscordSocketClient"/>.

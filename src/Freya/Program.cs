@@ -1,5 +1,6 @@
 ﻿using Freya.Logging;
-using Freya.Providers.Discord;
+
+using Glittertind.Discord;
 
 using Glittertind.Extensibility;
 

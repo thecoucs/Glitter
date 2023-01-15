@@ -1,10 +1,10 @@
 using Discord.WebSocket;
 
-using Freya.Providers.Discord.Events;
+using Glittertind.Discord.Events;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Freya.Providers.Discord
+namespace Glittertind.Discord
 {
     public static class DiscordServiceExtensions
     {

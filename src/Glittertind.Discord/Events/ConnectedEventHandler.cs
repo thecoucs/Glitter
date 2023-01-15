@@ -2,7 +2,7 @@ using Discord.WebSocket;
 
 using Microsoft.Extensions.Logging;
 
-namespace Freya.Providers.Discord.Events
+namespace Glittertind.Discord.Events
 {
     /// <summary>
     /// Represents an <see cref="EventHandler"/> for handling the connected event for a <see cref="DiscordSocketClient"/>.
