@@ -2,7 +2,7 @@
 
 using Microsoft.Extensions.Logging;
 
-namespace Freya.Ai
+namespace Glittertind.Ai
 {
     /// <summary>
     /// Represents a <see cref="Chatbot"/> with settings.

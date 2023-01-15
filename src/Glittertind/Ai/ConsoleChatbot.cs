@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 using SystemConsole = System.Console;
 
-namespace Freya.Ai
+namespace Glittertind.Ai
 {
     /// <summary>
     /// Represents a test service for testing within the deployed console.

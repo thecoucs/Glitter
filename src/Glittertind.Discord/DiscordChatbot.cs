@@ -1,8 +1,6 @@
 ﻿using Discord;
 using Discord.WebSocket;
 
-using Freya.Ai;
-
 using MediatR;
 
 using Microsoft.Extensions.Logging;

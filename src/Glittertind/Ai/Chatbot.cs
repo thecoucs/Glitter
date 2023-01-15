@@ -8,7 +8,7 @@ using MediatR;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Freya.Ai
+namespace Glittertind.Ai
 {
     /// <summary>
     /// Represents a service for integrating Freya with a specific provider.
