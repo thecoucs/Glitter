@@ -11,27 +11,27 @@ namespace Glittertind.Extensibility
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection UseGlittertind(this IServiceCollection services, Action<SynapseBuilder> configurationAction)
+        public static IServiceCollection UseGlittertind(this IServiceCollection services, Action<GlittertindConfigurationBuilder> configurationAction)
         {
             // Load the configuration.
             LoadConfiguration(out IConfiguration configuration);
             _ = services.AddSingleton(configuration);
 
             // Allow consumers to configure Freya.
-            var synapseBuilder = new SynapseBuilder(services, configuration);
-            configurationAction?.Invoke(synapseBuilder);
+            var configBuilder = new GlittertindConfigurationBuilder(services, configuration);
+            configurationAction?.Invoke(configBuilder);
 
             // Add the request parser.
-            string commandToken = synapseBuilder.CommandPrefix ?? "!";
-            string commandSeparator = synapseBuilder.CommandSeparator ?? ",";
+            string commandToken = configBuilder.CommandPrefix ?? "!";
+            string commandSeparator = configBuilder.CommandSeparator ?? ",";
             _ = services.AddSingleton(new RequestParser(commandToken, commandSeparator));
 
             // Add the test bot if it's been enabled.
-            if (synapseBuilder.TestBotEnabled)
+            if (configBuilder.TestBotEnabled)
                 _ = services.AddHostedService<ConsoleChatbot>();
 
             // Add MediatR.
-            IEnumerable<Assembly> assemblies = synapseBuilder.GetRegisteredAssemblies().Append(Assembly.GetExecutingAssembly());
+            IEnumerable<Assembly> assemblies = configBuilder.GetRegisteredAssemblies().Append(Assembly.GetExecutingAssembly());
             return services.AddMediatR(assemblies: assemblies.ToArray());
         }
         private static void LoadConfiguration(out IConfiguration configuration)

@@ -15,7 +15,7 @@ Console.Title = "Freya";
 using IHost host = Host.CreateDefaultBuilder()
     .ConfigureServices(services => services
         .AddLogging(BuildLogging)
-        .UseGlittertind(synapses => synapses
+        .UseGlittertind(config => config
             .EnableTesting()
             .SetCommandPrefix("!")
             .SetCommandSeparator(",")
