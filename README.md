@@ -3,8 +3,8 @@ Named after the second largest mountain in Norway, Glittertind is a framework fo
 
 #### Want to help out?
 Get started by reviewing the answers to the following questions:
-- [How should I behave here?](./CODE_OF_CONDUCT.md)
 - [How can I help?](./CONTRIBUTING.md)
+- [How should I behave here?](./CODE_OF_CONDUCT.md)
 - [How do I report security concerns?](./SECURITY.md)
 
 ## 🎉 Just a little demo
