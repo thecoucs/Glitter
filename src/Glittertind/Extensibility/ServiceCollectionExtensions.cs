@@ -1,14 +1,15 @@
 ﻿using System.Reflection;
 
-using Glittertind.Ai;
 using Freya.Core;
+
+using Glittertind.Ai;
 
 using MediatR;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Freya.Extensibility
+namespace Glittertind.Extensibility
 {
     public static class ServiceCollectionExtensions
     {
