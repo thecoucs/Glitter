@@ -15,14 +15,14 @@ namespace Glittertind.Discord
         /// <returns>The current <see cref="IServiceCollection"/> instance containing <see cref="DiscordChatbot"/> as a singleton service.</returns>
         public static SynapseBuilder AddDiscord(this SynapseBuilder registrar) =>
             registrar.AddChatbot<DiscordChatbot>()
-                        .AddSettings<DiscordSettings>("discord")
-                        .AddEventHandler<LogEventHandler>()
-                        .AddEventHandler<LogEventHandler>()
-                        .AddEventHandler<LoggedInEventHandler>()
-                        .AddEventHandler<LoggedOutEventHandler>()
-                        .AddEventHandler<ConnectedEventHandler>()
-                        .AddEventHandler<DisconnectedEventHandler>()
-                        .AddEventHandler<MessageReceivedEventHandler>()
-                        .AddServices(services => services.AddSingleton<DiscordSocketClient>());
+                     .AddSettings<DiscordSettings>("discord")
+                     .AddEventHandler<LogEventHandler>()
+                     .AddEventHandler<LogEventHandler>()
+                     .AddEventHandler<LoggedInEventHandler>()
+                     .AddEventHandler<LoggedOutEventHandler>()
+                     .AddEventHandler<ConnectedEventHandler>()
+                     .AddEventHandler<DisconnectedEventHandler>()
+                     .AddEventHandler<MessageReceivedEventHandler>()
+                     .AddServices(services => services.AddSingleton<DiscordSocketClient>());
     }
 }

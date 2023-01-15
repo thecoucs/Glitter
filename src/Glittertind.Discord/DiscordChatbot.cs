@@ -1,6 +1,8 @@
 ﻿using Discord;
 using Discord.WebSocket;
 
+using Glittertind.Ai;
+
 using MediatR;
 
 using Microsoft.Extensions.Logging;
