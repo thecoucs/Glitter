@@ -24,7 +24,7 @@ namespace Freya.Providers.Discord.Events
         {
             // Determine the event type.
             LogLevel logLevel = message.Exception is null
-                ? LogLevel.Information
+                ? LogLevel.Debug
                 : LogLevel.Error;
 
             // Log the original message.

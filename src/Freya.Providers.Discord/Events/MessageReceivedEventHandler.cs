@@ -18,7 +18,7 @@ namespace Freya.Providers.Discord.Events
             base(logger) => client.MessageReceived += HandleMessage;
         private async Task HandleMessage(SocketMessage message)
         {
-            Logger.LogInformation($"Message received...");
+            Logger.LogDebug($"{message.Author.Username} sent a message: {message.Content}");
             await Task.CompletedTask;
         }
     }

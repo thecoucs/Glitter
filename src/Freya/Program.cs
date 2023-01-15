@@ -31,4 +31,5 @@ await host.RunAsync();
 static void BuildLogging(ILoggingBuilder logging) =>
     logging.ClearProviders()
            .AddDebug()
-           .AddColoredConsole();
+           .AddColoredConsole()
+           .SetMinimumLevel(LogLevel.Debug);
