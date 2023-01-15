@@ -10,6 +10,7 @@ Get started by reviewing the answers to the following questions:
 ## 🎉 Create your first chatbot!
 It's never been easier to get a custom made chatbot up and running. Simply add a few lines of code to your `Program.cs` file to get started:
 ```csharp
+using Glittertind;
 using Glittertind.Discord;
 using Glittertind.Extensibility;
 
@@ -18,7 +19,6 @@ using Microsoft.Extensions.Hosting;
 
 using IHost host = Host.CreateDefaultBuilder()
     .ConfigureServices(services => services
-        .AddLogging(BuildLogging)
         .UseGlittertind(config => config
             .EnableTesting()
             .SetCommandPrefix("!")
