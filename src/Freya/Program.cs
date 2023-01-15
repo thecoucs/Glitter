@@ -29,5 +29,6 @@ await host.RunAsync();
 
 // Builds the logging service.
 static void BuildLogging(ILoggingBuilder logging) =>
-    logging.AddDebug()
+    logging.ClearProviders()
+           .AddDebug()
            .AddColoredConsole();

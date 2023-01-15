@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Configuration;
+﻿using Microsoft.Extensions.Logging;
 
 namespace Freya.Logging
 {
@@ -12,12 +9,7 @@ namespace Freya.Logging
         /// </summary>
         /// <param name="loggingBuilder">The <see cref="ILoggingBuilder"/> to add the <see cref="ColoredConsoleLogger"/> to.</param>
         /// <returns>The current <see cref="ILoggingBuilder"/> instance with the <see cref="ColoredConsoleLogger"/> added.</returns>
-        public static ILoggingBuilder AddColoredConsole(this ILoggingBuilder loggingBuilder)
-        {
-            loggingBuilder.AddConfiguration();
-            loggingBuilder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<ILoggerProvider, ColoredConsoleLoggerProvider>());
-            LoggerProviderOptions.RegisterProviderOptions<ColoredConsoleLoggerConfiguration, ColoredConsoleLoggerProvider>(loggingBuilder.Services);
-            return loggingBuilder;
-        }
+        public static ILoggingBuilder AddColoredConsole(this ILoggingBuilder loggingBuilder) =>
+            loggingBuilder.AddProvider(new ColoredConsoleLoggerProvider());
     }
 }

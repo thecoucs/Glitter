@@ -10,7 +10,7 @@ namespace Freya.Logging
         /// <summary>
         /// The highest <see cref="LogLevel"/> eligible to be logged.
         /// </summary>
-        public LogLevel Threshold { get; set; }
+        public LogLevel Threshold { get; set; } = LogLevel.Debug;
         /// <summary>
         /// A simple map between <see cref="LogLevel"/> to <see cref="ConsoleColor"/>.
         /// </summary>
