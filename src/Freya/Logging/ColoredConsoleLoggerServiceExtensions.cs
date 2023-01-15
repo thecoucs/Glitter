@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace Glittertind.Logging
+namespace Freya.Logging
 {
     internal static class ColoredConsoleLoggerServiceExtensions
     {

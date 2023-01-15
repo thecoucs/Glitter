@@ -3,7 +3,7 @@ using System.Runtime.Versioning;
 
 using Microsoft.Extensions.Logging;
 
-namespace Glittertind.Logging
+namespace Freya.Logging
 {
     /// <summary>
     /// Represents an implementation of <see cref="ILoggerProvider"/> for providing <see cref="ColoredConsoleLogger"/> instances.

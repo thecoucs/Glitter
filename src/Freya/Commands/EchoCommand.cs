@@ -2,7 +2,7 @@
 
 using Microsoft.Extensions.Logging;
 
-namespace Glittertind.Commands
+namespace Freya.Commands
 {
     /// <summary>
     /// Represents a <see cref="Command"/> that echos input back to the user.
