@@ -9,7 +9,7 @@ namespace Glittertind.Discord.Events
     /// <summary>
     /// Represents an <see cref="EventHandler"/> for handling the disconnected event for a <see cref="DiscordSocketClient"/>.
     /// </summary>
-    internal sealed class DisconnectedEventHandler : EventHandler
+    internal sealed class DisconnectedEventHandler : EncapsulatedEventHandler
     {
         /// <summary>
         /// Creates a new <see cref="ConnectedEventHandler"/> instance.

@@ -10,7 +10,7 @@ namespace Glittertind.Discord.Events
     /// <summary>
     /// Represents an <see cref="IEventHandler"/> for handling the Log event for a <see cref="DiscordSocketClient"/>.
     /// </summary>
-    internal sealed class LogEventHandler : EventHandler
+    internal sealed class LogEventHandler : EncapsulatedEventHandler
     {
         private readonly Dictionary<LogSeverity, LogLevel> _severityToLevelMap;
         /// <summary>

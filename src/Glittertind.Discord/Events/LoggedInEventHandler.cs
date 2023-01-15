@@ -7,7 +7,7 @@ namespace Glittertind.Discord.Events
     /// <summary>
     /// Represents an <see cref="EventHandler"/> for handling the LoggedIn event for a <see cref="DiscordSocketClient"/>.
     /// </summary>
-    internal sealed class LoggedInEventHandler : EventHandler
+    internal sealed class LoggedInEventHandler : EncapsulatedEventHandler
     {
         /// <summary>
         /// Creates a new <see cref="LoggedInEventHandler"/> instance.
