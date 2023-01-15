@@ -11,7 +11,7 @@ namespace Glittertind.Extensibility
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection UseFreya(this IServiceCollection services, Action<SynapseBuilder> configurationAction)
+        public static IServiceCollection UseGlittertind(this IServiceCollection services, Action<SynapseBuilder> configurationAction)
         {
             // Load the configuration.
             LoadConfiguration(out IConfiguration configuration);
