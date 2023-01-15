@@ -23,7 +23,7 @@ using IHost host = Host.CreateDefaultBuilder()
             .EnableTesting()
             .SetCommandPrefix("!")
             .SetCommandSeparator(",")
-            .AddDiscord())
+            .AddDiscord("<AUTH_TOKEN>"))
 ).Build();
 await host.RunAsync();
 ```
