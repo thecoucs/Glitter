@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Freya.Core\Freya.Core.csproj" />
+    <ProjectReference Include="..\Freya.Core\Glittertind.csproj" />
   </ItemGroup>
 
 </Project>

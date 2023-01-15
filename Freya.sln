@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Freya", "src\Freya\Freya.csproj", "{6576D115-59FE-45B2-BD28-6FD91BFAA298}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Freya.Core", "src\Freya.Core\Freya.Core.csproj", "{CBB2128C-91E6-4F96-ACBB-6DE58F7FCB39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glittertind", "src\Freya.Core\Glittertind.csproj", "{CBB2128C-91E6-4F96-ACBB-6DE58F7FCB39}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".providers", ".providers", "{2CCD146A-4B04-4785-8129-9681F6DCEAA3}"
 EndProject

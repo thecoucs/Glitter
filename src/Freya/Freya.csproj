@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Freya.Core\Freya.Core.csproj" />
+    <ProjectReference Include="..\Freya.Core\Glittertind.csproj" />
     <ProjectReference Include="..\Freya.Providers.Discord\Freya.Providers.Discord.csproj" />
   </ItemGroup>
 
