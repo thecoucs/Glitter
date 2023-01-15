@@ -1,5 +1,6 @@
 ﻿using Freya.Logging;
 
+using Glittertind.Commands.OpenSource;
 using Glittertind.Discord;
 
 using Glittertind.Extensibility;
@@ -19,6 +20,7 @@ using IHost host = Host.CreateDefaultBuilder()
             .EnableTesting()
             .SetCommandPrefix("!")
             .SetCommandSeparator(",")
+            .AddOpenSourceCommands()
             .AddDiscord())
 ).Build();
 await host.RunAsync();

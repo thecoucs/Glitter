@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Glittertind.Commands.OpenSource\Glittertind.Commands.OpenSource.csproj" />
     <ProjectReference Include="..\Glittertind.Discord\Glittertind.Discord.csproj" />
     <ProjectReference Include="..\Glittertind\Glittertind.csproj" />
   </ItemGroup>
