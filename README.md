@@ -7,7 +7,7 @@ Get started by reviewing the answers to the following questions:
 - [How should I behave here?](./CODE_OF_CONDUCT.md)
 - [How do I report security concerns?](./SECURITY.md)
 
-## 🎉 Just a little demo
+## 🎉 Create your first chatbot!
 It's never been easier to get a custom made chatbot up and running. Simply add a few lines of code to your `Program.cs` file to get started:
 ```csharp
 using Glittertind.Discord;
@@ -23,7 +23,7 @@ using IHost host = Host.CreateDefaultBuilder()
             .EnableTesting()
             .SetCommandPrefix("!")
             .SetCommandSeparator(",")
-            .AddDiscord())
+            .AddDiscord("<AUTH_TOKEN">))
 ).Build();
 await host.RunAsync();
 ```
