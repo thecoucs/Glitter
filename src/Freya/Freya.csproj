@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Freya.Core\Glittertind.csproj" />
+    <ProjectReference Include="..\Glittertind\Glittertind.csproj" />
     <ProjectReference Include="..\Freya.Providers.Discord\Freya.Providers.Discord.csproj" />
     <ProjectReference Include="..\Glittertind.Discord\Glittertind.Discord.csproj" />
     <ProjectReference Include="..\Glittertind\Glittertind.csproj" />

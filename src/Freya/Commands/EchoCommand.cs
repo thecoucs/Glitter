@@ -1,6 +1,4 @@
-﻿using Freya.Core;
-
-using Mauve;
+﻿using Mauve;
 
 using Microsoft.Extensions.Logging;
 

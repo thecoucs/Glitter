@@ -1,7 +1,7 @@
 ﻿using Glittertind.Commands;
 
 using Mauve.Extensibility;
-namespace Freya.Core
+namespace Glittertind
 {
     /// <summary>
     /// Represents a parser responsible for creating <see cref="CommandRequest"/> instances.

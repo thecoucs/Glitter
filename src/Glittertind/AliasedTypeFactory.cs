@@ -3,7 +3,7 @@
 using Mauve;
 using Mauve.Extensibility;
 
-namespace Freya.Core
+namespace Glittertind
 {
     /// <summary>
     /// Represents a factory for creating instances of concrete implementations of a specified type marked with an <see cref="AliasAttribute"/>.

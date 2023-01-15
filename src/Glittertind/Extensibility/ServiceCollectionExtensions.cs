@@ -1,7 +1,5 @@
 ﻿using System.Reflection;
 
-using Freya.Core;
-
 using Glittertind.Ai;
 
 using MediatR;

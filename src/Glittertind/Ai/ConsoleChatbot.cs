@@ -1,5 +1,5 @@
 ﻿using Glittertind.Commands;
-using Freya.Core;
+using Glittertind;
 
 using MediatR;
 

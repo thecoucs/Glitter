@@ -1,6 +1,6 @@
 ﻿using Mauve;
 
-namespace Freya.Core
+namespace Glittertind
 {
     /// <summary>
     /// Represents a log entry.

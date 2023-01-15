@@ -1,4 +1,4 @@
-﻿namespace Freya.Core
+﻿namespace Glittertind
 {
     /// <summary>
     /// Allows specification that a member comes from the bot.
