@@ -13,18 +13,12 @@ Console.Title = "Freya";
 using IHost host = Host.CreateDefaultBuilder()
     .ConfigureServices(services => services
         .AddLogging(BuildLogging)
-        .UseFreya(synapses =>
-        {
-            // Configure Freya.
-            _ = synapses.EnableTesting()
-                     .SetCommandPrefix("!")
-                     .SetCommandSeparator(",");
-
-            // Register chatbots.
-            _ = synapses.AddDiscord();
-        }))
-    .Build();
-
+        .UseFreya(synapses => synapses
+            .EnableTesting()
+            .SetCommandPrefix("!")
+            .SetCommandSeparator(",")
+            .AddDiscord())
+).Build();
 await host.RunAsync();
 
 // Builds the logging service.
