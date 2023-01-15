@@ -16,14 +16,14 @@ using Glittertind.Extensibility;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-// Create a host and start running it.
 using IHost host = Host.CreateDefaultBuilder()
     .ConfigureServices(services => services
-        .UseGlittertind(synapses => synapses
+        .AddLogging(BuildLogging)
+        .UseGlittertind(config => config
             .EnableTesting()
             .SetCommandPrefix("!")
             .SetCommandSeparator(",")
-            .AddDiscord("<AUTH_TOKEN">))
+            .AddDiscord())
 ).Build();
 await host.RunAsync();
 ```
