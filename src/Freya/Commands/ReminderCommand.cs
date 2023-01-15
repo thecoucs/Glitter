@@ -1,6 +1,6 @@
 ﻿using Mauve;
 
-namespace Freya.Commands
+namespace Glittertind.Commands
 {
     /// <summary>
     /// Represents a <see cref="Command"/> that reminds users of some specified input.

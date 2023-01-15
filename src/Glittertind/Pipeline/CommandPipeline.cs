@@ -1,4 +1,4 @@
-﻿using Freya.Commands;
+﻿using Glittertind.Commands;
 
 using Mauve.Extensibility;
 using Mauve.Patterns;

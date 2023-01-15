@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 
 using Glittertind.Ai;
-using Freya.Commands;
+using Glittertind.Commands;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

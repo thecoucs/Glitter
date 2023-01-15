@@ -3,7 +3,7 @@ using Mauve.Math;
 
 using Microsoft.Extensions.Logging;
 
-namespace Freya.Commands
+namespace Glittertind.Commands
 {
     public abstract class Command
     {

@@ -1,4 +1,4 @@
-﻿namespace Freya.Commands
+﻿namespace Glittertind.Commands
 {
     /// <summary>
     /// Represents a <see cref="CommandResponse"/>.

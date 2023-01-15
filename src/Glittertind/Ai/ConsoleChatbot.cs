@@ -1,4 +1,4 @@
-﻿using Freya.Commands;
+﻿using Glittertind.Commands;
 using Freya.Core;
 
 using MediatR;

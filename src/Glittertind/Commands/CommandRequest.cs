@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Freya.Commands
+namespace Glittertind.Commands
 {
     /// <summary>
     /// Represents a command request within Freya.

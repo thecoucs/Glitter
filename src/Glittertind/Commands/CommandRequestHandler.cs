@@ -8,7 +8,7 @@ using MediatR;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Freya.Commands
+namespace Glittertind.Commands
 {
     /// <summary>
     /// Represents a factory for creating <see cref="Command"/> instances.
