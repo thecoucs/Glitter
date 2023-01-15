@@ -34,6 +34,16 @@ The following open source projects help to power both Glittertind and Freya; be 
  - [Mauve](https://github.com/tacosontitan/Mauve)
  - [MediatR](https://github.com/jbogard/MediatR)
 
+## Open Source Commands
+There are endless possibilities for chatbot commands! Glittertind encourages the open-source community to create a vast global baseline of commands for public consumption. Here's our current baseline list of commands included with all Glittertind powered bots:
+
+- `uptime`: Queries the time the bot has been up and running.
+
+Of course, these are just the commands that are automatically registered with your bot through `AddOpenSourceCommands`. You can manually register any open-source command just like you would a custom made one:
+```csharp
+services.UseGlittertind(config => config.AddCommand<MySampleCommand>());
+```
+
 # 💃 Freya
 Freya is my personal chatbot built using Glittertind as a design pallete and proof of concept. The following commands are available out of the box:
 
