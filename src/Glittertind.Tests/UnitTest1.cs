@@ -1,4 +1,4 @@
-namespace Freya.Tests
+namespace Glittertind.Tests
 {
     public class Tests
     {

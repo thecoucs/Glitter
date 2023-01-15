@@ -6,7 +6,7 @@ using Glittertind.Commands;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Freya
+namespace Glittertind
 {
     /// <summary>
     /// Represents an interface that exposes methods to configure Freya.
@@ -99,7 +99,7 @@ namespace Freya
             serviceAction?.Invoke(_services);
             return this;
         }
-        public SynapseBuilder AddEventHandler<T>() where T : EventHandler
+        public SynapseBuilder AddEventHandler<T>() where T : EncapsulatedEventHandler
         {
             _ = _services.AddHostedService<T>();
             return this;

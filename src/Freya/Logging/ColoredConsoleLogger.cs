@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace Freya.Logging
+namespace Glittertind.Logging
 {
     /// <summary>
     /// Represents a simple <see cref="ILogger"/> capable of recording logs in color.
