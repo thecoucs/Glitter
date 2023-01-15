@@ -1,6 +1,5 @@
 using Discord.WebSocket;
 
-using Freya.Ai;
 using Freya.Providers.Discord.Events;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -14,7 +13,7 @@ namespace Freya.Providers.Discord
         /// </summary>
         /// <param name="services">The service contract for adding services to the DI container.</param>
         /// <returns>The current <see cref="IServiceCollection"/> instance containing <see cref="DiscordChatbot"/> as a singleton service.</returns>
-        public static ChatbotRegistrar AddDiscord(this ChatbotRegistrar registrar) =>
+        public static SynapseBuilder AddDiscord(this SynapseBuilder registrar) =>
             registrar.AddChatbot<DiscordChatbot>()
                         .AddSettings<DiscordSettings>("discord")
                         .AddEventHandler<LogEventHandler>()

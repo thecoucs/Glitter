@@ -12,16 +12,15 @@ namespace Freya.Extensibility
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection UseFreya(this IServiceCollection services, Action<SynapseBuilder, ChatbotRegistrar> configurationAction)
+        public static IServiceCollection UseFreya(this IServiceCollection services, Action<SynapseBuilder> configurationAction)
         {
             // Load the configuration.
             LoadConfiguration(out IConfiguration configuration);
             _ = services.AddSingleton(configuration);
 
             // Allow consumers to configure Freya.
-            var synapseBuilder = new SynapseBuilder();
-            var registrar = new ChatbotRegistrar(services, configuration);
-            configurationAction?.Invoke(synapseBuilder, registrar);
+            var synapseBuilder = new SynapseBuilder(services, configuration);
+            configurationAction?.Invoke(synapseBuilder);
 
             // Add the request parser.
             string commandToken = synapseBuilder.CommandPrefix ?? "!";
@@ -33,7 +32,7 @@ namespace Freya.Extensibility
                 _ = services.AddHostedService<ConsoleChatbot>();
 
             // Add MediatR.
-            IEnumerable<Assembly> assemblies = registrar.GetRegisteredAssemblies().Append(Assembly.GetExecutingAssembly());
+            IEnumerable<Assembly> assemblies = synapseBuilder.GetRegisteredAssemblies().Append(Assembly.GetExecutingAssembly());
             return services.AddMediatR(assemblies: assemblies.ToArray());
         }
         private static void LoadConfiguration(out IConfiguration configuration)

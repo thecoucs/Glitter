@@ -13,15 +13,15 @@ Console.Title = "Freya";
 using IHost host = Host.CreateDefaultBuilder()
     .ConfigureServices(services => services
         .AddLogging(BuildLogging)
-        .UseFreya((freya, bots) =>
+        .UseFreya(synapses =>
         {
             // Configure Freya.
-            _ = freya.EnableTesting()
+            _ = synapses.EnableTesting()
                      .SetCommandPrefix("!")
                      .SetCommandSeparator(",");
 
             // Register chatbots.
-            _ = bots.AddDiscord();
+            _ = synapses.AddDiscord();
         }))
     .Build();
 
