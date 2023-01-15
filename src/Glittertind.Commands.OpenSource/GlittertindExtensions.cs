@@ -2,7 +2,7 @@
 
 namespace Glittertind.Commands.OpenSource
 {
-    public static class Extensions
+    public static class GlittertindExtensions
     {
         /// <summary>
         /// Adds open source commands to the DI container.
