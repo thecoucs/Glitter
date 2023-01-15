@@ -12,20 +12,30 @@ namespace Freya.Providers.Discord.Events
     /// </summary>
     internal sealed class LogEventHandler : EventHandler
     {
+        private readonly Dictionary<LogSeverity, LogLevel> _severityToLevelMap;
         /// <summary>
         /// Creates a new <see cref="LogEventHandler"/> instance.
         /// </summary>
         /// <param name="client">The <see cref="DiscordSocketClient"/> to handle log events for.</param>
         /// <param name="logger">The logger for the <see cref="DiscordChatbot"/>.</param>
         public LogEventHandler(DiscordSocketClient discordClient, ILogger<DiscordChatbot> logger) :
-            base(logger) =>
+            base(logger)
+        {
             discordClient.Log += HandleLogMessage;
+            _severityToLevelMap = new Dictionary<LogSeverity, LogLevel>
+            {
+                { LogSeverity.Critical, LogLevel.Critical },
+                { LogSeverity.Verbose, LogLevel.Debug },
+                { LogSeverity.Error, LogLevel.Error },
+                { LogSeverity.Info, LogLevel.Information },
+                { LogSeverity.Debug, LogLevel.Trace },
+                { LogSeverity.Warning, LogLevel.Warning }
+            };
+        }
         private async Task HandleLogMessage(LogMessage message)
         {
             // Determine the event type.
-            LogLevel logLevel = message.Exception is null
-                ? LogLevel.Debug
-                : LogLevel.Error;
+            LogLevel logLevel = _severityToLevelMap[message.Severity];
 
             // Log the original message.
             if (!string.IsNullOrWhiteSpace(message.Message))
