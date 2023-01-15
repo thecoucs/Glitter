@@ -1,6 +1,12 @@
 # 🗻 Glittertind
 Named after the second largest mountain in Norway, Glittertind is a framework for quickly building out chatbots and the commands they can invoke.
 
+#### Want to help out?
+Get started by reviewing the answers to the following questions:
+- [How should I behave here?](./CODE_OF_CONDUCT.md)
+- [How can I help?](./CONTRIBUTING.md)
+- [How do I report security concerns?](./SECURITY.md)
+
 ## 🎉 Just a little demo
 It's never been easier to get a custom made chatbot up and running. Simply add a few lines of code to your `Program.cs` file to get started:
 ```csharp
