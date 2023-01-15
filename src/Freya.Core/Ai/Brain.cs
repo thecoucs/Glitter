@@ -1,55 +1,41 @@
-﻿using Freya.Pipeline;
-using Freya.Services;
+﻿//using Freya.Pipeline;
+//using Freya.Ai;
 
-using Microsoft.Extensions.DependencyInjection;
+//using Microsoft.Extensions.DependencyInjection;
+//using Microsoft.Extensions.Hosting;
+//using Microsoft.Extensions.Logging;
 
-namespace Freya.Ai
-{
-    /// <summary>
-    /// Represents Freya's central processing system.
-    /// </summary>
-    public class Brain
-    {
-        private readonly IServiceProvider _serviceProvider;
-        private readonly CancellationToken _cancellationToken;
-        private readonly CancellationTokenSource _cancellationTokenSource;
-        /// <summary>
-        /// Creates a new instance of <see cref="Brain"/>.
-        /// </summary>
-        /// <param name="serviceFactory">The <see cref="ChatbotFactory"/> for discovering <see cref="Chatbot"/> instances.</param>
-        public Brain(IServiceProvider serviceProvider)
-        {
-            _cancellationTokenSource = new CancellationTokenSource();
-            _cancellationToken = _cancellationTokenSource.Token;
-            _serviceProvider = serviceProvider;
-        }
-        /// <summary>
-        /// Cancels processing for the <see cref="Brain"/>.
-        /// </summary>
-        public void Cancel() =>
-            _cancellationTokenSource.Cancel();
-        /// <summary>
-        /// Starts the brain.
-        /// </summary>
-        /// <returns>A <see cref="Task"/> describing the state of the operation.</returns>
-        public async Task Start()
-        {
-            // Cancel if requested, otherwise discover and start each service.
-            _cancellationToken.ThrowIfCancellationRequested();
-            Console.WriteLine("Discovering providers.");
-            foreach (Chatbot bot in _serviceProvider.GetServices<Chatbot>())
-            {
-                // Cancel if requested, otherwise start the service.
-                _cancellationToken.ThrowIfCancellationRequested();
-                Console.WriteLine($"Starting provider {bot.Name}");
-                bot.Configure(new CommandPipeline(_cancellationToken));
-                await bot.Start(_cancellationToken);
-            }
-
-            // Wake up all event handlers.
-            // TODO: This is a disgusting way to handle this, fix it per issue #6.
-            _ = _serviceProvider.GetServices<EventHandler>();
-            await Task.Delay(Timeout.Infinite);
-        }
-    }
-}
+//namespace Freya.Ai
+//{
+//    /// <summary>
+//    /// Represents Freya's central processing system.
+//    /// </summary>
+//    public class Brain : BackgroundService
+//    {
+//        private readonly ILogger _logger;
+//        private readonly IServiceProvider _serviceProvider;
+//        /// <summary>
+//        /// Creates a new instance of <see cref="Brain"/>.
+//        /// </summary>
+//        /// <param name="serviceFactory">The <see cref="ChatbotFactory"/> for discovering <see cref="Chatbot"/> instances.</param>
+//        public Brain(IServiceProvider serviceProvider, ILogger<Brain> logger)
+//        {
+//            _logger = logger;
+//            _serviceProvider = serviceProvider;
+//        }
+//        protected override async Task ExecuteAsync(CancellationToken cancellationToken)
+//        {
+//            // Cancel if requested, otherwise discover and start each service.
+//            cancellationToken.ThrowIfCancellationRequested();
+//            _logger.LogDebug("Discovering providers.");
+//            foreach (Chatbot bot in _serviceProvider.GetServices<Chatbot>())
+//            {
+//                // Cancel if requested, otherwise start the service.
+//                cancellationToken.ThrowIfCancellationRequested();
+//                _logger.LogDebug($"Starting provider {bot.Name}");
+//                bot.Configure(new CommandPipeline(cancellationToken));
+//                await bot.Start(cancellationToken);
+//            }
+//        }
+//    }
+//}

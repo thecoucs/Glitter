@@ -1,10 +1,8 @@
-﻿using Freya.Core;
-
-using MediatR;
+﻿using MediatR;
 
 using Microsoft.Extensions.Logging;
 
-namespace Freya.Services
+namespace Freya.Ai
 {
     /// <summary>
     /// Represents a <see cref="Chatbot"/> with settings.
@@ -22,14 +20,12 @@ namespace Freya.Services
         /// <param name="name">The name of the service.</param>
         /// <param name="settings">The settings for the service.</param>
         /// <param name="logger">The logger to be utilized by the service.</param>
-        /// <param name="commandFactory">The <see cref="Commands.CommandRequestHandler"/> instance the service should use when creating commands.</param>
         public Chatbot(
             string name,
             TSettings settings,
-            RequestParser parser,
-            ILogger logger,
-            IMediator mediator) :
-            base(name, parser, logger, mediator) =>
+            IMediator mediator,
+            ILogger logger) :
+            base(name, mediator, logger) =>
             Settings = settings;
     }
 }

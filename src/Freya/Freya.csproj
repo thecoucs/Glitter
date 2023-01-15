@@ -28,7 +28,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Freya.Core\Freya.Core.csproj" />
-    <ProjectReference Include="..\Freya.Providers.Console\Freya.Providers.Console.csproj" />
     <ProjectReference Include="..\Freya.Providers.Discord\Freya.Providers.Discord.csproj" />
   </ItemGroup>
 

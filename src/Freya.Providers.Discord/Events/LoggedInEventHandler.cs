@@ -19,7 +19,7 @@ namespace Freya.Providers.Discord.Events
             client.LoggedIn += HandleLogin;
         private async Task HandleLogin()
         {
-            Logger.LogInformation("Logged in to Discord.");
+            Logger.LogInformation("Logged into Discord.");
             await Task.CompletedTask;
         }
     }

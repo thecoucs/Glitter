@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".providers", ".providers", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Freya.Tests", "src\Freya.Tests\Freya.Tests.csproj", "{0E301449-8468-4093-8364-256AF2F33C3B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Freya.Providers.Console", "src\Freya.Providers.Console\Freya.Providers.Console.csproj", "{183F5FC3-C6DE-4217-814B-43B10A86D540}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Freya.Providers.Discord", "src\Freya.Providers.Discord\Freya.Providers.Discord.csproj", "{51A3CCE1-50B3-4C3E-8D97-3832CCE34234}"
 EndProject
 Global
@@ -33,10 +31,6 @@ Global
 		{0E301449-8468-4093-8364-256AF2F33C3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E301449-8468-4093-8364-256AF2F33C3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E301449-8468-4093-8364-256AF2F33C3B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{183F5FC3-C6DE-4217-814B-43B10A86D540}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{183F5FC3-C6DE-4217-814B-43B10A86D540}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{183F5FC3-C6DE-4217-814B-43B10A86D540}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{183F5FC3-C6DE-4217-814B-43B10A86D540}.Release|Any CPU.Build.0 = Release|Any CPU
 		{51A3CCE1-50B3-4C3E-8D97-3832CCE34234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{51A3CCE1-50B3-4C3E-8D97-3832CCE34234}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51A3CCE1-50B3-4C3E-8D97-3832CCE34234}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -46,7 +40,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{183F5FC3-C6DE-4217-814B-43B10A86D540} = {2CCD146A-4B04-4785-8129-9681F6DCEAA3}
 		{51A3CCE1-50B3-4C3E-8D97-3832CCE34234} = {2CCD146A-4B04-4785-8129-9681F6DCEAA3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

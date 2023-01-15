@@ -15,11 +15,10 @@ namespace Freya.Providers.Discord.Events
         /// <param name="client">The <see cref="DiscordSocketClient"/> to handle connected events for.</param>
         /// <param name="logger">The logger for the <see cref="DiscordChatbot"/>.</param>
         public MessageReceivedEventHandler(DiscordSocketClient client, ILogger<DiscordChatbot> logger) :
-            base(logger) =>
-            client.MessageReceived += HandleMessage;
+            base(logger) => client.MessageReceived += HandleMessage;
         private async Task HandleMessage(SocketMessage message)
         {
-            Logger.LogInformation($"{message.Author.Username}: {message.Content}");
+            Logger.LogInformation($"Message received...");
             await Task.CompletedTask;
         }
     }

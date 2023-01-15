@@ -1,8 +1,7 @@
 ﻿using Discord;
 using Discord.WebSocket;
 
-using Freya.Core;
-using Freya.Services;
+using Freya.Ai;
 
 using MediatR;
 
@@ -22,10 +21,9 @@ namespace Freya.Providers.Discord
         public DiscordChatbot(
             DiscordSettings settings,
             DiscordSocketClient client,
-            RequestParser parser,
-            ILogger<DiscordChatbot> logger,
-            IMediator mediator) :
-            base("Discord", settings, parser, logger, mediator) =>
+            IMediator mediator,
+            ILogger<DiscordChatbot> logger) :
+            base("Discord", settings, mediator, logger) =>
             _client = client;
         /// <inheritdoc/>
         protected override async Task Run(CancellationToken cancellationToken)
@@ -35,11 +33,14 @@ namespace Freya.Providers.Discord
             {
                 await _client.LoginAsync(TokenType.Bot, Settings.Token);
                 await _client.StartAsync();
-                Log(LogLevel.Information, "The Discord service has been started successfully.");
+                Logger.LogInformation("The Discord service has been started successfully.");
             } catch (Exception e)
             {
-                Log(LogLevel.Information, $"An unexpected error occurred while starting the Discord service. {e.Message}");
+                Logger.LogError($"An unexpected error occurred while starting the Discord service. {e.Message}");
             }
+
+            // Keep the service alive forever.
+            await Task.Delay(Timeout.Infinite);
         }
     }
 }

@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace Freya
@@ -5,7 +6,7 @@ namespace Freya
     /// <summary>
     /// Represents a basic event handler.
     /// </summary>
-    public abstract class EventHandler
+    public abstract class EventHandler : BackgroundService
     {
         /// <summary>
         /// The logger for the service the event is related to.
@@ -17,5 +18,13 @@ namespace Freya
         /// <param name="logger">The logger for the service the event is related to.</param>
         public EventHandler(ILogger logger) =>
             Logger = logger;
+        protected override async Task ExecuteAsync(CancellationToken cancellationToken)
+        {
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                Logger.LogDebug("Listening for events.");
+                await Task.Delay(TimeSpan.FromSeconds(30));
+            }
+        }
     }
 }
