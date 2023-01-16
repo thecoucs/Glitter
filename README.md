@@ -41,6 +41,8 @@ The following open source projects help to power both Glitter and Freya; be sure
 ## Open Source Commands
 There are endless possibilities for chatbot commands! Glitter encourages the open-source community to create a vast global baseline of commands for public consumption. Here's our current baseline list of commands included with all Glitter powered bots:
 
+- `help`: Queries for a list of commands.
+- `version`: Queries for the current version of the bot.
 - `uptime`: Queries the time the bot has been up and running.
 
 Of course, these are just the commands that are automatically registered with your bot through `AddOpenSourceCommands`. You can manually register any open-source command just like you would a custom made one:
