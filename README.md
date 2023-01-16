@@ -33,6 +33,7 @@ With that, you've got a working chatbot that can communicate with Discord; and a
 The following open source projects help to power both Glitter and Freya; be sure to give them a star! ⭐
  - [Mauve](https://github.com/tacosontitan/Mauve)
  - [MediatR](https://github.com/jbogard/MediatR)
+ - [TwitchLib](https://github.com/TwitchLib/TwitchLib)
 
 ## Open Source Commands
 There are endless possibilities for chatbot commands! Glitter encourages the open-source community to create a vast global baseline of commands for public consumption. Here's our current baseline list of commands included with all Glitter powered bots:
