@@ -11,6 +11,16 @@ body:
         - 🐣 Pre-Release
     validations:
       required: true
+  - type: dropdown
+    id: command-type
+    attributes:
+      label: 💻 Command Type
+      description: Is this a system command (e.g. slash command) or just a simple text based one?
+      options:
+        - 💻 System
+        - ✍️ Simple
+    validations:
+      required: true
   - type: input
     id: key
     attributes:
@@ -25,10 +35,3 @@ body:
       description: If your feature request is related to a problem, describe it clearly.
     validations:
       required: true
-  - type: checkboxes
-    id: system-command
-    attributes:
-      label: 💻 Is this a system command (e.g. slash command)?
-      options:
-        - label: "Yes"
-        - label: "No"
