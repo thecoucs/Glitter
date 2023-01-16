@@ -5,8 +5,7 @@ body:
   - type: dropdown
     id: version
     attributes:
-      label: 🔢 Version
-      description: Which version of Glitter are you currently using?
+      label: 🔢 Which version of Glitter are you currently using?
       options:
         - 🐣 Pre-Release
     validations:
@@ -14,11 +13,11 @@ body:
   - type: dropdown
     id: command-type
     attributes:
-      label: 💻 Command Type
-      description: Is this a system command (e.g. slash command) or just a simple text based one?
+      label: 🧬 What type of command is this?
+      description: Some commands require registration with the provider they're intended for use with, others do not.
       options:
-        - 💻 System
-        - ✍️ Simple
+        - 💻 Slash Command
+        - ✍️ Text Based Command
     validations:
       required: true
   - type: input
