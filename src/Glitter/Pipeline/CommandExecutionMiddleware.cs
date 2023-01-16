@@ -2,22 +2,21 @@
 
 using Mauve.Patterns;
 
-namespace Glitter.Pipeline
+namespace Glitter.Pipeline;
+
+/// <summary>
+/// Represents an implementation of <see cref="IMiddleware{T}"/> that executes <see cref="Command"/> instances.
+/// </summary>
+/// <inheritdoc/>
+public class CommandExecutionMiddleware : IMiddleware<Command>
 {
-    /// <summary>
-    /// Represents an implementation of <see cref="IMiddleware{T}"/> that executes <see cref="Command"/> instances.
-    /// </summary>
     /// <inheritdoc/>
-    public class CommandExecutionMiddleware : IMiddleware<Command>
+    public async Task Invoke(Command input, IMiddleware<Command> next) =>
+        _ = await input.Execute(CancellationToken.None);
+    /// <inheritdoc/>
+    public async Task Invoke(Command input, IMiddleware<Command> next, CancellationToken cancellationToken)
     {
-        /// <inheritdoc/>
-        public async Task Invoke(Command input, IMiddleware<Command> next) =>
-            _ = await input.Execute(CancellationToken.None);
-        /// <inheritdoc/>
-        public async Task Invoke(Command input, IMiddleware<Command> next, CancellationToken cancellationToken)
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-            _ = await input.Execute(cancellationToken);
-        }
+        cancellationToken.ThrowIfCancellationRequested();
+        _ = await input.Execute(cancellationToken);
     }
 }

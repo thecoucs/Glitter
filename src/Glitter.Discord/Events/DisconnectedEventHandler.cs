@@ -4,25 +4,24 @@ using Mauve.Extensibility;
 
 using Microsoft.Extensions.Logging;
 
-namespace Glitter.Discord.Events
+namespace Glitter.Discord.Events;
+
+/// <summary>
+/// Represents an <see cref="EventHandler"/> for handling the disconnected event for a <see cref="DiscordSocketClient"/>.
+/// </summary>
+internal sealed class DisconnectedEventHandler : EncapsulatedEventHandler
 {
     /// <summary>
-    /// Represents an <see cref="EventHandler"/> for handling the disconnected event for a <see cref="DiscordSocketClient"/>.
+    /// Creates a new <see cref="ConnectedEventHandler"/> instance.
     /// </summary>
-    internal sealed class DisconnectedEventHandler : EncapsulatedEventHandler
+    /// <param name="client">The <see cref="DiscordSocketClient"/> to handle disconnected events for.</param>
+    /// <param name="logger">The logger for the <see cref="DiscordChatbot"/>.</param>
+    public DisconnectedEventHandler(DiscordSocketClient client, ILogger<DiscordChatbot> logger) :
+        base(logger) =>
+        client.Disconnected += HandleDisconnect;
+    private async Task HandleDisconnect(Exception arg)
     {
-        /// <summary>
-        /// Creates a new <see cref="ConnectedEventHandler"/> instance.
-        /// </summary>
-        /// <param name="client">The <see cref="DiscordSocketClient"/> to handle disconnected events for.</param>
-        /// <param name="logger">The logger for the <see cref="DiscordChatbot"/>.</param>
-        public DisconnectedEventHandler(DiscordSocketClient client, ILogger<DiscordChatbot> logger) :
-            base(logger) =>
-            client.Disconnected += HandleDisconnect;
-        private async Task HandleDisconnect(Exception arg)
-        {
-            Logger.LogError($"Disconnected from Discord. {arg.FlattenMessages(" ")}");
-            await Task.CompletedTask;
-        }
+        Logger.LogError($"Disconnected from Discord. {arg.FlattenMessages(" ")}");
+        await Task.CompletedTask;
     }
 }
