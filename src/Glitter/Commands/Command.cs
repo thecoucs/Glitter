@@ -1,8 +1,6 @@
 ﻿using Mauve.Extensibility;
 using Mauve.Math;
 
-using MediatR;
-
 using Microsoft.Extensions.Logging;
 
 namespace Glitter.Commands;
@@ -11,16 +9,14 @@ public abstract class Command
 {
     private readonly string _id;
     protected ILogger Logger { get; private set; }
-    protected IMediator Mediator { get; private set; }
     public string Key { get; set; }
     public string DisplayName { get; set; }
     public string Description { get; set; }
-    public Command(string key, string displayName, string description, IMediator mediator, ILogger logger)
+    public Command(string key, string displayName, string description, ILogger logger)
     {
         _id = Guid.NewGuid().GetHashCode(NumericBase.Hexadecimal);
         Key = key;
         Logger = logger;
-        Mediator = mediator;
         DisplayName = displayName;
         Description = description;
     }
