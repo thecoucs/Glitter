@@ -16,15 +16,15 @@ public static class DiscordServiceExtensions
     /// </summary>
     /// <param name="synapses">The <see cref="RuntimeSpecification"/> to be used for adding Discord to the service contract.</param>
     /// <returns>The current <see cref="RuntimeSpecification"/> instance containing <see cref="DiscordChatbot"/> and its dependencies as a service.</returns>
-    public static RuntimeSpecification AddDiscord(this RuntimeSpecification config) =>
-        RegisterDiscordServices(config, settings: null);
+    public static RuntimeSpecification AddDiscord(this RuntimeSpecification specs) =>
+        RegisterDiscordServices(specs, settings: null);
     /// <summary>
     /// Adds support for Discord to the DI container.
     /// </summary>
     /// <param name="synapses">The <see cref="RuntimeSpecification"/> to be used for adding Discord to the service contract.</param>
     /// <param name="token">The authentication token that should be used to communicate with Discord.</param>
     /// <returns>The current <see cref="RuntimeSpecification"/> instance containing <see cref="DiscordChatbot"/> and its dependencies as a service.</returns>
-    public static RuntimeSpecification AddDiscord(this RuntimeSpecification config, string token)
+    public static RuntimeSpecification AddDiscord(this RuntimeSpecification specs, string token)
     {
         // Create a new set of settings for Discord.
         var settings = new DiscordSettings
@@ -33,24 +33,24 @@ public static class DiscordServiceExtensions
         };
 
         // Register services and return the builder.
-        return RegisterDiscordServices(config, settings);
+        return RegisterDiscordServices(specs, settings);
     }
-    private static RuntimeSpecification RegisterDiscordServices(this RuntimeSpecification config, DiscordSettings? settings)
+    private static RuntimeSpecification RegisterDiscordServices(this RuntimeSpecification specs, DiscordSettings? settings)
     {
         // Determine if settings should be loaded or built.
         _ = settings is null
-            ? config.AddSettings<DiscordSettings>("Discord")
-            : config.AddServices(services => services.AddSingleton(settings));
+            ? specs.AddSettings<DiscordSettings>("Discord")
+            : specs.AddServices(services => services.AddSingleton(settings));
 
         // Register remaining services and return the builder.
-        return config.AddChatbot<DiscordChatbot>()
-                     .AddEventHandler<LogEventHandler>()
-                     .AddEventHandler<LogEventHandler>()
-                     .AddEventHandler<LoggedInEventHandler>()
-                     .AddEventHandler<LoggedOutEventHandler>()
-                     .AddEventHandler<ConnectedEventHandler>()
-                     .AddEventHandler<DisconnectedEventHandler>()
-                     .AddEventHandler<MessageReceivedEventHandler>()
-                     .AddServices(services => services.AddSingleton<DiscordSocketClient>());
+        return specs.AddChatbot<DiscordChatbot>()
+                    .AddEventHandler<LogEventHandler>()
+                    .AddEventHandler<LogEventHandler>()
+                    .AddEventHandler<LoggedInEventHandler>()
+                    .AddEventHandler<LoggedOutEventHandler>()
+                    .AddEventHandler<ConnectedEventHandler>()
+                    .AddEventHandler<DisconnectedEventHandler>()
+                    .AddEventHandler<MessageReceivedEventHandler>()
+                    .AddServices(services => services.AddSingleton<DiscordSocketClient>());
     }
 }

@@ -11,17 +11,17 @@ public static class GlitterExtensions
     /// </summary>
     /// <param name="config"></param>
     /// <returns></returns>
-    public static RuntimeSpecification AddOpenSourceCommands(this RuntimeSpecification config) =>
-        AddOpenSourceCommands<SessionData>(config);
+    public static RuntimeSpecification AddOpenSourceCommands(this RuntimeSpecification specs) =>
+        AddOpenSourceCommands<SessionData>(specs);
     /// <summary>
     /// Adds the core open source commands to the DI container.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="config"></param>
     /// <returns></returns>
-    public static RuntimeSpecification AddOpenSourceCommands<TSessionData>(this RuntimeSpecification config)
+    public static RuntimeSpecification AddOpenSourceCommands<TSessionData>(this RuntimeSpecification specs)
         where TSessionData : SessionData, new() =>
-        config.AddServices(services => services.AddSingleton<SessionData>(new TSessionData()))
+        specs.AddServices(services => services.AddSingleton<SessionData>(new TSessionData()))
               .AddCommand<UptimeCommand>()
               .AddCommand<VersionCommand>();
 }
