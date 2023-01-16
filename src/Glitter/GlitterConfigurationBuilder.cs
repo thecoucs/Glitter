@@ -11,7 +11,7 @@ namespace Glitter;
 /// <summary>
 /// Represents an interface that exposes methods to configure Freya.
 /// </summary>
-public class RuntimeSpecification
+public class GlitterConfigurationBuilder
 {
     private readonly IConfiguration _configuration;
     private readonly IServiceCollection _services;
@@ -29,7 +29,7 @@ public class RuntimeSpecification
     /// </summary>
     internal string? CommandSeparator { get; private set; }
     internal List<Type> CommandTypes { get; private set; }
-    internal RuntimeSpecification(IServiceCollection services, IConfiguration configuration)
+    internal GlitterConfigurationBuilder(IServiceCollection services, IConfiguration configuration)
     {
         _services = services;
         _configuration = configuration;
@@ -39,8 +39,8 @@ public class RuntimeSpecification
     /// <summary>
     /// Enables a <see cref="Console"/> driven bot for testing purposes.
     /// </summary>
-    /// <returns>The current <see cref="RuntimeSpecification"/> instance with the testing console enabled.</returns>
-    public RuntimeSpecification EnableTesting()
+    /// <returns>The current <see cref="GlitterConfigurationBuilder"/> instance with the testing console enabled.</returns>
+    public GlitterConfigurationBuilder EnableTesting()
     {
         TestBotEnabled = true;
         return this;
@@ -49,8 +49,8 @@ public class RuntimeSpecification
     /// Sets the prefix utilized to identify commands in a text-only based chat system.
     /// </summary>
     /// <param name="commandPrefix">The prefix utilized to identify commands in a text-only based chat system.</param>
-    /// <returns>The current <see cref="RuntimeSpecification"/> instance with the command prefix set to the specified value.</returns>
-    public RuntimeSpecification SetCommandPrefix(string commandPrefix)
+    /// <returns>The current <see cref="GlitterConfigurationBuilder"/> instance with the command prefix set to the specified value.</returns>
+    public GlitterConfigurationBuilder SetCommandPrefix(string commandPrefix)
     {
         CommandPrefix = commandPrefix;
         return this;
@@ -59,8 +59,8 @@ public class RuntimeSpecification
     /// Sets the separator utilized to identify command arguments in a text-only based chat system.
     /// </summary>
     /// <param name="commandSeparator">The separator utilized to identify command arguments in a text-only based chat system.</param>
-    /// <returns>The current <see cref="RuntimeSpecification"/> instance with the command separator set to the specified value.</returns>
-    public RuntimeSpecification SetCommandSeparator(string commandSeparator)
+    /// <returns>The current <see cref="GlitterConfigurationBuilder"/> instance with the command separator set to the specified value.</returns>
+    public GlitterConfigurationBuilder SetCommandSeparator(string commandSeparator)
     {
         CommandSeparator = commandSeparator;
         return this;
@@ -70,7 +70,7 @@ public class RuntimeSpecification
     /// </summary>
     /// <typeparam name="T">Specifies the type of <see cref="Chatbot"/> to add.</typeparam>
     /// <returns>The current <see cref="ChatbotRegistrar"/> instance with the specified type added as a hosted service.</returns>
-    public RuntimeSpecification AddChatbot<T>() where T : Chatbot
+    public GlitterConfigurationBuilder AddChatbot<T>() where T : Chatbot
     {
         _ = _services.AddHostedService<T>();
         var chatbotAssembly = Assembly.GetAssembly(typeof(T));
@@ -79,12 +79,12 @@ public class RuntimeSpecification
 
         return this;
     }
-    public RuntimeSpecification AddCommand<T>() where T : Command
+    public GlitterConfigurationBuilder AddCommand<T>() where T : Command
     {
         CommandTypes.Add(typeof(T));
         return this;
     }
-    public RuntimeSpecification AddSettings<T>(string key) where T : class, new()
+    public GlitterConfigurationBuilder AddSettings<T>(string key) where T : class, new()
     {
         IConfigurationSection? configurationSection = _configuration.GetSection(key);
         T settings = configurationSection is null
@@ -94,12 +94,12 @@ public class RuntimeSpecification
         _ = _services.AddSingleton(settings);
         return this;
     }
-    public RuntimeSpecification AddServices(Action<IServiceCollection> serviceAction)
+    public GlitterConfigurationBuilder AddServices(Action<IServiceCollection> serviceAction)
     {
         serviceAction?.Invoke(_services);
         return this;
     }
-    public RuntimeSpecification AddEventHandler<T>() where T : EncapsulatedEventHandler
+    public GlitterConfigurationBuilder AddEventHandler<T>() where T : EncapsulatedEventHandler
     {
         _ = _services.AddHostedService<T>();
         return this;

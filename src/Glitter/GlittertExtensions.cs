@@ -11,14 +11,14 @@ namespace Glitter;
 
 public static class GlitterExtensions
 {
-    public static IServiceCollection UseGlitter(this IServiceCollection services, Action<RuntimeSpecification> configurationAction)
+    public static IServiceCollection UseGlitter(this IServiceCollection services, Action<GlitterConfigurationBuilder> configurationAction)
     {
         // Load the configuration.
         LoadConfiguration(out IConfiguration configuration);
         _ = services.AddSingleton(configuration);
 
         // Allow consumers to configure Freya.
-        var configBuilder = new RuntimeSpecification(services, configuration);
+        var configBuilder = new GlitterConfigurationBuilder(services, configuration);
         configurationAction?.Invoke(configBuilder);
 
         // Add the request parser.
