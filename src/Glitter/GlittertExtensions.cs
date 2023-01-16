@@ -9,16 +9,16 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Glitter;
 
-public static class ServiceCollectionExtensions
+public static class GlitterExtensions
 {
-    public static IServiceCollection UseGlitter(this IServiceCollection services, Action<GlitterConfigurationBuilder> configurationAction)
+    public static IServiceCollection UseGlitter(this IServiceCollection services, Action<RuntimeSpecification> configurationAction)
     {
         // Load the configuration.
         LoadConfiguration(out IConfiguration configuration);
         _ = services.AddSingleton(configuration);
 
         // Allow consumers to configure Freya.
-        var configBuilder = new GlitterConfigurationBuilder(services, configuration);
+        var configBuilder = new RuntimeSpecification(services, configuration);
         configurationAction?.Invoke(configBuilder);
 
         // Add the request parser.

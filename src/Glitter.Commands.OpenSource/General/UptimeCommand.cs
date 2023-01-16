@@ -1,7 +1,5 @@
 ﻿using System.Text;
 
-using MediatR;
-
 using Microsoft.Extensions.Logging;
 
 namespace Glitter.Commands.OpenSource.General;
@@ -16,8 +14,8 @@ public sealed class UptimeCommand : Command
     /// Creates a new <see cref="UptimeCommand"/> instance.
     /// </summary>
     /// <param name="logger">The logger the command should use.</param>
-    public UptimeCommand(SessionData session, IMediator mediator, ILogger<UptimeCommand> logger) :
-        base("uptime", "Get Uptime", "Queries the amount of time the bot has been up and running.", mediator, logger) =>
+    public UptimeCommand(SessionData session, ILogger<UptimeCommand> logger) :
+        base("uptime", "Get Uptime", "Queries the amount of time the bot has been up and running.", logger) =>
         _session = session;
     protected override Task<CommandResponse> Work(CancellationToken cancellationToken)
     {
