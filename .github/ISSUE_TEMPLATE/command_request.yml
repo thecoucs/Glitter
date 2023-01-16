@@ -1,0 +1,34 @@
+name: 🎉 Request a new command
+description: Have an idea for a new command? You can request a new command here.
+labels: [enhancement,command,under review]
+body:
+  - type: dropdown
+    id: version
+    attributes:
+      label: 🔢 Version
+      description: Which version of Glitter are you currently using?
+      options:
+        - 🐣 Pre-Release
+    validations:
+      required: true
+  - type: input
+    id: key
+    attributes:
+      label: 🗝️ What should the key for the command be?
+      description: All commands have a key for invocation requests (e.g. `uptime` to request uptime for a bot).
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: 🤔 What should the command do?
+      description: If your feature request is related to a problem, describe it clearly.
+    validations:
+      required: true
+  - type: checkboxes
+    id: system-command
+    attributes:
+      label: Is this a system command (e.g. slash command)?
+      options:
+        - label: Yes
+        - label: No
