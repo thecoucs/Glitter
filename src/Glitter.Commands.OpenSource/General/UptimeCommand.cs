@@ -5,9 +5,9 @@ using Microsoft.Extensions.Logging;
 namespace Glitter.Commands.OpenSource.General;
 
 /// <summary>
-/// Represents a <see cref="Command"/> for getting the uptime of the bot.
+/// Represents a <see cref="SlashCommand"/> for getting the uptime of the bot.
 /// </summary>
-public sealed class UptimeCommand : Command
+public sealed class UptimeCommand : SlashCommand
 {
     private readonly SessionData _session;
     /// <summary>

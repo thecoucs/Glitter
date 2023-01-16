@@ -3,9 +3,9 @@
 namespace Glitter.Commands.OpenSource.General;
 
 /// <summary>
-/// Represents a <see cref="Command"/> for getting the current version of the bot.
+/// Represents a <see cref="SlashCommand"/> for getting the current version of the bot.
 /// </summary>
-public sealed class VersionCommand : Command
+public sealed class VersionCommand : SlashCommand
 {
     /// <summary>
     /// Creates a new <see cref="VersionCommand"/> instance.
