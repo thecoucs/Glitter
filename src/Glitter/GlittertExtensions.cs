@@ -11,27 +11,30 @@ namespace Glitter;
 
 public static class GlitterExtensions
 {
-    public static IServiceCollection UseGlitter(this IServiceCollection services, Action<GlitterConfigurationBuilder> configurationAction)
+    public static IServiceCollection UseGlitter(this IServiceCollection services, Action<RuntimeOptionsBuilder> buildAction)
     {
         // Load the configuration.
         LoadConfiguration(out IConfiguration configuration);
         _ = services.AddSingleton(configuration);
 
         // Allow consumers to configure Freya.
-        var configBuilder = new GlitterConfigurationBuilder(services, configuration);
-        configurationAction?.Invoke(configBuilder);
+        var optionsBuilder = new RuntimeOptionsBuilder(services, configuration);
+        buildAction?.Invoke(optionsBuilder);
+
+        // Build the resulting options.
+        RuntimeOptions options = optionsBuilder.Build();
 
         // Add the request parser.
-        string commandToken = configBuilder.CommandPrefix ?? "!";
-        string commandSeparator = configBuilder.CommandSeparator ?? ",";
+        string commandToken = options.CommandPrefix ?? "!";
+        string commandSeparator = options.CommandSeparator ?? ",";
         _ = services.AddSingleton(new RequestParser(commandToken, commandSeparator));
 
         // Add the test bot if it's been enabled.
-        if (configBuilder.TestBotEnabled)
+        if (options.TestBotEnabled)
             _ = services.AddHostedService<ConsoleChatbot>();
 
         // Add MediatR.
-        IEnumerable<Assembly> assemblies = configBuilder.GetRegisteredAssemblies().Append(Assembly.GetExecutingAssembly());
+        IEnumerable<Assembly> assemblies = optionsBuilder.GetRegisteredAssemblies().Append(Assembly.GetExecutingAssembly());
         return services.AddMediatR(assemblies: assemblies.ToArray());
     }
     private static void LoadConfiguration(out IConfiguration configuration)

@@ -11,7 +11,7 @@ public static class GlitterExtensions
     /// </summary>
     /// <param name="config"></param>
     /// <returns></returns>
-    public static GlitterConfigurationBuilder AddOpenSourceCommands(this GlitterConfigurationBuilder specs) =>
+    public static RuntimeOptionsBuilder AddOpenSourceCommands(this RuntimeOptionsBuilder specs) =>
         AddOpenSourceCommands<SessionData>(specs);
     /// <summary>
     /// Adds the core open source commands to the DI container.
@@ -19,9 +19,9 @@ public static class GlitterExtensions
     /// <typeparam name="T"></typeparam>
     /// <param name="config"></param>
     /// <returns></returns>
-    public static GlitterConfigurationBuilder AddOpenSourceCommands<TSessionData>(this GlitterConfigurationBuilder specs)
+    public static RuntimeOptionsBuilder AddOpenSourceCommands<TSessionData>(this RuntimeOptionsBuilder specs)
         where TSessionData : SessionData, new() =>
         specs.AddServices(services => services.AddSingleton<SessionData>(new TSessionData()))
-              .AddCommand<UptimeCommand>()
-              .AddCommand<VersionCommand>();
+              .WithSlashCommand<UptimeCommand>()
+              .WithSlashCommand<VersionCommand>();
 }
