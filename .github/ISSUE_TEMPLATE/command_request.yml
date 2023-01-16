@@ -28,7 +28,7 @@ body:
   - type: checkboxes
     id: system-command
     attributes:
-      label: Is this a system command (e.g. slash command)?
+      label: 💻 Is this a system command (e.g. slash command)?
       options:
-        - label: Yes
-        - label: No
+        - label: "Yes"
+        - label: "No"
