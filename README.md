@@ -32,7 +32,7 @@ await host.RunAsync();
 ```
 With that, you've got a working chatbot that can communicate with Discord; and all that's left is to add some custom commands!
 
-# 💪 Powered By Open Source
+# 💪 Powered by Open Source
 The following open source projects help to power both Glitter and Freya; be sure to give them a star! ⭐
  - [Mauve](https://github.com/tacosontitan/Mauve)
  - [MediatR](https://github.com/jbogard/MediatR)
@@ -49,6 +49,12 @@ Of course, these are just the commands that are automatically registered with yo
 ```csharp
 services.UseGlitter(config => config.AddCommand<MySampleCommand>());
 ```
+
+# 🧪 Tested by Open Source
+The following open source projects help to keep Glitter tested and held to the highest standards; be sure to give them a star! ⭐
+ - [Fluent Assertions](https://github.com/fluentassertions/fluentassertions)
+ - [Fluent Validation](https://github.com/FluentValidation/FluentValidation)
+ - [Shouldly](https://github.com/shouldly/shouldly)
 
 # 💃 Freya
 Freya is [tacosontitan's](https://github.com/tacosontitan) personal chatbot built using Glitter as a design pallete and proof of concept.
