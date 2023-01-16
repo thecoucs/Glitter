@@ -25,11 +25,12 @@ using IHost host = Host.CreateDefaultBuilder()
             .EnableTesting()
             .SetCommandPrefix("!")
             .SetCommandSeparator(",")
+            .AddOpenSourceCommands()
             .AddDiscord("<AUTH_TOKEN>"))
 ).Build();
 await host.RunAsync();
 ```
-With that, you've got a working chatbot that can communicate with Discord; and all that's left is to add some commands!
+With that, you've got a working chatbot that can communicate with Discord; and all that's left is to add some custom commands!
 
 # 💪 Powered By Open Source
 The following open source projects help to power both Glitter and Freya; be sure to give them a star! ⭐
