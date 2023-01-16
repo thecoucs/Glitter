@@ -1,13 +1,13 @@
 # 🗻 Glittertind
 Named after the second largest mountain in Norway, Glitter is a framework for quickly building out chatbots and the commands they can invoke.
 
+![.NET Workflow](https://github.com/tacosontitan/Glitter/workflows/.NET/badge.svg)
+
 #### Want to help out?
 Get started by reviewing the answers to the following questions:
 - [How can I help?](./CONTRIBUTING.md)
 - [How should I behave here?](./CODE_OF_CONDUCT.md)
 - [How do I report security concerns?](./SECURITY.md)
-
-![.NET Workflow](https://github.com/tacosontitan/Glitter/workflows/.NET/badge.svg)
 
 ## 🎉 Create your first chatbot!
 It's never been easier to get a custom made chatbot up and running. Simply add a few lines of code to your `Program.cs` file to get started:
