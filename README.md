@@ -46,17 +46,6 @@ services.UseGlitter(config => config.AddCommand<MySampleCommand>());
 ```
 
 # 💃 Freya
-Freya is my personal chatbot built using Glittertind as a design pallete and proof of concept. The following commands are available out of the box:
-
- - General Commands
-   - Remind Me
- - Development Commands
-   - Pull Request
- - Financial Commands
-   - Quote
-   - Chart
-   - Positions
-   - Watchlist
-   - Balance
+Freya is [tacosontitan's](https://github.com/tacosontitan) personal chatbot built using Glitter as a design pallete and proof of concept.
 
 ![Freya Header](/.resources/freya-header.png "Freya Header")
