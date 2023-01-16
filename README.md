@@ -1,4 +1,4 @@
-# 🗻 Glitter
+# 🗻 Welcome aboard!
 Named after the second largest mountain in Norway, Glitter is a framework for quickly building out chatbots and the commands they can invoke.
 
 ![.NET Workflow](https://github.com/tacosontitan/Glitter/workflows/.NET/badge.svg)
