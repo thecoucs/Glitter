@@ -27,11 +27,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Glittertind.Commands.OpenSource\Glittertind.Commands.OpenSource.csproj" />
-    <ProjectReference Include="..\Glittertind\Glittertind.csproj" />
-    <ProjectReference Include="..\Glittertind.Discord\Glittertind.Discord.csproj" />
-    <ProjectReference Include="..\Glittertind.Discord\Glittertind.Discord.csproj" />
-    <ProjectReference Include="..\Glittertind\Glittertind.csproj" />
+    <ProjectReference Include="..\Glitter.Commands.OpenSource\Glitter.Commands.OpenSource.csproj" />
+    <ProjectReference Include="..\Glitter\Glitter.csproj" />
+    <ProjectReference Include="..\Glitter.Discord\Glitter.Discord.csproj" />
+    <ProjectReference Include="..\Glitter.Discord\Glitter.Discord.csproj" />
+    <ProjectReference Include="..\Glitter\Glitter.csproj" />
+    <ProjectReference Include="..\Glitter\Glitter.csproj" />
   </ItemGroup>
 
   <ItemGroup>

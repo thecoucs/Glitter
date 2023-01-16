@@ -1,8 +1,8 @@
 ﻿using Freya.Logging;
 
-using Glittertind;
-using Glittertind.Commands.OpenSource;
-using Glittertind.Discord;
+using Glitter;
+using Glitter.Commands.OpenSource;
+using Glitter.Discord;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -15,7 +15,7 @@ Console.Title = "Freya";
 using IHost host = Host.CreateDefaultBuilder()
     .ConfigureServices(services => services
         .AddLogging(BuildLogging)
-        .UseGlittertind(config => config
+        .UseGlitter(config => config
             .EnableTesting()
             .SetCommandPrefix("!")
             .SetCommandSeparator(",")
