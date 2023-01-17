@@ -8,20 +8,21 @@ using Microsoft.Extensions.Logging;
 namespace Glitter.Discord.Events;
 
 /// <summary>
-/// Represents an <see cref="IEventHandler"/> for handling the Log event for a <see cref="DiscordSocketClient"/>.
+/// Represents an <see cref="EncapsulatedEventHandler"/> for handling the Log event for a <see cref="DiscordSocketClient"/>.
 /// </summary>
 internal sealed class LogEventHandler : EncapsulatedEventHandler
 {
+    private readonly DiscordSocketClient _client;
     private readonly Dictionary<LogSeverity, LogLevel> _severityToLevelMap;
     /// <summary>
     /// Creates a new <see cref="LogEventHandler"/> instance.
     /// </summary>
     /// <param name="client">The <see cref="DiscordSocketClient"/> to handle log events for.</param>
     /// <param name="logger">The logger for the <see cref="DiscordChatbot"/>.</param>
-    public LogEventHandler(DiscordSocketClient discordClient, ILogger<DiscordChatbot> logger) :
+    public LogEventHandler(DiscordSocketClient client, ILogger<DiscordChatbot> logger) :
         base(logger)
     {
-        discordClient.Log += HandleLogMessage;
+        _client = client;
         _severityToLevelMap = new Dictionary<LogSeverity, LogLevel>
         {
             { LogSeverity.Critical, LogLevel.Critical },
@@ -32,6 +33,12 @@ internal sealed class LogEventHandler : EncapsulatedEventHandler
             { LogSeverity.Warning, LogLevel.Warning }
         };
     }
+    /// <inheritdoc/>
+    protected override void Subscribe() =>
+        _client.Log += HandleLogMessage;
+    /// <inheritdoc/>
+    protected override void Unsubscribe() =>
+        _client.Log -= HandleLogMessage;
     private async Task HandleLogMessage(LogMessage message)
     {
         // Determine the event type.

@@ -5,10 +5,11 @@ using Microsoft.Extensions.Logging;
 namespace Glitter.Discord.Events;
 
 /// <summary>
-/// Represents an <see cref="EventHandler"/> for handling the connected event for a <see cref="DiscordSocketClient"/>.
+/// Represents an <see cref="EncapsulatedEventHandler"/> for handling the connected event for a <see cref="DiscordSocketClient"/>.
 /// </summary>
 internal sealed class ConnectedEventHandler : EncapsulatedEventHandler
 {
+    private readonly DiscordSocketClient _client;
     /// <summary>
     /// Creates a new <see cref="ConnectedEventHandler"/> instance.
     /// </summary>
@@ -16,7 +17,13 @@ internal sealed class ConnectedEventHandler : EncapsulatedEventHandler
     /// <param name="logger">The logger for the <see cref="DiscordChatbot"/>.</param>
     public ConnectedEventHandler(DiscordSocketClient client, ILogger<DiscordChatbot> logger) :
         base(logger) =>
-        client.Connected += HandleConnected;
+        _client = client;
+    /// <inheritdoc/>
+    protected override void Subscribe() =>
+        _client.Connected += HandleConnected;
+    /// <inheritdoc/>
+    protected override void Unsubscribe() =>
+        _client.Connected -= HandleConnected;
     private async Task HandleConnected()
     {
         Logger.LogInformation("Successfully connected to Discord.");
