@@ -9,6 +9,7 @@ namespace Glitter.Discord.Events;
 /// </summary>
 internal sealed class LoggedInEventHandler : EncapsulatedEventHandler
 {
+    private readonly DiscordSocketClient _client;
     /// <summary>
     /// Creates a new <see cref="LoggedInEventHandler"/> instance.
     /// </summary>
@@ -16,7 +17,13 @@ internal sealed class LoggedInEventHandler : EncapsulatedEventHandler
     /// <param name="logger">The logger for the <see cref="DiscordChatbot"/>.</param>
     public LoggedInEventHandler(DiscordSocketClient client, ILogger<DiscordChatbot> logger) :
         base(logger) =>
-        client.LoggedIn += HandleLogin;
+        _client = client;
+    /// <inheritdoc/>
+    protected override void Subscribe() =>
+        _client.LoggedIn += HandleLogin;
+    /// <inheritdoc/>
+    protected override void Unsubscribe() =>
+        _client.LoggedIn -= HandleLogin;
     private async Task HandleLogin()
     {
         Logger.LogDebug("Logged into Discord.");
