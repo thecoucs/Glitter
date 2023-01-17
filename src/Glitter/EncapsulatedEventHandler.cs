@@ -6,7 +6,7 @@ namespace Glitter;
 /// <summary>
 /// Represents a basic event handler.
 /// </summary>
-public abstract class EncapsulatedEventHandler : BackgroundService
+public abstract class EncapsulatedEventHandler : IHostedService
 {
     private readonly TimeSpan _pingInterval;
     /// <summary>
@@ -17,20 +17,20 @@ public abstract class EncapsulatedEventHandler : BackgroundService
     /// Creates a new <see cref="EncapsulatedEventHandler"/> instance.
     /// </summary>
     /// <param name="logger">The logger for the service the event is related to.</param>
-    public EncapsulatedEventHandler(ILogger logger) :
-        this(logger, TimeSpan.FromMinutes(5))
-    { }
-    public EncapsulatedEventHandler(ILogger logger, TimeSpan pingInterval)
-    {
+    public EncapsulatedEventHandler(ILogger logger) =>
         Logger = logger;
-        _pingInterval = pingInterval;
-    }
-    protected override async Task ExecuteAsync(CancellationToken cancellationToken)
-    {
-        while (!cancellationToken.IsCancellationRequested)
-        {
-            Logger.LogDebug("Listening for events.");
-            await Task.Delay(_pingInterval);
-        }
-    }
+    /// <inheritdoc/>
+    public async Task StartAsync(CancellationToken cancellationToken) => await Subscribe();
+    /// <inheritdoc/>
+    public async Task StopAsync(CancellationToken cancellationToken) => await Unsubscribe();
+    /// <summary>
+    /// Subscribes to events.
+    /// </summary>
+    /// <returns>A <see cref="Task"/> describing the state of the operation.</returns>
+    protected abstract Task Subscribe();
+    /// <summary>
+    /// Unsubscribes from events.
+    /// </summary>
+    /// <returns>A <see cref="Task"/> describing the state of the operation.</returns>
+    protected abstract Task Unsubscribe();
 }
