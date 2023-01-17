@@ -20,17 +20,25 @@ public abstract class EncapsulatedEventHandler : IHostedService
     public EncapsulatedEventHandler(ILogger logger) =>
         Logger = logger;
     /// <inheritdoc/>
-    public async Task StartAsync(CancellationToken cancellationToken) => await Subscribe();
+    public async Task StartAsync(CancellationToken cancellationToken)
+    {
+        Subscribe();
+        await Task.CompletedTask;
+    }
     /// <inheritdoc/>
-    public async Task StopAsync(CancellationToken cancellationToken) => await Unsubscribe();
+    public async Task StopAsync(CancellationToken cancellationToken)
+    {
+        Unsubscribe();
+        await Task.CompletedTask;
+    }
     /// <summary>
     /// Subscribes to events.
     /// </summary>
     /// <returns>A <see cref="Task"/> describing the state of the operation.</returns>
-    protected abstract Task Subscribe();
+    protected abstract void Subscribe();
     /// <summary>
     /// Unsubscribes from events.
     /// </summary>
     /// <returns>A <see cref="Task"/> describing the state of the operation.</returns>
-    protected abstract Task Unsubscribe();
+    protected abstract void Unsubscribe();
 }
