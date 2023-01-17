@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 namespace Glitter.Discord.Events;
 
 /// <summary>
-/// Represents an <see cref="IEventHandler"/> for handling the Log event for a <see cref="DiscordSocketClient"/>.
+/// Represents an <see cref="EncapsulatedEventHandler"/> for handling the Log event for a <see cref="DiscordSocketClient"/>.
 /// </summary>
 internal sealed class LogEventHandler : EncapsulatedEventHandler
 {
