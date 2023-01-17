@@ -8,7 +8,6 @@ namespace Glitter;
 /// </summary>
 public abstract class EncapsulatedEventHandler : IHostedService
 {
-    private readonly TimeSpan _pingInterval;
     /// <summary>
     /// The logger for the service the event is related to.
     /// </summary>
