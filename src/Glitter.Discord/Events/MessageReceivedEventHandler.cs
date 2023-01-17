@@ -9,13 +9,21 @@ namespace Glitter.Discord.Events;
 /// </summary>
 internal sealed class MessageReceivedEventHandler : EncapsulatedEventHandler
 {
+    private readonly DiscordSocketClient _client;
     /// <summary>
     /// Creates a new <see cref="MessageReceivedEventHandler"/> instance.
     /// </summary>
     /// <param name="client">The <see cref="DiscordSocketClient"/> to handle connected events for.</param>
     /// <param name="logger">The logger for the <see cref="DiscordChatbot"/>.</param>
     public MessageReceivedEventHandler(DiscordSocketClient client, ILogger<DiscordChatbot> logger) :
-        base(logger) => client.MessageReceived += HandleMessage;
+        base(logger) =>
+        _client = client;
+    /// <inheritdoc/>
+    protected override void Subscribe() =>
+        _client.MessageReceived += HandleMessage;
+    /// <inheritdoc/>
+    protected override void Unsubscribe() =>
+        _client.MessageReceived -= HandleMessage;
     private async Task HandleMessage(SocketMessage message)
     {
         Logger.LogDebug($"{message.Author.Username} sent a message: {message.Content}");
