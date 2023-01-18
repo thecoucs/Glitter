@@ -34,7 +34,8 @@ internal sealed class DiscordChatbot : Chatbot<DiscordSettings>
             await _client.LoginAsync(TokenType.Bot, Settings.Token);
             await _client.StartAsync();
             Logger.LogInformation("The Discord service has been started successfully.");
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             Logger.LogError($"An unexpected error occurred while starting the Discord service. {e.Message}");
         }

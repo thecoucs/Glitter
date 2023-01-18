@@ -36,7 +36,8 @@ public class CommandRequestHandler : AliasedTypeFactory<Command>, IRequestHandle
             object? createdInstance = ActivatorUtilities.CreateInstance(_serviceProvider, type, request.Parameters.ToArray());
             if (createdInstance is Command commandInstance)
                 return Task.FromResult((Command?)commandInstance);
-        } catch
+        }
+        catch
         {
             return Task.FromResult<Command?>(null);
         }

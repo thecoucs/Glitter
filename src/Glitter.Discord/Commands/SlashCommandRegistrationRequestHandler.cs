@@ -54,10 +54,12 @@ internal class SlashCommandRegistrationRequestHandler : IRequestHandler<SlashCom
             // Register the command globally.
             // TODO: Add support for guild focused registration.
             _ = await _client.CreateGlobalApplicationCommandAsync(commandProperties);
-        } catch (HttpException e)
+        }
+        catch (HttpException e)
         {
             LogHttpException(e);
-        } finally
+        }
+        finally
         {
             _workComplete = true;
         }

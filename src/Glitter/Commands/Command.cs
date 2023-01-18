@@ -33,10 +33,12 @@ public abstract class Command
         try
         {
             response = await Work(cancellationToken);
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             Logger.LogError($"An unexpected error occurred during execution. {e.Message}");
-        } finally
+        }
+        finally
         {
             // Set the event type for the completion message.
             LogLevel logLevel = encounteredErrors

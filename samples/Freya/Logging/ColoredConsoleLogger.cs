@@ -45,7 +45,9 @@ internal class ColoredConsoleLogger : ILogger
             Console.ForegroundColor = _logLevelToColorMap[logLevel];
             string? message = formatter?.Invoke(state, exception);
             Console.WriteLine($"{_categoryName}: {message ?? "Something went wrong trying to log this message."}");
-        } catch { /* Gracefully ignore logging exceptions. */ } finally
+        }
+        catch { /* Gracefully ignore logging exceptions. */ }
+        finally
         {
             // Reset the foreground color to the captured incoming color.
             Console.ForegroundColor = incomingColor;
