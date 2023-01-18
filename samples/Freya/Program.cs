@@ -4,15 +4,12 @@ using Glitter;
 using Glitter.Commands.OpenSource;
 using Glitter.Discord;
 
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 // Set the title of the debugging console.
 Console.Title = "Freya";
 
 // Create a host and start running it.
-using IHost host = Host.CreateDefaultBuilder()
+using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services => services
         .AddLogging(BuildLogging)
         .UseGlitter(specs => specs
