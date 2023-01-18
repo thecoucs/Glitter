@@ -21,12 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Glitter.Commands.OpenSource\Glitter.Commands.OpenSource.csproj" />
-    <ProjectReference Include="..\Glitter.Discord\Glitter.Discord.csproj" />
-    <ProjectReference Include="..\Glitter.Commands.OpenSource\Glitter.Commands.OpenSource.csproj" />
-    <ProjectReference Include="..\Glitter.Discord\Glitter.Discord.csproj" />
-    <ProjectReference Include="..\Glitter\Glitter.csproj" />
-    <ProjectReference Include="..\Glitter\Glitter.csproj" />
+    <ProjectReference Include="..\..\src\Glitter.Commands.OpenSource\Glitter.Commands.OpenSource.csproj" />
+    <ProjectReference Include="..\..\src\Glitter.Discord\Glitter.Discord.csproj" />
+    <ProjectReference Include="..\..\src\Glitter\Glitter.csproj" />
   </ItemGroup>
 
 </Project>

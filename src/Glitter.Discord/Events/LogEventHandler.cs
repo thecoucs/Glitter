@@ -54,7 +54,8 @@ internal sealed class LogEventHandler : EncapsulatedEventHandler
             try
             {
                 Logger.Log(LogLevel.Error, message.Exception.FlattenMessages(" "));
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Logger.Log(LogLevel.Error, $"An unexpected error occurred while recording a log from Discord. {e.Message}");
                 await Task.FromException(e);
