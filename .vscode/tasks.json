@@ -18,7 +18,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/src/Freya/Freya.csproj",
+                "${workspaceFolder}/samples/Freya/Freya.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -32,7 +32,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/src/Freya/Freya.csproj"
+                "${workspaceFolder}/samples/Freya/Freya.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

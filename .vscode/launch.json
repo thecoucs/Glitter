@@ -9,9 +9,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/src/Freya/bin/Debug/net6.0/Freya.dll",
+            "program": "${workspaceFolder}/samples/Freya/bin/Debug/net6.0/Freya.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/src/Freya",
+            "cwd": "${workspaceFolder}/samples/Freya",
             "console": "internalConsole",
             "stopAtEntry": false
         },
