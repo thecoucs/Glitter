@@ -11,7 +11,7 @@ namespace Glitter;
 
 public static class GlitterExtensions
 {
-    public static IServiceCollection UseGlitter(this IServiceCollection services, Action<RuntimeOptionsBuilder> buildAction)
+    public static IServiceCollection AddGlitter(this IServiceCollection services, Action<RuntimeOptionsBuilder> buildAction)
     {
         // Load the configuration.
         LoadConfiguration(out IConfiguration configuration);
