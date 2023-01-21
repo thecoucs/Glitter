@@ -21,7 +21,7 @@ using Microsoft.Extensions.Hosting;
 
 using IHost host = Host.CreateDefaultBuilder()
     .ConfigureServices(services => services
-        .UseGlitter(config => config
+        .AddGlitter(config => config
             .EnableTesting()
             .SetCommandPrefix("!")
             .SetCommandSeparator(",")
@@ -47,7 +47,7 @@ There are endless possibilities for chatbot commands! Glitter encourages the ope
 
 Of course, these are just the commands that are automatically registered with your bot through `AddOpenSourceCommands`. You can manually register any open-source command just like you would a custom made one:
 ```csharp
-services.UseGlitter(config => config.AddCommand<MySampleCommand>());
+services.AddGlitter(config => config.AddCommand<MySampleCommand>());
 ```
 
 # 🧪 Tested by Open Source
