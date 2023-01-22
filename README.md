@@ -17,11 +17,15 @@ Glitter employs workflows for continuous integration to ensure the repository is
 ![Analysis Workflow](https://img.shields.io/github/actions/workflow/status/tacosontitan/Glitter/codeql.yml?label=Analysis&logo=dotnet&style=for-the-badge)
 
 ### 📦 Available on NuGet.
+Glitter is available for consumption via NuGet:
 ![Version](https://img.shields.io/nuget/v/Glitter?logo=nuget&label=Glitter&style=for-the-badge)
+
 ![Version](https://img.shields.io/nuget/v/Glitter.Commands.OpenSource?logo=nuget&label=Glitter.Commands.OpenSource&style=for-the-badge)
+
 ![Version](https://img.shields.io/nuget/v/Glitter.Discord?logo=nuget&label=Glitter.Discord&style=for-the-badge)
 
 ### 💎 A few more gems for your knowledge.
+We believe in keeping the community informed, so here's a few more tidbits of information to satisfy some additional curiosities:
 ![Contributors](https://img.shields.io/github/contributors/tacosontitan/Glitter?logo=github&style=for-the-badge)
 ![Issues](https://img.shields.io/github/issues/tacosontitan/Glitter?logo=github&style=for-the-badge)
 ![Stars](https://img.shields.io/github/stars/tacosontitan/Glitter?logo=github&style=for-the-badge)
