@@ -1,17 +1,50 @@
-﻿using Mauve.Extensibility;
+﻿using Glitter.Ai;
+
+using Mauve.Extensibility;
 using Mauve.Math;
 
 using Microsoft.Extensions.Logging;
 
 namespace Glitter.Commands;
 
+/// <summary>
+/// Represents a command capable of being executed by a <see cref="Chatbot"/>/
+/// </summary>
 public abstract class Command
 {
     private readonly string _id;
+    /// <summary>
+    /// The logger for the <see cref="Command"/>.
+    /// </summary>
     protected ILogger Logger { get; private set; }
+    /// <summary>
+    /// The key used to identify the <see cref="Command"/>.
+    /// </summary>
     public string Key { get; set; }
+    /// <summary>
+    /// The display name for the <see cref="Command"/>.
+    /// </summary>
     public string DisplayName { get; set; }
+    /// <summary>
+    /// A description of what the <see cref="Command"/> does.
+    /// </summary>
     public string Description { get; set; }
+    /// <summary>
+    /// Creates a new <see cref="Command"/> instance.
+    /// </summary>
+    /// <param name="key">The key used to identify the <see cref="Command"/>.</param>
+    /// <param name="description">A description of what the <see cref="Command"/> does.</param>
+    /// <param name="logger"></param>
+    public Command(string key, string description, ILogger logger) :
+        this(key, key, description, logger)
+    { }
+    /// <summary>
+    /// Creates a new <see cref="Command"/> instance.
+    /// </summary>
+    /// <param name="key">The key used to identify the <see cref="Command"/>.</param>
+    /// <param name="displayName">The display name for the <see cref="Command"/>.</param>
+    /// <param name="description">A description of what the <see cref="Command"/> does.</param>
+    /// <param name="logger"></param>
     public Command(string key, string displayName, string description, ILogger logger)
     {
         _id = Guid.NewGuid().GetHashCode(NumericBase.Hexadecimal);
@@ -21,10 +54,10 @@ public abstract class Command
         Description = description;
     }
     /// <summary>
-    /// 
+    /// Executes the <see cref="Command"/>.
     /// </summary>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
-    /// <returns></returns>
+    /// <param name="cancellationToken">A <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
+    /// <returns>A <see cref="Task"/> describing the state of the operation.</returns>
     public async Task<CommandResponse?> Execute(CancellationToken cancellationToken)
     {
         bool encounteredErrors = false;
@@ -33,12 +66,10 @@ public abstract class Command
         try
         {
             response = await Work(cancellationToken);
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             Logger.LogError($"An unexpected error occurred during execution. {e.Message}");
-        }
-        finally
+        } finally
         {
             // Set the event type for the completion message.
             LogLevel logLevel = encounteredErrors
@@ -49,7 +80,7 @@ public abstract class Command
             Logger.Log(logLevel, "Execution complete.");
         }
 
-        return await Task.FromResult(response);
+        return response;
     }
     protected abstract Task<CommandResponse> Work(CancellationToken cancellationToken);
 }
