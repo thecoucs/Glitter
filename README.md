@@ -12,7 +12,7 @@ Named after the second largest mountain in Norway, Glitter is a framework for qu
 ![Size](https://img.shields.io/github/languages/code-size/tacosontitan/Glitter?logo=github&style=for-the-badge)
 ![Line Count](https://img.shields.io/tokei/lines/github/tacosontitan/Glitter?logo=github&style=for-the-badge)
 
-## Want to help out?
+## 💁‍♀️ Want to help out?
 Get started by reviewing the answers to the following questions:
 - [How can I help?](./CONTRIBUTING.md)
 - [How should I behave here?](./CODE_OF_CONDUCT.md)
@@ -47,7 +47,7 @@ The following open source projects help to power both Glitter and Freya; be sure
  - [MediatR](https://github.com/jbogard/MediatR)
  - [TwitchLib](https://github.com/TwitchLib/TwitchLib)
 
-## Open Source Commands
+## 🎊 Open Source Commands
 There are endless possibilities for chatbot commands! Glitter encourages the open-source community to create a vast global baseline of commands for public consumption. Here's our current baseline list of commands included with all Glitter powered bots:
 
 - `help`: Queries for a list of commands.
@@ -66,7 +66,7 @@ The following open source projects help to keep Glitter tested and held to the h
  - [Shouldly](https://github.com/shouldly/shouldly)
  - [Coverlet](https://github.com/coverlet-coverage/coverlet)
  
-# Color Palette
+# 🎨 Color Palette
 ![image](https://user-images.githubusercontent.com/65432314/213923346-1f909154-56e3-4fdd-ba8b-45c5b98a8c5e.png)
 <p align="center"><sub><i>This color palette is subject to change.</i></sub></p>
 
