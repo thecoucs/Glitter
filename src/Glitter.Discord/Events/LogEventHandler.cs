@@ -39,7 +39,7 @@ internal sealed class LogEventHandler : EncapsulatedEventHandler
     /// <inheritdoc/>
     protected override void Unsubscribe() =>
         _client.Log -= HandleLogMessage;
-    private async Task HandleLogMessage(LogMessage message)
+    private Task HandleLogMessage(LogMessage message)
     {
         // Determine the event type.
         LogLevel logLevel = _severityToLevelMap[message.Severity];
@@ -54,14 +54,13 @@ internal sealed class LogEventHandler : EncapsulatedEventHandler
             try
             {
                 Logger.Log(LogLevel.Error, message.Exception.FlattenMessages(" "));
-            }
-            catch (Exception e)
+            } catch (Exception e)
             {
                 Logger.Log(LogLevel.Error, $"An unexpected error occurred while recording a log from Discord. {e.Message}");
-                await Task.FromException(e);
+                return Task.FromException(e);
             }
         }
 
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 }

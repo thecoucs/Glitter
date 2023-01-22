@@ -24,9 +24,9 @@ internal sealed class MessageReceivedEventHandler : EncapsulatedEventHandler
     /// <inheritdoc/>
     protected override void Unsubscribe() =>
         _client.MessageReceived -= HandleMessage;
-    private async Task HandleMessage(SocketMessage message)
+    private Task HandleMessage(SocketMessage message)
     {
         Logger.LogDebug($"{message.Author.Username} sent a message: {message.Content}");
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 }

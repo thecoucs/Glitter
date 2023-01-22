@@ -24,9 +24,9 @@ internal sealed class LoggedInEventHandler : EncapsulatedEventHandler
     /// <inheritdoc/>
     protected override void Unsubscribe() =>
         _client.LoggedIn -= HandleLogin;
-    private async Task HandleLogin()
+    private Task HandleLogin()
     {
         Logger.LogDebug("Logged into Discord.");
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 }

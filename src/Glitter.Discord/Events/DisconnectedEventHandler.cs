@@ -26,9 +26,9 @@ internal sealed class DisconnectedEventHandler : EncapsulatedEventHandler
     /// <inheritdoc/>
     protected override void Unsubscribe() =>
         _client.Disconnected -= HandleDisconnect;
-    private async Task HandleDisconnect(Exception arg)
+    private Task HandleDisconnect(Exception arg)
     {
         Logger.LogError($"Disconnected from Discord. {arg.FlattenMessages(" ")}");
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 }

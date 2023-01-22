@@ -24,9 +24,9 @@ internal sealed class ConnectedEventHandler : EncapsulatedEventHandler
     /// <inheritdoc/>
     protected override void Unsubscribe() =>
         _client.Connected -= HandleConnected;
-    private async Task HandleConnected()
+    private Task HandleConnected()
     {
         Logger.LogInformation("Successfully connected to Discord.");
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 }

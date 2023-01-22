@@ -24,9 +24,9 @@ internal sealed class LoggedOutEventHandler : EncapsulatedEventHandler
     /// <inheritdoc/>
     protected override void Unsubscribe() =>
         _client.LoggedOut -= HandleLogout;
-    private async Task HandleLogout()
+    private Task HandleLogout()
     {
         Logger.LogWarning("Logged out of Discord.");
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 }
