@@ -1,13 +1,13 @@
 # 🗻 Welcome aboard!
 Named after the second largest mountain in Norway, Glitter is a framework for quickly building out chatbots and the commands they can invoke.
 
-## ✅ What's the current state of Glitter?
+![License](https://img.shields.io/github/license/tacosontitan/Glitter?logo=github&style=for-the-badge)
 
-### Workflows
+Glitter employs workflows for continuous integration to ensure the repository is held to industry standards; here's the current state of those workflows:
 ![.NET Workflow](https://img.shields.io/github/actions/workflow/status/tacosontitan/Glitter/dotnet.yml?label=Build%20and%20Test&logo=dotnet&style=for-the-badge)
 ![Analysis Workflow](https://img.shields.io/github/actions/workflow/status/tacosontitan/Glitter/codeql.yml?label=Analysis&logo=dotnet&style=for-the-badge)
 
-### NuGet
+Here's the latest information from NuGet with regards to Glitter:
 ![Version](https://img.shields.io/nuget/v/Glitter?logo=nuget&label=Glitter&style=for-the-badge)
 ![Version](https://img.shields.io/nuget/v/Glitter.Commands.OpenSource?logo=nuget&label=Glitter.Commands.OpenSource&style=for-the-badge)
 ![Version](https://img.shields.io/nuget/v/Glitter.Discord?logo=nuget&label=Glitter.Discord&style=for-the-badge)
@@ -19,7 +19,6 @@ Get started by reviewing the answers to the following questions:
 - [How should I behave here?](./CODE_OF_CONDUCT.md)
 - [How do I report security concerns?](./SECURITY.md)
 
-![License](https://img.shields.io/github/license/tacosontitan/Glitter?logo=github&style=for-the-badge)
 ![Contributors](https://img.shields.io/github/contributors/tacosontitan/Glitter?logo=github&style=for-the-badge)
 ![Issues](https://img.shields.io/github/issues/tacosontitan/Glitter?logo=github&style=for-the-badge)
 ![Stars](https://img.shields.io/github/stars/tacosontitan/Glitter?logo=github&style=for-the-badge)
