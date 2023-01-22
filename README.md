@@ -25,6 +25,7 @@ Glitter is available for consumption via NuGet:
 
 ### 💎 A few more gems for your knowledge.
 We believe in keeping the community informed, so here's a few more tidbits of information to satisfy some additional curiosities:
+
 ![Contributors](https://img.shields.io/github/contributors/tacosontitan/Glitter?logo=github&style=for-the-badge)
 ![Issues](https://img.shields.io/github/issues/tacosontitan/Glitter?logo=github&style=for-the-badge)
 ![Stars](https://img.shields.io/github/stars/tacosontitan/Glitter?logo=github&style=for-the-badge)
