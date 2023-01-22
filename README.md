@@ -15,6 +15,7 @@ Glitter employs workflows for continuous integration to ensure the repository is
 
 ![.NET Workflow](https://img.shields.io/github/actions/workflow/status/tacosontitan/Glitter/dotnet.yml?label=Build%20and%20Test&logo=dotnet&style=for-the-badge)
 ![Analysis Workflow](https://img.shields.io/github/actions/workflow/status/tacosontitan/Glitter/codeql.yml?label=Analysis&logo=dotnet&style=for-the-badge)
+![Coverage](https://img.shields.io/github/actions/workflow/status/tacosontitan/Glitter/codecov.yml?label=Coverage&logo=codecov&style=for-the-badge)
 
 ### 📦 Available on NuGet.
 Glitter is available for consumption via NuGet:
