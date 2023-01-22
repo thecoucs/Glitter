@@ -4,7 +4,7 @@
 ## Super Linter GitHub Actions ##
 #################################
 #################################
-name: Lint Codebase
+name: "💖 Lint Codebase"
 
 #############################
 # Start the job on all push #
