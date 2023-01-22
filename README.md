@@ -28,6 +28,8 @@ Glitter employs workflows for continuous integration to ensure the repository is
 ![Size](https://img.shields.io/github/languages/code-size/tacosontitan/Glitter?logo=github&style=for-the-badge)
 ![Line Count](https://img.shields.io/tokei/lines/github/tacosontitan/Glitter?logo=github&style=for-the-badge)
 
+# 🪄 Getting started with Glitter.
+
 ## 🎉 Create your first chatbot!
 It's never been easier to get a custom made chatbot up and running. Simply add a few lines of code to your `Program.cs` file to get started:
 ```csharp
