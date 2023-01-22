@@ -12,7 +12,7 @@ Named after the second largest mountain in Norway, Glitter is a framework for qu
 ![Size](https://img.shields.io/github/languages/code-size/tacosontitan/Glitter?logo=github&style=for-the-badge)
 ![Line Count](https://img.shields.io/tokei/lines/github/tacosontitan/Glitter?logo=github&style=for-the-badge)
 
-### Want to help out?
+## Want to help out?
 Get started by reviewing the answers to the following questions:
 - [How can I help?](./CONTRIBUTING.md)
 - [How should I behave here?](./CODE_OF_CONDUCT.md)
