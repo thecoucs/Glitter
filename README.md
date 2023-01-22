@@ -1,16 +1,22 @@
 # 🗻 Welcome aboard!
 Named after the second largest mountain in Norway, Glitter is a framework for quickly building out chatbots and the commands they can invoke.
 
+### Workflows
 ![.NET Workflow](https://img.shields.io/github/actions/workflow/status/tacosontitan/Glitter/dotnet.yml?label=%F0%9F%A7%AA%20Build%20and%20Test&logo=dotnet&style=for-the-badge)
 ![Analysis Workflow](https://img.shields.io/github/actions/workflow/status/tacosontitan/Glitter/codeql.yml?label=%F0%9F%91%81%EF%B8%8F%20Analysis&logo=dotnet&style=for-the-badge)
+
+### NuGet
 ![Version](https://img.shields.io/nuget/v/Glitter?logo=nuget&style=for-the-badge)
 ![Downloads](https://img.shields.io/nuget/dt/glitter?logo=nuget&style=for-the-badge)
+
+### Repository at a glance.
 ![Contributors](https://img.shields.io/github/contributors/tacosontitan/Glitter?logo=github&style=for-the-badge)
 ![Issues](https://img.shields.io/github/issues/tacosontitan/Glitter?logo=github&style=for-the-badge)
 ![License](https://img.shields.io/github/license/tacosontitan/Glitter?style=for-the-badge)
 ![Stars](https://img.shields.io/github/stars/tacosontitan/Glitter?logo=github&style=for-the-badge)
 ![Size](https://img.shields.io/github/languages/code-size/tacosontitan/Glitter?style=for-the-badge)
 ![Line Count](https://img.shields.io/tokei/lines/github/tacosontitan/Glitter?style=for-the-badge)
+
 ### Want to help out?
 Get started by reviewing the answers to the following questions:
 - [How can I help?](./CONTRIBUTING.md)
