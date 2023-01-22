@@ -9,8 +9,17 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Glitter;
 
+/// <summary>
+/// Represents a collection of extension methods for the <see cref="IServiceCollection"/> type which enable adding Glitter services.
+/// </summary>
 public static class GlitterExtensions
 {
+    /// <summary>
+    /// Adds Glitter services to the DI container.
+    /// </summary>
+    /// <param name="services">The current service contract for registering services with the DI container.</param>
+    /// <param name="buildAction">The <see cref="Action{T}"/> for building options for Glitter.</param>
+    /// <returns>The current service contract for registering services with the DI container.</returns>
     public static IServiceCollection AddGlitter(this IServiceCollection services, Action<RuntimeOptionsBuilder> buildAction)
     {
         // Load the configuration.
