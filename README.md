@@ -3,8 +3,6 @@ Named after the second largest mountain in Norway, Glitter is a framework for qu
 
 ![.NET Workflow](https://github.com/tacosontitan/Glitter/workflows/.NET/badge.svg)
 
-![Glitter Header](/.resources/glitter-header.png "Glitter Header")
-
 ### Want to help out?
 Get started by reviewing the answers to the following questions:
 - [How can I help?](./CONTRIBUTING.md)
