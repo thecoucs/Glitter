@@ -2,8 +2,8 @@
 Named after the second largest mountain in Norway, Glitter is a framework for quickly building out chatbots and the commands they can invoke.
 
 ### Workflows
-![.NET Workflow](https://img.shields.io/github/actions/workflow/status/tacosontitan/Glitter/dotnet.yml?label=%F0%9F%A7%AA%20Build%20and%20Test&logo=dotnet&style=for-the-badge)
-![Analysis Workflow](https://img.shields.io/github/actions/workflow/status/tacosontitan/Glitter/codeql.yml?label=%F0%9F%91%81%EF%B8%8F%20Analysis&logo=dotnet&style=for-the-badge)
+![.NET Workflow](https://img.shields.io/github/actions/workflow/status/tacosontitan/Glitter/dotnet.yml?label=Build%20and%20Test&logo=dotnet&style=for-the-badge)
+![Analysis Workflow](https://img.shields.io/github/actions/workflow/status/tacosontitan/Glitter/codeql.yml?label=Analysis&logo=dotnet&style=for-the-badge)
 
 ### NuGet
 ![Version](https://img.shields.io/nuget/v/Glitter?logo=nuget&style=for-the-badge)
