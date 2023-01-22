@@ -20,14 +20,14 @@ public static class GlitterExtensions
     /// <param name="services">The current service contract for registering services with the DI container.</param>
     /// <param name="buildAction">The <see cref="Action{T}"/> for building options for Glitter.</param>
     /// <returns>The current service contract for registering services with the DI container.</returns>
-    public static IServiceCollection AddGlitter(this IServiceCollection services, Action<RuntimeOptionsBuilder> buildAction)
+    public static IServiceCollection AddGlitter(this IServiceCollection services, Action<GlitterBuilder> buildAction)
     {
         // Load the configuration.
         LoadConfiguration(out IConfiguration configuration);
         _ = services.AddSingleton(configuration);
 
         // Allow consumers to configure Freya.
-        var optionsBuilder = new RuntimeOptionsBuilder(services, configuration);
+        var optionsBuilder = new GlitterBuilder(services, configuration);
         buildAction?.Invoke(optionsBuilder);
 
         // Build the resulting options.
