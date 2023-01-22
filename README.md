@@ -3,7 +3,7 @@ Named after the second largest mountain in Norway, Glitter is a framework for qu
 
 ![.NET Workflow](https://img.shields.io/github/actions/workflow/status/tacosontitan/Glitter/dotnet.yml?label=Build%20and%20Test&logo=dotnet&style=for-the-badge)
 ![Analysis Workflow](https://img.shields.io/github/actions/workflow/status/tacosontitan/Glitter/codeql.yml?label=Analysis&logo=dotnet&style=for-the-badge)
-![Version](https://img.shields.io/nuget/v/Glitter?logo=nuget&style=for-the-badge)
+![Version](https://img.shields.io/nuget/v/Glitter?label=Version&logo=nuget&style=for-the-badge)
 ![Downloads](https://img.shields.io/nuget/dt/glitter?logo=nuget&style=for-the-badge)
 ![Contributors](https://img.shields.io/github/contributors/tacosontitan/Glitter?logo=github&style=for-the-badge)
 ![Issues](https://img.shields.io/github/issues/tacosontitan/Glitter?logo=github&style=for-the-badge)
