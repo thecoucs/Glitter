@@ -15,14 +15,24 @@ namespace Glitter.Ai;
 /// </summary>
 public abstract class Chatbot : BackgroundService
 {
-    protected ILogger Logger { get; set; }
-    protected IMediator Mediator { get; set; }
+    /// <summary>
+    /// The name of the <see cref="Chatbot"/>.
+    /// </summary>
     public string Name { get; set; }
+    /// <summary>
+    /// The mediator for handling <see cref="Command"/> requests.
+    /// </summary>
+    protected IMediator Mediator { get; set; }
+    /// <summary>
+    /// The logger for the <see cref="Chatbot"/>.
+    /// </summary>
+    protected ILogger Logger { get; set; }
     /// <summary>
     /// Creates a new <see cref="Chatbot"/> instance.
     /// </summary>
-    /// <param name="name">The name of the service.</param>
-    /// <param name="logger">The logger to be utilized by the service.</param>
+    /// <param name="name">The name of the <see cref="Chatbot"/>.</param>
+    /// <param name="mediator">The mediator for handling <see cref="Command"/> requests.</param>
+    /// <param name="logger">The logger for the <see cref="Chatbot"/>.</param>
     public Chatbot(
         string name,
         IMediator mediator,
@@ -35,7 +45,6 @@ public abstract class Chatbot : BackgroundService
     /// <summary>
     /// Configures the <see cref="Chatbot"/>.
     /// </summary>
-    /// <param name="services">The service collection to add to.</param>
     /// <param name="pipeline">The pipeline to register middleware with.</param>
     public virtual void Configure(IPipeline<Command> pipeline)
     {
@@ -43,6 +52,9 @@ public abstract class Chatbot : BackgroundService
         var executor = new CommandExecutionMiddleware();
         pipeline.Run(executor);
     }
+    /// <summary>
+    /// Initializes the <see cref="Chatbot"/>.
+    /// </summary>
     protected virtual void Initialize() { }
     /// <summary>
     /// Runs the primary work for the service.
@@ -50,6 +62,11 @@ public abstract class Chatbot : BackgroundService
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
     /// <returns>A <see cref="Task"/> describing the state of the operation.</returns>
     protected abstract Task Run(CancellationToken cancellationToken);
+    /// <summary>
+    /// Executes the primary work for the <see cref="Chatbot"/>.
+    /// </summary>
+    /// <param name="cancellationToken">A <see cref="CancellationToken"/> for cancelling the <see cref="Chatbot"/>s operations.</param>
+    /// <returns>A <see cref="Task"/> describing the state of the operation.</returns>
     protected override async Task ExecuteAsync(CancellationToken cancellationToken)
     {
         // Cancel if requested, otherwise configure the service.
