@@ -63,4 +63,4 @@ The following open source projects help to keep Glitter tested and held to the h
 # 💃 Freya
 Freya is [tacosontitan's](https://github.com/tacosontitan) personal chatbot built using Glitter as a design pallete and proof of concept.
 
-![Freya Header](/.resources/freya-header.png "Freya Header")
+![Freya Header](/.resources/images/freya-header.png "Freya Header")
