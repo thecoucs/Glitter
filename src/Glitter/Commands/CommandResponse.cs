@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents a <see cref="CommandResponse"/>.
 /// </summary>
-public sealed class CommandResponse
+public class CommandResponse
 {
     /// <summary>
     /// The message for the response.
