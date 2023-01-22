@@ -17,8 +17,9 @@ internal sealed class ConsoleChatbot : Chatbot
     /// <summary>
     /// Creates a new <see cref="ConsoleChatbot"/> instance.
     /// </summary>
-    /// <param name="commandFactory">The command factory for the service to create commands.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be utilized during execution to signal cancellation.</param>
+    /// <param name="parser">A <see cref="RequestParser"/> for parsing requests.</param>
+    /// <param name="mediator">The mediator for handling <see cref="Command"/> requests.</param>
+    /// <param name="logger">The logger for the <see cref="Chatbot"/>.</param>
     public ConsoleChatbot(
         RequestParser parser,
         IMediator mediator,
