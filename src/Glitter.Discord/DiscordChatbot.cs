@@ -12,14 +12,14 @@ namespace Glitter.Discord;
 /// <summary>
 /// Represents a new <see cref="Chatbot"/> for integrating with <see href="https://discordnet.dev/guides/introduction/intro.html">Discord</see>.
 /// </summary>
-internal sealed class DiscordChatbot : Chatbot<DiscordSettings>
+internal sealed class DiscordChatbot : Chatbot<DiscordOptions>
 {
     private readonly DiscordSocketClient _client;
     /// <summary>
     /// Creates a new <see cref="DiscordChatbot"/> instance.
     /// </summary>
     public DiscordChatbot(
-        DiscordSettings settings,
+        DiscordOptions settings,
         DiscordSocketClient client,
         IMediator mediator,
         ILogger<DiscordChatbot> logger) :

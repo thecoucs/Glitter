@@ -5,7 +5,7 @@ namespace Glitter.Discord;
 /// <summary>
 /// Represents a collection of settings for the <see cref="DiscordChatbot"/>.
 /// </summary>
-internal class DiscordSettings
+internal class DiscordOptions
 {
     /// <summary>
     /// The token used to authenticate with Discord.
