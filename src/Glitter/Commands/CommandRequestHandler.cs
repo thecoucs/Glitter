@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 
 using Mauve;
+using Mauve.Extensibility;
 
 using MediatR;
 
@@ -11,7 +12,7 @@ namespace Glitter.Commands;
 /// <summary>
 /// Represents a factory for creating <see cref="Command"/> instances.
 /// </summary>
-public class CommandRequestHandler : AliasedTypeFactory<Command>, IRequestHandler<CommandRequest, Command?>
+public class CommandRequestHandler : IRequestHandler<CommandRequest, Command?>
 {
     private Dictionary<string, Type>? _types;
     private readonly IServiceProvider _serviceProvider;
@@ -63,7 +64,7 @@ public class CommandRequestHandler : AliasedTypeFactory<Command>, IRequestHandle
             return null;
 
         // Get any types considered valid for the factory.
-        IEnumerable<Type>? types = GetQualifiedTypes();
+        IEnumerable<Type>? types = GetQualifiedTypes<Command>();
         if (types is null)
             return null;
 
@@ -106,5 +107,25 @@ public class CommandRequestHandler : AliasedTypeFactory<Command>, IRequestHandle
             if (_types is not null && type is not null)
                 _types.Add(value, type);
         }
+    }
+    /// <summary>
+    /// Gets all qualified types for the factory.
+    /// </summary>
+    /// <returns>An <see cref="IEnumerable{T}"/> containing the qualified types for the factory.</returns>
+    private IEnumerable<Type>? GetQualifiedTypes<T>()
+    {
+        // Get the entry assembly, if we can't find it, there's no work.
+        IEnumerable<Assembly> domainAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+        if (domainAssemblies is null)
+            return null;
+
+        // Get any types considered valid for the factory.
+        return from assembly in domainAssemblies
+               from type in assembly.GetTypes()
+               where !type.IsAbstract &&
+                     !type.IsInterface &&
+                      type.GetCustomAttribute<AliasAttribute>() is not null &&
+                      type.DerivesFrom<T>()
+               select type;
     }
 }
