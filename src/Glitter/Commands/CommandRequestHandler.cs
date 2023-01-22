@@ -15,6 +15,10 @@ public class CommandRequestHandler : AliasedTypeFactory<Command>, IRequestHandle
 {
     private Dictionary<string, Type>? _types;
     private readonly IServiceProvider _serviceProvider;
+    /// <summary>
+    /// Creates a new <see cref="CommandRequestHandler"/> instance.
+    /// </summary>
+    /// <param name="serviceProvider">An <see cref="IServiceProvider"/> for retreiving services for enabling dependency injection within commands.</param>
     public CommandRequestHandler(IServiceProvider serviceProvider) =>
         _serviceProvider = serviceProvider;
     /// <summary>
@@ -36,8 +40,7 @@ public class CommandRequestHandler : AliasedTypeFactory<Command>, IRequestHandle
             object? createdInstance = ActivatorUtilities.CreateInstance(_serviceProvider, type, request.Parameters.ToArray());
             if (createdInstance is Command commandInstance)
                 return Task.FromResult((Command?)commandInstance);
-        }
-        catch
+        } catch
         {
             return Task.FromResult<Command?>(null);
         }
