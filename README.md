@@ -57,6 +57,10 @@ The following open source projects help to keep Glitter tested and held to the h
  - [Fluent Assertions](https://github.com/fluentassertions/fluentassertions)
  - [Fluent Validation](https://github.com/FluentValidation/FluentValidation)
  - [Shouldly](https://github.com/shouldly/shouldly)
+ 
+# Color Palette
+![image](https://user-images.githubusercontent.com/65432314/213923346-1f909154-56e3-4fdd-ba8b-45c5b98a8c5e.png)
+<p align="center"><sub><i>This color palette is subject to change.</i></sub></p>
 
 # 💃 Freya
 Freya is [tacosontitan's](https://github.com/tacosontitan) personal chatbot built using Glitter as a design pallete and proof of concept.
