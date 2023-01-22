@@ -60,7 +60,7 @@ representative at an online or offline event.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the community leaders responsible for enforcement at
-[our discussions area](https://github.com/tacosontitan/Glittertind/discussions).
+[our discussions area](https://github.com/tacosontitan/Glittertind/discussions) or via email at `contact@tacosontitan.com`.
 All complaints will be reviewed and investigated promptly and fairly.
 
 All community leaders are obligated to respect the privacy and security of the
