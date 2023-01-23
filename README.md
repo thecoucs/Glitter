@@ -38,20 +38,15 @@ We believe in keeping the community informed, so here's a few more tidbits of in
 It's never been easier to get a custom made chatbot up and running. Simply add a few lines of code to your `Program.cs` file to get started:
 ```csharp
 using Glitter;
+using Glitter.Commands.OpenSource;
 using Glitter.Discord;
-using Glitter.Extensibility;
 
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-
-using IHost host = Host.CreateDefaultBuilder()
+using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services => services
-        .AddGlitter(config => config
-            .EnableTesting()
-            .SetCommandPrefix("!")
-            .SetCommandSeparator(",")
-            .AddOpenSourceCommands()
-            .AddDiscord("<AUTH_TOKEN>"))
+        .AddGlitter()
+        .AddOpenSourceCommands()
+        .AddDiscord("<AUTH_TOKEN>")
+        .EnableTesting(commandPrefix: "!", parameterSeparator: ",")
 ).Build();
 await host.RunAsync();
 ```
