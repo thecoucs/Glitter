@@ -1,10 +1,10 @@
-# 🗻 Welcome aboard
+# 🗻 Welcome Aboard
 Named after the second largest mountain in Norway, Glitter is a framework for quickly building out chatbots and the commands they can invoke.
 
 ![License](https://img.shields.io/github/license/tacosontitan/Glitter?logo=github&style=for-the-badge)
 ![Downloads](https://img.shields.io/nuget/dt/glitter?logo=nuget&style=for-the-badge)
 
-## 💁‍♀️ Want to help out
+## 💁‍♀️ Getting Started
 Get started by reviewing the answers to the following questions:
 - [How can I help?](./CONTRIBUTING.md)
 - [How should I behave here?](./CODE_OF_CONDUCT.md)
@@ -23,7 +23,7 @@ Glitter is available for consumption via NuGet:
 ![Version](https://img.shields.io/nuget/v/Glitter.Discord?logo=nuget&label=Glitter.Discord&style=for-the-badge)<br/>
 ![Version](https://img.shields.io/nuget/v/Glitter.Commands.OpenSource?logo=nuget&label=Glitter.Commands.OpenSource&style=for-the-badge)
 
-### 💎 A few more gems for your knowledge
+### 💎 A few more gems
 We believe in keeping the community informed, so here's a few more tidbits of information to satisfy some additional curiosities:
 
 ![Contributors](https://img.shields.io/github/contributors/tacosontitan/Glitter?logo=github&style=for-the-badge)
@@ -32,9 +32,9 @@ We believe in keeping the community informed, so here's a few more tidbits of in
 ![Size](https://img.shields.io/github/languages/code-size/tacosontitan/Glitter?logo=github&style=for-the-badge)
 ![Line Count](https://img.shields.io/tokei/lines/github/tacosontitan/Glitter?logo=github&style=for-the-badge)
 
-## 🪄 Getting started with Glitter
+## 🪄 Working with Glitter
 
-### 🎉 Create your first chatbot
+### 🎉 Create a Chatbot
 It's never been easier to get a custom made chatbot up and running. Simply add a few lines of code to your `Program.cs` file to get started:
 ```csharp
 using Glitter;
