@@ -46,7 +46,6 @@ using IHost host = Host.CreateDefaultBuilder(args)
         .AddGlitter()
         .AddOpenSourceCommands()
         .AddDiscord("<AUTH_TOKEN>")
-        .EnableTesting(commandPrefix: "!", parameterSeparator: ",")
 ).Build();
 await host.RunAsync();
 ```
