@@ -2,7 +2,7 @@
 
 using Microsoft.Extensions.Logging;
 
-namespace Glitter.Commands.OpenSource.General;
+namespace Glitter.Commands.OpenSource.Baseline;
 
 /// <summary>
 /// Represents a <see cref="SlashCommand"/> for getting the uptime of the bot.
