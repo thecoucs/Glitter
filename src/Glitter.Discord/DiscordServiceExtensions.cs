@@ -12,46 +12,34 @@ namespace Glitter.Discord;
 /// </summary>
 public static class DiscordServiceExtensions
 {
+
     /// <summary>
     /// Adds support for Discord to the DI container.
     /// </summary>
-    /// <param name="synapses">The <see cref="GlitterBuilder"/> to be used for adding Discord to the service contract.</param>
-    /// <returns>The current <see cref="GlitterBuilder"/> instance containing <see cref="DiscordChatbot"/> and its dependencies as a service.</returns>
-    public static GlitterBuilder AddDiscord(this GlitterBuilder specs) =>
-        RegisterDiscordServices(specs, settings: null);
-    /// <summary>
-    /// Adds support for Discord to the DI container.
-    /// </summary>
-    /// <param name="synapses">The <see cref="GlitterBuilder"/> to be used for adding Discord to the service contract.</param>
+    /// <param name="optionsBuilder">The <see cref="OptionsBuilder<GlitterOptions>"/> to be used for adding Discord to the service contract.</param>
     /// <param name="token">The authentication token that should be used to communicate with Discord.</param>
     /// <returns>The current <see cref="GlitterBuilder"/> instance containing <see cref="DiscordChatbot"/> and its dependencies as a service.</returns>
-    public static GlitterBuilder AddDiscord(this GlitterBuilder specs, string token)
+    public static OptionsBuilder<GlitterOptions> AddDiscord(this OptionsBuilder<GlitterOptions> optionsBuilder, string token) =>
+        AddDiscord(optionsBuilder, optionsBuilder =>
+            optionsBuilder.Configure(options => options.Token = token)
+                          .Validate(options => string.IsNullOrWhiteSpace(options.Token), "A token is required for the Discord chatbot.")
+        );
+    private static OptionsBuilder<GlitterOptions> AddDiscord(this OptionsBuilder<GlitterOptions> optionsBuilder, Action<OptionsBuilder<DiscordOptions>> configurationAction)
     {
-        // Create a new set of settings for Discord.
-        var settings = new DiscordOptions
-        {
-            Token = token
-        };
+        // Register individual services.
+        OptionsBuilder<DiscordOptions> discordOptionsBuilder = optionsBuilder.Services.AddSingleton<DiscordSocketClient>()
+            .AddHostedService<LogEventHandler>()
+            .AddHostedService<LogEventHandler>()
+            .AddHostedService<LoggedInEventHandler>()
+            .AddHostedService<LoggedOutEventHandler>()
+            .AddHostedService<ConnectedEventHandler>()
+            .AddHostedService<DisconnectedEventHandler>()
+            .AddHostedService<MessageReceivedEventHandler>()
+            .AddOptions<DiscordOptions>()
+            .BindConfiguration(configSectionPath: "Discord");
 
-        // Register services and return the builder.
-        return RegisterDiscordServices(specs, settings);
-    }
-    private static OptionsBuilder<DiscordOptions> RegisterDiscordServices(this GlitterBuilder specs, DiscordOptions? settings)
-    {
-        // Determine if settings should be loaded or built.
-        _ = settings is null
-            ? specs.AddSettings<DiscordOptions>("Discord")
-            : specs.AddServices(services => services.AddSingleton(settings));
-
-        // Register remaining services and return the builder.
-        return specs.AddChatbot<DiscordChatbot>()
-                    .AddEventHandler<LogEventHandler>()
-                    .AddEventHandler<LogEventHandler>()
-                    .AddEventHandler<LoggedInEventHandler>()
-                    .AddEventHandler<LoggedOutEventHandler>()
-                    .AddEventHandler<ConnectedEventHandler>()
-                    .AddEventHandler<DisconnectedEventHandler>()
-                    .AddEventHandler<MessageReceivedEventHandler>()
-                    .AddServices(services => services.AddSingleton<DiscordSocketClient>());
+        // Invoke the configuration action.
+        configurationAction?.Invoke(discordOptionsBuilder);
+        return optionsBuilder;
     }
 }

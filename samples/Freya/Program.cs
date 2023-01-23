@@ -4,7 +4,6 @@ using Glitter;
 using Glitter.Commands.OpenSource;
 using Glitter.Discord;
 
-
 // Set the title of the debugging console.
 Console.Title = "Freya";
 
@@ -12,12 +11,10 @@ Console.Title = "Freya";
 using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services => services
         .AddLogging(BuildLogging)
-        .AddGlitter(specs => specs
-            .EnableTesting()
-            .SetCommandPrefix("!")
-            .SetCommandSeparator(",")
-            .AddOpenSourceCommands()
-            .AddDiscord())
+        .AddGlitter()
+        .AddOpenSourceCommands()
+        .AddDiscord("<AUTH_TOKEN>")
+        .EnableTesting(commandPrefix: "!", parameterSeparator: ",")
 ).Build();
 await host.RunAsync();
 

@@ -11,7 +11,7 @@ namespace Glitter.Ai;
 /// <summary>
 /// Represents a test service for testing within the deployed console.
 /// </summary>
-internal sealed class ConsoleChatbot : Chatbot
+internal sealed class ConsoleChatbot<T> : Chatbot<T> where T : ChatbotOptions
 {
     private readonly RequestParser _parser;
     /// <summary>
@@ -21,11 +21,11 @@ internal sealed class ConsoleChatbot : Chatbot
     /// <param name="mediator">The mediator for handling <see cref="Command"/> requests.</param>
     /// <param name="logger">The logger for the <see cref="Chatbot"/>.</param>
     public ConsoleChatbot(
+        T options,
         RequestParser parser,
         IMediator mediator,
-        ILogger<ConsoleChatbot> logger
-        ) :
-        base("Testing Bot", mediator, logger) =>
+        ILogger<ConsoleChatbot<T>> logger) :
+        base("Testing Bot", options, mediator, logger) =>
         _parser = parser;
     /// <inheritdoc/>
     protected override async Task Run(CancellationToken cancellationToken)

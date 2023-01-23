@@ -1,7 +1,10 @@
-﻿namespace Glitter;
+﻿using System.Reflection;
 
-internal sealed class RuntimeOptions
+namespace Glitter;
+
+public sealed class GlitterOptions
 {
+    internal List<Assembly> Assemblies { get; private set; }
     /// <summary>
     /// Specifies whether or not a <see cref="Console"/> driven bot is available for testing purposes.
     /// </summary>
@@ -19,13 +22,14 @@ internal sealed class RuntimeOptions
     /// </summary>
     public List<Type>? CommandTypes { get; set; }
     /// <summary>
-    /// Creates a new <see cref="RuntimeOptions"/> instance.
+    /// Creates a new <see cref="GlitterOptions"/> instance.
     /// </summary>
-    public RuntimeOptions()
+    public GlitterOptions()
     {
         TestBotEnabled = false;
         CommandPrefix = "!";
         CommandSeparator = ",";
         CommandTypes = new List<Type>();
+        Assemblies = new List<Assembly>();
     }
 }
