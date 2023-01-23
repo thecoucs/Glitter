@@ -1,4 +1,4 @@
-﻿using Glitter.Commands.OpenSource.General;
+﻿using Glitter.Commands.OpenSource.Baseline;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -23,7 +23,8 @@ public static class GlitterExtensions
     public static OptionsBuilder<GlitterOptions> AddOpenSourceCommands<TSessionData>(this OptionsBuilder<GlitterOptions> optionsBuilder)
         where TSessionData : SessionData, new()
     {
-        _ = optionsBuilder.AddSlashCommand<UptimeCommand>()
+        _ = optionsBuilder.AddSlashCommand<HelpCommand>()
+                          .AddSlashCommand<UptimeCommand>()
                           .AddSlashCommand<VersionCommand>()
                           .Services.AddSingleton<SessionData>(new TSessionData());
 
