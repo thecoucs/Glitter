@@ -7,7 +7,7 @@ on:
   pull_request_target:
     types: [opened, synchronize, reopened]
 
-name: CodeSee
+name: "🗺️ Create a Codebase Map"
 
 permissions: read-all
 
