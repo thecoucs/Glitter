@@ -15,7 +15,7 @@ public abstract class Command
     /// <summary>
     /// The logger for the <see cref="Command"/>.
     /// </summary>
-    protected ILogger Logger { get; private set; }
+
     /// <summary>
     /// The key used to identify the <see cref="Command"/>.
     /// </summary>
