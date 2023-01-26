@@ -12,7 +12,6 @@ namespace Glitter.Commands;
 /// </summary>
 public abstract class Command
 {
-    private readonly string _id;
     /// <summary>
     /// The logger for the <see cref="Command"/>.
     /// </summary>
@@ -47,7 +46,6 @@ public abstract class Command
     /// <param name="logger"></param>
     protected Command(string key, string displayName, string description, ILogger logger)
     {
-        _id = Guid.NewGuid().GetHashCode(NumericBase.Hexadecimal);
         Key = key;
         Logger = logger;
         DisplayName = displayName;
